@@ -25,7 +25,7 @@ class Inicio extends BaseController
                 $validation->setRules([
                     'usuario' => [
                     'label' => 'Usuario', 
-                    'rules'  => 'required|regex_match[/^[a-zA-Z_]+$/]|max_length[45]',
+                    'rules'  => 'required|regex_match[/^[a-zA-Z0-9_]+$/]|max_length[45]',
                     'errors' => [
                             'required'    => '* El {field} es requerido.',
                             'regex_match' => '* El {field} no es válido.',

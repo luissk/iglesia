@@ -42,6 +42,10 @@ class Usuario extends BaseController
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) exit();
 
+            //validar si el usuario que crea existe
+            $us_crea = $this->modeloUsuario->obtenerUsuario(session('idusuario'));
+            if( !$us_crea ) exit(); //
+
             //print_r($_POST);
 
             $usuario   = trim($this->request->getVar('usuario'));
@@ -64,7 +68,7 @@ class Usuario extends BaseController
             $rules = [
                 'usuario' => [
                     'label' => 'Usuario', 
-                    'rules' => 'required|regex_match[/^[a-zA-Z_]+$/]|max_length[45]',
+                    'rules' => 'required|regex_match[/^[a-zA-Z0-9_]+$/]|max_length[45]',
                     'errors' => [
                         'required'    => '* El {field} es requerido.',
                         'regex_match' => '* El {field} no es válido.',
@@ -187,6 +191,53 @@ class Usuario extends BaseController
                 }
             }
 
+        }
+    }
+
+    public function eliminarUsuario(){
+        if( $this->request->isAJAX() ){
+            if(!session('idusuario')) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) exit();
+
+            $idusuario = $this->request->getVar('id');
+
+            if( $idusuario == 1 ) exit();
+
+            $eliminar = FALSE;
+            $mensaje = "";
+
+            $tablas = ['usuario','registro'];
+            foreach( $tablas as $t ){
+                $total = $this->modeloUsuario->verificarUsuTieneRegEnTablas($idusuario,$t)['total'];
+                if( $total > 0 ){
+                    $mensaje .= "<div class='text-start'>El usuario tiene $total registros en la tabla '$t'.</div>";
+                    $eliminar = TRUE;
+                }
+            }
+
+            if( $eliminar ){
+                echo '<script>
+                    Swal.fire({
+                        title: "El usuario no puede ser eliminado",
+                        html: "'.$mensaje.'",
+                        icon: "warning",
+                    });
+                </script>';
+                exit();
+            }
+
+            if( $this->modeloUsuario->eliminarUsuario($idusuario) ){
+                echo '<script>
+                    Swal.fire({
+                        title: "Usuario Eliminado",
+                        text: "",
+                        icon: "success",
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                    });
+                    setTimeout(function(){location.reload()},1500)
+                </script>';
+            }
         }
     }
 

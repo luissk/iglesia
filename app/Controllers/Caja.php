@@ -2,15 +2,17 @@
 
 namespace App\Controllers;
 
-class Iglesia extends BaseController
+class Caja extends BaseController
 {
     protected $modeloUsuario;
     protected $modeloIglesia;
+    protected $modeloCaja;
     protected $helpers = ['funciones'];
 
     public function __construct(){
         $this->modeloUsuario = model('UsuarioModel');
         $this->modeloIglesia = model('IglesiaModel');
+        $this->modeloCaja    = model('CajaModel');
         $this->session;
     }
 
@@ -19,62 +21,51 @@ class Iglesia extends BaseController
             return redirect()->to('sistema');
         }
 
-        if( session('idtipo_usuario') != 1 ) return redirect()->to('sistema');
+        if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) return redirect()->to('sistema');
 
-        $data['iglesias'] = $this->modeloIglesia->listarIglesias();
+        $data['title']           = 'Cajas del Sistema';
+        $data['cajasLinkActive'] = 1;
 
-        $data['title']              = 'Iglesias del Sistema';
-        $data['iglesiasLinkActive'] = 1;
+        if( session('idtipo_usuario') == 1 ){
+            $data['cajas'] = $this->modeloCaja->listarCajas();
+            return view('sistema/caja/index', $data);
+        }else if( session('idtipo_usuario') == 2 ){
+            return view('sistema/caja/admin', $data);
+        }
+        
 
-        return view('sistema/iglesia/index', $data);    
+
+        
+
+        
     }
 
-    public function registrarIglesia(){
+    public function registrarCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 1 ) exit();
 
             //print_r($_POST);exit();
 
-            $iglesia   = trim($this->request->getVar('iglesia'));
-            $pastor    = trim($this->request->getVar('pastor'));
-            $direccion = trim($this->request->getVar('direccion'));
-            $idiglesia = $this->request->getVar('id_iglesiae');//para editar
+            $caja   = trim($this->request->getVar('caja'));
+            $idcaja = $this->request->getVar('idcajae');//para editar
 
             $validation = \Config\Services::validation();
 
             $data = [
-                'iglesia'   => $iglesia,
-                'pastor'    => $pastor,
-                'direccion' => $direccion,
+                'caja'   => $caja,
             ];
 
             $rules = [
-                'iglesia' => [
-                    'label' => 'Iglesia', 
-                    'rules' => 'required|max_length[200]',
+                'caja' => [
+                    'label' => 'Caja', 
+                    'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[45]',
                     'errors' => [
                         'required'    => '* La {field} es requerida.',
-                        'max_length'  => '* La {field} debe contener máximo 100 caracteres.'
+                        'regex_match' => '* La {field} no es válida.',
+                        'max_length'  => '* La {field} debe contener máximo 45 caracteres.'
                     ]
-                ],
-                'pastor' => [
-                    'label' => 'Pastor', 
-                    'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[100]',
-                    'errors' => [
-                        'required'    => '* El {field} es requerido.',
-                        'regex_match' => '* El {field} no es válido.',
-                        'max_length'  => '* El {field} debe contener máximo 100 caracteres.'
-                    ]
-                ],
-                'direccion' => [
-                    'label' => 'Dirección', 
-                    'rules' => 'required|max_length[100]',
-                    'errors' => [
-                        'required'    => '* La {field} es requerida.',
-                        'max_length'  => '* La {field} debe contener máximo 100 caracteres.'
-                    ]
-                ],
+                ]
             ];
 
             $validation->setRules($rules);
@@ -83,25 +74,25 @@ class Iglesia extends BaseController
                 return $this->response->setJson(['errors' => $validation->getErrors()]);
             }
 
-            $iglesia_bd = $this->modeloIglesia->obtenerIglesia($idiglesia);
+            $caja_bd = $this->modeloCaja->obtenerCaja($idcaja);
 
-            if($iglesia_bd){
-                 $nombre_bd = $iglesia_bd['ig_iglesia'];
-                if( $iglesia != $nombre_bd ){
-                    if( $this->modeloIglesia->obtenerIglesiaXNombre($iglesia) ){
+            if($caja_bd){
+                $nombre_bd = $caja_bd['ca_caja'];
+                if( $caja != $nombre_bd ){
+                    if( $this->modeloCaja->obtenerCajaXNombre($caja) ){
                         echo '<script>
                             Swal.fire({
-                                title: "Ya existe el nombre de la Iglesia",
+                                title: "Ya existe el nombre de la Caja",
                                 icon: "error"
                             });
                         </script>';
                         exit();
                     }
                 }
-                if( $this->modeloIglesia->modificarIglesia($iglesia,$pastor,$direccion,$idiglesia) ){
+                if( $this->modeloCaja->modificarCaja($caja,$idcaja) ){
                     echo '<script>
                         Swal.fire({
-                            title: "Iglesia Modificada",
+                            title: "Caja Modificada",
                             text: "",
                             icon: "success",
                             showConfirmButton: false,
@@ -112,20 +103,20 @@ class Iglesia extends BaseController
                 }
             }else{
                 //echo "INSERTAR";
-                if( $this->modeloIglesia->obtenerIglesiaXNombre($iglesia) ){
+                if( $this->modeloCaja->obtenerCajaXNombre($caja) ){
                     echo '<script>
                         Swal.fire({
-                            title: "Ya existe el nombre de la Iglesia",
+                            title: "Ya existe el nombre de la Caja",
                             icon: "error"
                         });
                     </script>';
                     exit();
                 }
 
-                if($this->modeloIglesia->insertarIglesia($iglesia,$pastor,$direccion)){
+                if($this->modeloCaja->insertarCaja($caja)){
                     echo '<script>
                         Swal.fire({
-                            title: "Iglesia Registrada",
+                            title: "Caja Registrada",
                             text: "",
                             icon: "success",
                             showConfirmButton: false,
@@ -135,24 +126,25 @@ class Iglesia extends BaseController
                     </script>';
                 }
             }            
+
         }
     }
 
-    public function eliminarIglesia(){
+    public function eliminarCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 1 ) exit();
 
-            $idiglesia = $this->request->getVar('id');
+            $idcaja = $this->request->getVar('id');
 
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['usuario','responsable_caja'];
+            $tablas = ['registro','responsable_caja'];
             foreach( $tablas as $t ){
-                $total = $this->modeloIglesia->verificarIglesiaTieneRegEnTablas($idiglesia,$t)['total'];
+                $total = $this->modeloCaja->verificarCajaTieneRegEnTablas($idcaja,$t)['total'];
                 if( $total > 0 ){
-                    $mensaje .= "<div class='text-start'>La iglesia tiene $total registros en la tabla '$t'.</div>";
+                    $mensaje .= "<div class='text-start'>La caja tiene $total registros en la tabla '$t'.</div>";
                     $eliminar = TRUE;
                 }
             }
@@ -160,7 +152,7 @@ class Iglesia extends BaseController
             if( $eliminar ){
                 echo '<script>
                     Swal.fire({
-                        title: "La iglesia no puede ser eliminada",
+                        title: "La caja no puede ser eliminada",
                         html: "'.$mensaje.'",
                         icon: "warning",
                     });
@@ -168,10 +160,10 @@ class Iglesia extends BaseController
                 exit();
             }
 
-            if( $this->modeloIglesia->eliminarIglesia($idiglesia) ){
+            if( $this->modeloCaja->eliminarCaja($idcaja) ){
                 echo '<script>
                     Swal.fire({
-                        title: "Iglesia Eliminada",
+                        title: "Caja Eliminada",
                         text: "",
                         icon: "success",
                         showConfirmButton: false,
@@ -182,5 +174,6 @@ class Iglesia extends BaseController
             }
         }
     }
+
 
 }

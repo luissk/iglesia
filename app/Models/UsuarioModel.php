@@ -66,7 +66,22 @@ class UsuarioModel extends Model{
         return $st;
     }
 
+    public function verificarUsuTieneRegEnTablas($idusuario, $tabla){
+        $query = "select count(us_creador) as total from $tabla where us_creador=?";
+        $st = $this->db->query($query, [$idusuario]);
 
+        return $st->getRowArray();
+    }
+
+    public function eliminarUsuario($idusuario){
+        $query = "delete from usuario where idusuario = ? and idusuario != 1";
+        $st = $this->db->query($query, [$idusuario]);
+
+        return $st;
+    }
+
+
+    
 
 
     public function cambiarPassword($idusuario, $password){
