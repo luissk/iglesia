@@ -30,14 +30,12 @@ class Caja extends BaseController
             $data['cajas'] = $this->modeloCaja->listarCajas();
             return view('sistema/caja/index', $data);
         }else if( session('idtipo_usuario') == 2 ){
+            $data['title']        = 'Responsables de Caja';
+            $data['cajas']        = $this->modeloCaja->listarCajas();
+            $data['responsables'] = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));
             return view('sistema/caja/admin', $data);
-        }
-        
-
-
-        
-
-        
+        }   
+ 
     }
 
     public function registrarCaja(){
@@ -174,6 +172,8 @@ class Caja extends BaseController
             }
         }
     }
+
+
 
 
 }

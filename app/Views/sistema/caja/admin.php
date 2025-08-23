@@ -10,49 +10,54 @@
                     <div class="card-header">                      
                         <div class="row">
                             <div class="col-sm-6 d-flex align-items-center">
-                                <h4 class="mb-0">Cajas de la iglesia</h4>
+                                <h4 class="mb-0">Responsables de Caja</h4>
                             </div>
                             <div class="col-sm-6 text-end">
-                                <a class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#modalCaja">Nueva Caja</a>
+                                <a class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#modalResponsable">Nuevo Responsable de Caja</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body table-responsive" id="divListar">
-                        <table id="cajas" class="table table-striped">
+                        <table id="responsables" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Responsable</th>
                                     <th>Caja</th>
                                     <th>Opcion</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                            /* if( $cajas ){
+                            if( $responsables ){
                                 $cont = 0;
-                                foreach( $cajas as $c){
+                                foreach( $responsables as $r){
                                     $cont++;
-                                    $idcaja = $c['idcaja'];
-                                    $caja   = $c['ca_caja'];
+                                    $idresponsable = $r['idresponsable_caja'];
+                                    $nombre        = $r['re_nombres'];
+                                    $idiglesia     = $r['idiglesia'];
+                                    $idcaja        = $r['idcaja'];
+                                    $caja          = $r['ca_caja'];
 
                                     $arr = json_encode(
                                         [
-                                            $caja
+                                            $nombre,$idcaja,$caja
                                         ],
                                         JSON_HEX_APOS
                                     );
 
                                     echo "<tr>";
                                     echo "<td>$cont</td>";
+                                    echo "<td>$nombre</td>";
                                     echo "<td>$caja</td>";
                                     echo '<td class="d-flex justify-content-center">';
-                                    echo '<a href="javascript:;" class="link-success editar" title="Modificar" data-id='.$idcaja.' data-arr=\''.$arr.'\'><i class="fa-solid fa-pen-to-square"></i></a>';
+                                    echo '<a href="javascript:;" class="link-success editar" title="Modificar" data-id='.$idresponsable.' data-arr=\''.$arr.'\'><i class="fa-solid fa-pen-to-square"></i></a>';
                                     //if( $idiglesia != 1 )
-                                        echo '<a href="javascript:;" class="link-danger ms-2 eliminar" title="Eliminar" data-id='.$idcaja.'><i class="fa-solid fa-trash"></i></a>';
+                                        echo '<a href="javascript:;" class="link-danger ms-2 eliminar" title="Eliminar" data-id='.$idresponsable.'><i class="fa-solid fa-trash"></i></a>';
                                     echo '</td>';
                                     echo "</tr>";                                    
                                 }
-                            } */
+                            }
                             ?>
                             </tbody>
                         </table>
@@ -65,28 +70,40 @@
 
 <div id="msj"></div>
 
-<div class="modal fade" id="modalCaja" tabindex="-1" aria-labelledby="modalCajaLabel" aria-hidden="true">
+<div class="modal fade" id="modalResponsable" tabindex="-1" aria-labelledby="modalResponsableLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header py-2">
-                <h1 class="modal-title fs-5" id="tituloModal">Formulario Caja</h1>
+                <h1 class="modal-title fs-5" id="tituloModal">Formulario Responsable de Caja</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="frmCaja">
+            <form id="frmResponsable">
                 <div class="modal-body">            
                     <div class="row">
-                        <div class="col-sm-12 mb-3">
-                            <label for="caja" class="form-label">Caja</label>
-                            <input type="text" class="form-control" id="caja" name="caja" value="" maxlength="45">
+                        <div class="col-sm-12">
+                            <label for="caja" class="form-label">Cajas del Sistema</label>
+                            <select class="form-select" name="caja" id="caja">
+                                <option value="">Seleccione</option>
+                                <?php
+                                foreach( $cajas as $c ){
+                                    echo "<option value=".$c['idcaja'].">".$c['ca_caja']."</option>";
+                                }
+                                ?>
+                            </select>
                             <div id="msj-caja" class="form-text text-danger"></div>
+                        </div>
+                        <div class="col-sm-12 mt-3 mb-3">
+                            <label for="nombre" class="form-label">Nombre del Responsable</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="" maxlength="100">
+                            <div id="msj-nombre" class="form-text text-danger"></div>
                         </div>
                     </div>
                 </div>
                 <div id="msj"></div>
                 <div class="modal-footer py-2">
                     <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <button type="submit" class="btn btn-danger" id="btnGuardar">REGISTRAR CAJA</button>
-                    <input type="hidden" class="form-control" id="idcajae" name="idcajae">
+                    <button type="submit" class="btn btn-danger" id="btnGuardar">REGISTRAR RESPONSABLE</button>
+                    <input type="hidden" class="form-control" id="idresponsablee" name="idresponsablee">
                 </div>
             </form>
         </div>
@@ -99,11 +116,11 @@
 
 <script>
 
-    new DataTable('#cajas');
+    new DataTable('#responsables');
 
     
 $(function(){
-    $("#cajas").on('click', '.editar', function(e){
+    $("#responsables").on('click', '.editar', function(e){
         e.preventDefault();
         let id = $(this).data('id'),
             arr = $(this).data('arr');
@@ -111,14 +128,15 @@ $(function(){
 
         limpiarCampos();
 
-        $("#caja").val(arr[0]);
+        $("#caja").val(arr[1]);
+        $("#nombre").val(arr[0]);
         
-        $("#idcajae").val(id);
-        $("#btnGuardar").text("MODIFICAR CAJA");
-        $("#modalCaja").modal('show');
+        $("#idresponsablee").val(id);
+        $("#btnGuardar").text("MODIFICAR RESPONSABLE");
+        $("#modalResponsable").modal('show');
     })
 
-    $("#cajas").on('click', '.eliminar', function(e){
+    $("#responsables").on('click', '.eliminar', function(e){
         e.preventDefault();
         let id = $(this).data('id');
         
@@ -162,7 +180,7 @@ $(function(){
         });
     });
 
-    const myModalEl = document.getElementById('modalCaja')
+    const myModalEl = document.getElementById('modalResponsable')
     myModalEl.addEventListener('hidden.bs.modal', event => {
         limpiarCampos();
         $("#msj").html("");

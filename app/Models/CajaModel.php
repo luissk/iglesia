@@ -54,4 +54,19 @@ class CajaModel extends Model{
         return $st;
     }
 
+
+    public function listarResponsablesDeCaja($idiglesia){
+        $query = "select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
+            FROM responsable_caja rc 
+            inner join caja ca on rc.idcaja=ca.idcaja
+            WHERE idiglesia = ?";
+        $st = $this->db->query($query, [$idiglesia]);
+
+        return $st->getResultArray();
+    }
+
+
+
+
+
 }
