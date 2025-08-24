@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-08-2025 a las 06:47:44
+-- Tiempo de generación: 24-08-2025 a las 22:46:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,11 +52,46 @@ INSERT INTO `caja` (`idcaja`, `ca_caja`) VALUES
 
 CREATE TABLE `cuenta` (
   `idcuenta` int(11) NOT NULL,
-  `cu_dh` tinyint(4) NOT NULL COMMENT '1:Debe, 2:Haber',
-  `cu_codigo` varchar(45) NOT NULL,
-  `cu_cuenta` varchar(45) DEFAULT NULL,
+  `cu_dh` enum('Debe','Haber') NOT NULL COMMENT '1:Debe, 2:Haber',
+  `cu_codigo` char(3) NOT NULL,
+  `cu_cuenta` varchar(100) DEFAULT NULL,
   `cu_observacion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cuenta`
+--
+
+INSERT INTO `cuenta` (`idcuenta`, `cu_dh`, `cu_codigo`, `cu_cuenta`, `cu_observacion`) VALUES
+(1, 'Debe', '101', 'Caja', 'Caja efectivo'),
+(2, 'Debe', '141', 'Préstamo x Acción Social', 'Préstamo para Pollada, parrillada, ect.'),
+(3, 'Debe', '142', 'Transf.entre cajas mismo templo', 'eliminar '),
+(4, 'Debe', '421', 'Ctas x Pagar-fact. Compras, R/luz', 'Pago de Facturas '),
+(5, 'Debe', '621', 'Remuneracion-Visitantes Pastores, varios', 'Remunerac  Visitantes, Pastores varios'),
+(6, 'Debe', '622', 'Otras remuneraciones-labores varias', 'Remuneración limpieza, atención a enfermos'),
+(7, 'Debe', '623', 'Remuneracion-Pastor-Copastor', 'Remuneración al Pastor y Copastor'),
+(8, 'Debe', '624', 'Capacitación', 'Gastos por Capacitación'),
+(9, 'Debe', '625', 'Atención a Visitantes', 'Refrigerio a Pastores y otros'),
+(10, 'Debe', '631', 'Transporte y gastos de viaje', 'Gastos por movilidad, pasajes'),
+(11, 'Debe', '636', 'Servicios básicos, agua luz', 'Gastos por energía electrica…agua.'),
+(12, 'Debe', '641', 'Tributos gobierno central', 'Gasto por pago tributos: RENTA PYMES….'),
+(13, 'Debe', '643', 'Tributos gobierno municipalidades', 'Gastos por Impuesto predial, otros'),
+(14, 'Debe', '654', 'Gastos varios', 'Medicina hno obando'),
+(15, 'Debe', '655', 'Otros gastos de gestión', 'Utiles varios: limpieza, copias, chapas, etc'),
+(16, 'Debe', '656', 'Compra de flores para el Altar', 'Compra Flores para el altar'),
+(17, 'Debe', '659', 'Donaciones', 'Donaciones'),
+(18, 'Debe', '759', 'eliminar', 'eliminar '),
+(19, 'Haber', '101', 'Caja efectivo', 'Caja efectivo'),
+(20, 'Haber', '141', 'Préstamo x Acción Social', 'Préstamo para actividades, Pollada, parrillada, ect.'),
+(21, 'Haber', '421', 'Ctas x Pagar-fact. Compras, R/luz', 'Pago de Factura por compras, activos fijos ,luz, agua'),
+(22, 'Haber', '751', 'Diezmo actual', 'Diezmo actual'),
+(23, 'Haber', '752', 'Diezmo anterior', 'Diezmo anterior'),
+(24, 'Haber', '753', 'Ofrenda recogida', 'Ofrenda recogida'),
+(25, 'Haber', '754', 'Ofrenda misionera', 'Ofrenda misionera'),
+(26, 'Haber', '755', 'Ofrenda visitantes', 'Ofrenda visitantes'),
+(27, 'Haber', '756', 'Ofrenda niños E. dominical', 'Ofrenda niños E. dominical'),
+(28, 'Haber', '757', 'Por acción social', 'Ganancia x acción Social'),
+(29, 'Haber', '759', 'Otros ingresos de Gestión', 'Aporte para gas, otros');
 
 -- --------------------------------------------------------
 
@@ -92,7 +127,6 @@ CREATE TABLE `registro` (
   `re_importe` decimal(10,2) NOT NULL,
   `re_desc` varchar(200) NOT NULL,
   `us_creador` int(11) NOT NULL,
-  `idcaja` int(11) NOT NULL,
   `idcuenta` int(11) NOT NULL,
   `idresponsable_caja` int(11) NOT NULL,
   `re_fechareg` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -238,7 +272,7 @@ ALTER TABLE `caja`
 -- AUTO_INCREMENT de la tabla `cuenta`
 --
 ALTER TABLE `cuenta`
-  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesia`

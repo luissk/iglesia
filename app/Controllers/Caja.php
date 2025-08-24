@@ -51,7 +51,7 @@ class Caja extends BaseController
             $validation = \Config\Services::validation();
 
             $data = [
-                'caja'   => $caja,
+                'caja' => $caja,
             ];
 
             $rules = [
@@ -138,7 +138,7 @@ class Caja extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['registro','responsable_caja'];
+            $tablas = ['responsable_caja'];
             foreach( $tablas as $t ){
                 $total = $this->modeloCaja->verificarCajaTieneRegEnTablas($idcaja,$t)['total'];
                 if( $total > 0 ){

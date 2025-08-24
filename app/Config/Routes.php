@@ -24,4 +24,8 @@ $routes->post('elimina-caja', 'Caja::eliminarCaja');
 $routes->post('registro-responsable', 'Caja::registrarResponsable');
 $routes->post('elimina-responsable', 'Caja::eliminarResponsable');
 
+$routes->get('cuentas', 'Cuenta::index');
+$routes->post('registro-cuenta', 'Cuenta::registrarCuenta');
+$routes->post('elimina-cuenta', 'Cuenta::eliminarCuenta');
+
 $routes->get('registros', 'Registro::index');
