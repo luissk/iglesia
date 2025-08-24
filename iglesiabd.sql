@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2025 a las 18:36:45
+-- Tiempo de generación: 24-08-2025 a las 06:47:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,7 @@ INSERT INTO `caja` (`idcaja`, `ca_caja`) VALUES
 (3, 'Concilio'),
 (4, 'Evangelismo'),
 (5, 'Juventud'),
-(7, 'Escuela Bíblica');
+(6, 'Escuela Bíblica');
 
 -- --------------------------------------------------------
 
@@ -109,8 +109,19 @@ CREATE TABLE `responsable_caja` (
   `idresponsable_caja` int(11) NOT NULL,
   `re_nombres` varchar(100) NOT NULL,
   `idiglesia` int(11) NOT NULL,
-  `idcaja` int(11) NOT NULL
+  `idcaja` int(11) NOT NULL,
+  `us_creador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `responsable_caja`
+--
+
+INSERT INTO `responsable_caja` (`idresponsable_caja`, `re_nombres`, `idiglesia`, `idcaja`, `us_creador`) VALUES
+(1, 'Nolberto Solano', 4, 1, 2),
+(2, 'Paolo Guerrero', 5, 1, 3),
+(3, 'Nolberto Solano', 5, 2, 3),
+(4, 'Jeferson Farfán', 4, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -157,7 +168,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusuario`, `us_usuario`, `idiglesia`, `idtipo_usuario`, `us_password`, `us_nombre`, `us_creador`, `us_fechareg`, `us_fechaact`) VALUES
 (1, 'lcalderons', 1, 1, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Luis A. Calderón Sánchez', NULL, '2025-08-20 21:13:48', '2025-08-22 19:22:30'),
 (2, 'usuario1', 4, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Usuario1 Alcántara Riacho', 1, '2025-08-22 21:24:02', '2025-08-23 02:58:32'),
-(3, 'usuario2', 5, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Usuario2 Perez Gonzales', 1, '2025-08-22 21:24:53', '2025-08-22 21:24:53'),
+(3, 'usuario2', 5, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Juancito Perez', 1, '2025-08-24 04:35:50', '2025-08-24 04:36:20'),
 (4, 'usuarioSion', 4, 3, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Elias Aviles Cavero', 2, '2025-08-22 21:27:59', '2025-08-22 21:27:59');
 
 --
@@ -221,7 +232,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `idcaja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idcaja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cuenta`
@@ -245,7 +256,7 @@ ALTER TABLE `registro`
 -- AUTO_INCREMENT de la tabla `responsable_caja`
 --
 ALTER TABLE `responsable_caja`
-  MODIFY `idresponsable_caja` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idresponsable_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

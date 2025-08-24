@@ -141,13 +141,13 @@ $(function(){
         let id = $(this).data('id');
         
         Swal.fire({
-            title: "¿Estás seguro en eliminar la Caja?",
+            title: "¿Estás seguro en eliminar al Responsable?",
             showCancelButton: true,
             confirmButtonText: "Confirmar",
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                $.post('elimina-caja', {
+                $.post('elimina-responsable', {
                     id
                 }, function(data){
                     console.log(data);
@@ -157,7 +157,7 @@ $(function(){
         });
     });
 
-    $("#frmCaja").on('submit', function(e){
+    $("#frmResponsable").on('submit', function(e){
         e.preventDefault();
         let btn = document.querySelector('#btnGuardar'),
             txtbtn = btn.textContent,
@@ -165,7 +165,7 @@ $(function(){
         btn.setAttribute('disabled', 'disabled');
         btn.innerHTML = `${btnHTML} PROCESANDO...`;
 
-        $.post('registro-caja', $(this).serialize(), function(data){
+        $.post('registro-responsable', $(this).serialize(), function(data){
             console.log(data);
             $('[id^="msj-"').text("");                
             if( data.errors ){  
@@ -188,10 +188,10 @@ $(function(){
 })
 
 function limpiarCampos(){
-    $("#frmCaja")[0].reset();
+    $("#frmResponsable")[0].reset();
     $('[id^="msj-"').text("");
-    $("#idcajae").val("");
-    $("#btnGuardar").text("REGISTRAR CAJA");
+    $("#idresponsablee").val("");
+    $("#btnGuardar").text("REGISTRAR RESPONSABLE");
 }
 </script>
 

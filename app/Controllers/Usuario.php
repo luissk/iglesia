@@ -206,7 +206,7 @@ class Usuario extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['usuario','registro'];
+            $tablas = ['usuario','registro','responsable_caja'];
             foreach( $tablas as $t ){
                 $total = $this->modeloUsuario->verificarUsuTieneRegEnTablas($idusuario,$t)['total'];
                 if( $total > 0 ){

@@ -173,7 +173,162 @@ class Caja extends BaseController
         }
     }
 
+    public function registrarResponsable(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 ) exit();
 
+            //print_r($_POST);exit();
+
+            $idcaja        = $this->request->getVar('caja');
+            $nombre        = trim($this->request->getVar('nombre'));
+            $idresponsable = $this->request->getVar('idresponsablee');//para editar
+
+            $validation = \Config\Services::validation();
+
+            $data = [
+                'caja'   => $idcaja,
+                'nombre' => $nombre,
+            ];
+
+            $rules = [
+                'caja' => [
+                    'label' => 'Caja', 
+                    'rules' => 'required|regex_match[/^[0-9]+$/]',
+                    'errors' => [
+                        'required'    => '* La {field} es requerida.',
+                        'regex_match' => '* La {field} sólo contiene números.'
+                    ]
+                ],
+                'nombre' => [
+                    'label' => 'Nombre de responsable', 
+                    'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[100]',
+                    'errors' => [
+                        'required'    => '* El {field} es requerido.',
+                        'regex_match' => '* El {field} no es válido.',
+                        'max_length'  => '* El {field} debe contener máximo 100 caracteres.'
+                    ]
+                ]
+            ];
+
+            $validation->setRules($rules);
+
+            if (!$validation->run($data)) {
+                return $this->response->setJson(['errors' => $validation->getErrors()]);
+            }
+
+            //validar si existe aun la caja
+            $caja_bd = $this->modeloCaja->obtenerCaja($idcaja);
+            if( !$caja_bd ){
+                echo '<script>
+                    Swal.fire({
+                        title: "La Caja ya no existe",
+                        icon: "error"
+                    });
+                </script>';
+                exit();
+            }
+            //
+            $responsable_bd = $this->modeloCaja->obtenerResponsableDeCaja($idresponsable);
+
+            if($responsable_bd){
+                $idcaja_bd = $responsable_bd['idcaja'];
+                if( $idcaja != $idcaja_bd ){
+                    if( $this->modeloCaja->existeResponsableDeCajaIglesia($idcaja, session('idiglesia'))['total'] > 0 ){
+                        echo '<script>
+                            Swal.fire({
+                                title: "Ya existe un responsable para esta Caja",
+                                icon: "error"
+                            });
+                        </script>';
+                        exit();
+                    }
+                }
+                if( $this->modeloCaja->modificarResponsableCaja($nombre,$idcaja,session('idiglesia'),$idresponsable) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Responsable de Caja Modificado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                        });
+                        setTimeout(function(){location.reload()},1500)
+                    </script>';
+                }
+            }else{
+                //echo "INSERTAR";
+                if( $this->modeloCaja->existeResponsableDeCajaIglesia($idcaja, session('idiglesia'))['total'] > 0 ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Ya existe un responsable para esta Caja",
+                            icon: "error"
+                        });
+                    </script>';
+                    exit();
+                }
+
+                if( $this->modeloCaja->insertarResponsableCaja($nombre,$idcaja,session('idiglesia'),session('idusuario')) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Responsable de Caja Registrado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                        });
+                        setTimeout(function(){location.reload()},1500)
+                    </script>';
+                }
+            }            
+
+        }
+    }
+
+    public function eliminarResponsable(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 ) exit();
+
+            $idresponsable = $this->request->getVar('id');
+
+            $eliminar = FALSE;
+            $mensaje = "";
+
+            $tablas = ['registro'];
+            foreach( $tablas as $t ){
+                $total = $this->modeloCaja->verificarResponsableTieneRegEnTablas($idresponsable,$t)['total'];
+                if( $total > 0 ){
+                    $mensaje .= "<div class='text-start'>El responsable de caja tiene $total registros en la tabla '$t'.</div>";
+                    $eliminar = TRUE;
+                }
+            }
+
+            if( $eliminar ){
+                echo '<script>
+                    Swal.fire({
+                        title: "El responsable de caja no puede ser eliminada",
+                        html: "'.$mensaje.'",
+                        icon: "warning",
+                    });
+                </script>';
+                exit();
+            }
+
+            if( $this->modeloCaja->eliminarResponsableCaja($idresponsable) ){
+                echo '<script>
+                    Swal.fire({
+                        title: "Responsable de caja Eliminado",
+                        text: "",
+                        icon: "success",
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                    });
+                    setTimeout(function(){location.reload()},1500)
+                </script>';
+            }
+        }
+    }
 
 
 }

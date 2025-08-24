@@ -55,18 +55,62 @@ class CajaModel extends Model{
     }
 
 
+    // RESPONSABLES DE CAJA
+
     public function listarResponsablesDeCaja($idiglesia){
         $query = "select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
             FROM responsable_caja rc 
             inner join caja ca on rc.idcaja=ca.idcaja
-            WHERE idiglesia = ?";
+            WHERE rc.idiglesia = ?";
         $st = $this->db->query($query, [$idiglesia]);
 
         return $st->getResultArray();
     }
 
+    public function obtenerResponsableDeCaja($idresponsable){
+        $query = "select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
+            FROM responsable_caja rc 
+            inner join caja ca on rc.idcaja=ca.idcaja
+            WHERE rc.idresponsable_caja = ?";
+        $st = $this->db->query($query, [$idresponsable]);
 
+        return $st->getRowArray();
+    }
 
+    public function existeResponsableDeCajaIglesia($idcaja, $idiglesia){
+        $query = "select count(idresponsable_caja) as total from responsable_caja where idcaja = ? and idiglesia = ?";
+        $st = $this->db->query($query, [$idcaja, $idiglesia]);
+
+        return $st->getRowArray();
+    }
+
+    public function modificarResponsableCaja($nombre,$idcaja,$idiglesia,$idresponsable){
+        $query = "update responsable_caja set re_nombres=?,idcaja=?,idiglesia=? where idresponsable_caja=?";
+        $st = $this->db->query($query, [$nombre,$idcaja,$idiglesia,$idresponsable]);
+
+        return $st;
+    }
+
+    public function insertarResponsableCaja($nombre,$idcaja,$idiglesia,$idcreador){
+        $query = "insert into responsable_caja(re_nombres,idcaja,idiglesia,us_creador) values(?,?,?,?)";
+        $st = $this->db->query($query, [$nombre,$idcaja,$idiglesia,$idcreador]);
+
+        return $st;
+    }
+
+    public function verificarResponsableTieneRegEnTablas($idresponsable, $tabla){
+        $query = "select count(idresponsable_caja) as total from $tabla where idresponsable_caja=?";
+        $st = $this->db->query($query, [$idresponsable]);
+
+        return $st->getRowArray();
+    }
+
+    public function eliminarResponsableCaja($idresponsable){
+        $query = "delete from responsable_caja where idresponsable_caja = ?";
+        $st = $this->db->query($query, [$idresponsable]);
+
+        return $st;
+    }
 
 
 }
