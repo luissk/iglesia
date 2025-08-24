@@ -46,7 +46,7 @@ class Usuario extends BaseController
             $us_crea = $this->modeloUsuario->obtenerUsuario(session('idusuario'));
             if( !$us_crea ) exit(); //
 
-            //print_r($_POST);
+            //print_r($_POST);exit();
 
             $usuario   = trim($this->request->getVar('usuario'));
             $nombre    = trim($this->request->getVar('nombre'));            
@@ -54,6 +54,17 @@ class Usuario extends BaseController
             $tipo      = $this->request->getVar('tipo');
             $iglesia   = $this->request->getVar('iglesia');
             $idusuario = $this->request->getVar('id_usuarioe');//para editar
+
+            //VALIDAR SI LA IGLESIA EXISTE
+            if( ( isset($iglesia)  && $iglesia != "" ) && !$this->modeloIglesia->obtenerIglesia($iglesia) ){
+                echo '<script>
+                    Swal.fire({
+                        title: "La Iglesia no existe",
+                        icon: "error"
+                    });
+                </script>';
+                exit();
+            }
 
             $validation = \Config\Services::validation();
 

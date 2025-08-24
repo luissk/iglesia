@@ -178,6 +178,10 @@ class Caja extends BaseController
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 2 ) exit();
 
+            //validar si el usuario que crea existe
+            $us_crea = $this->modeloUsuario->obtenerUsuario(session('idusuario'));
+            if( !$us_crea ) exit(); //
+
             //print_r($_POST);exit();
 
             $idcaja        = $this->request->getVar('caja');
@@ -217,7 +221,7 @@ class Caja extends BaseController
                 return $this->response->setJson(['errors' => $validation->getErrors()]);
             }
 
-            //validar si existe aun la caja
+            //VALIDAR SI EXISTE LA CAJA
             $caja_bd = $this->modeloCaja->obtenerCaja($idcaja);
             if( !$caja_bd ){
                 echo '<script>
