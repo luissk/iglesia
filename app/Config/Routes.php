@@ -29,3 +29,5 @@ $routes->post('registro-cuenta', 'Cuenta::registrarCuenta');
 $routes->post('elimina-cuenta', 'Cuenta::eliminarCuenta');
 
 $routes->get('registros', 'Registro::index');
+
+$routes->post('formularioLCaja', 'Registro::formularioLibroCaja');
