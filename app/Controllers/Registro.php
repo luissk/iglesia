@@ -12,7 +12,7 @@ class Registro extends BaseController
 
     public function __construct(){
         $this->modeloUsuario = model('UsuarioModel');
-        $this->modeloUsuario = model('RegistroModel');
+        $this->modeloRegistro = model('RegistroModel');
         $this->modeloCaja    = model('CajaModel');
         $this->modeloCuenta  = model('CuentaModel');
         $this->session;
@@ -32,10 +32,26 @@ class Registro extends BaseController
         return view('sistema/registro/index', $data);
     }
 
+    public function listarLCajaDT(){
+        if( $this->request->isAJAX() ){
+			//print_r($_POST);
+
+			$registros = $this->modeloRegistro->listarRegistros(session('idiglesia'));
+			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
+        }
+    }
+
     public function formularioLibroCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $idregistro = $this->request->getVar('id');
+            if( $registro = $this->modeloRegistro->obtenerRegistro($idregistro) ){
+                if( $registro['idiglesia'] == session('idiglesia') ){
+                    $data['registro_bd'] = $registro;
+                }
+            }
 
             $data['cajas']   = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));
             $data['cuentas'] = $this->modeloCuenta->listarCuentas();
@@ -44,5 +60,155 @@ class Registro extends BaseController
 
         }
     }
+
+    public function registrarLCaja(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            //print_r($_POST);exit();
+
+            $idcajaresp = $this->request->getVar('caja');
+            $mov        = $this->request->getVar('mov');
+            $fecha      = trim($this->request->getVar('fecha'));
+            $concepto   = trim($this->request->getVar('concepto'));
+            $idcuenta   = $this->request->getVar('cuenta');
+            $importe    = $this->request->getVar('importe');
+            $idregistro = $this->request->getVar('idregistroe');//para editar
+
+            $validation = \Config\Services::validation();
+
+            $data = [
+                'caja'     => $idcajaresp,
+                'mov'      => $mov,
+                'fecha'    => $fecha,
+                'concepto' => $concepto,
+                'cuenta'   => $idcuenta,
+                'importe'  => $importe,
+            ];
+
+            $rules = [
+                'caja' => [
+                    'label' => 'Caja', 
+                    'rules' => 'required|integer',
+                    'errors' => [
+                        'required'   => '* La {field} es requerida.',
+                        'integer'    => '* La {field} no es válida.',
+                    ]
+                ],
+                'mov' => [
+                    'label' => 'Movimiento', 
+                    'rules' => 'required|integer',
+                    'errors' => [
+                        'required'   => '* El {field} es requerido.',
+                        'integer'    => '* El {field} no es válido.',
+                    ]
+                ],
+                'fecha' => [
+                    'label' => 'Fecha', 
+                    'rules' => 'required|valid_date',
+                    'errors' => [
+                        'required'   => '* La {field} es requerida.',
+                        'valid_date' => '* La {field} no es válida.',
+                    ]
+                ],
+                'concepto' => [
+                    'label' => 'Concepto', 
+                    'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[200]',
+                    'errors' => [
+                        'required'    => '* El {field} es requerido.',
+                        'regex_match' => '* El {field} no es válido.',
+                        'max_length'  => '* El {field} debe contener máximo 200 caracteres.'
+                    ]
+                ],
+                'cuenta' => [
+                    'label' => 'Cuenta', 
+                    'rules' => 'required|integer',
+                    'errors' => [
+                        'required'   => '* La {field} es requerida.',
+                        'integer'    => '* La {field} no es válida.',
+                    ]
+                ],
+                'importe' => [
+                    'label' => 'Importe', 
+                    'rules' => 'required|decimal|max_length[10]',
+                    'errors' => [
+                        'required'   => '* El {field} es requerido.',
+                        'decimal'    => '* El {field} sólo contiene números y punto decimal',
+                        'max_length' => '* El {field} debe contener máximo 10 caracteres.'
+                    ]
+                ],
+
+            ];
+
+            $validation->setRules($rules);
+
+            if (!$validation->run($data)) {
+                return $this->response->setJson(['errors' => $validation->getErrors()]);
+            }
+
+            $registro_bd = $this->modeloRegistro->obtenerRegistro($idregistro);
+
+            if( $registro_bd ){
+
+                if( $this->modeloRegistro->modificarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idregistro) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Registro Modificado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dataTableReload(1);
+                    </script>';
+                }
+                
+            }else{
+
+                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Registro Guardado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dataTableReload(1);
+                    </script>';
+                }
+
+            }
+
+        }
+    }
+
+    public function eliminarLCaja(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $idregistro = $this->request->getVar('id');
+            if( $registro = $this->modeloRegistro->obtenerRegistro($idregistro) ){
+                if( $this->modeloRegistro->eliminarRegistro($idregistro) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Registro Eliminado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dataTableReload(1);
+                    </script>';
+                }
+            }
+
+            
+
+        }
+    }
+
 
 }
