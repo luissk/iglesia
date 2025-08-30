@@ -35,5 +35,6 @@ $routes->post('elimina-lcaja', 'Registro::eliminarLCaja');
 
 $routes->get('reportes-registros', 'Registro::reportesRegistros');
 $routes->post('genera-reportelcaja', 'Registro::generaReporteLCaja');
+$routes->get('pdfLCaja/(:any)/(:any)', 'Registro::pdfLCaja/$1/$2');
 
 $routes->post('formularioLCaja', 'Registro::formularioLibroCaja');

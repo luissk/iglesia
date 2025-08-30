@@ -92,7 +92,7 @@ $(function(){
         btn.innerHTML = `${btnHTML} PROCESANDO...`;
 
         $.post('genera-reportelcaja', $(this).serialize(), function(data){
-            console.log(data);
+            //console.log(data);
             $('[id^="msj-"').text("");                
             if( data.errors ){  
                 let errors = data.errors;

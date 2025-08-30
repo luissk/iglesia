@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Dompdf\Dompdf;
+
 class Registro extends BaseController
 {
     protected $modeloUsuario;
@@ -236,7 +240,10 @@ class Registro extends BaseController
                 if( $tipoRep == 'excel' ){
                     $this->excelLCaja($mes, $anio);
                 }else if( $tipoRep == 'pdf' ){
-                    $this->pdfLCaja($mes, $anio);
+                    //$this->pdfLCaja($mes, $anio);
+                    $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+                    if( !$registros ) exit();
+                    echo "<script>window.open('".base_url('pdfLCaja/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
                 }
             }
 
@@ -244,6 +251,62 @@ class Registro extends BaseController
     }
 
     private function excelLCaja($mes, $anio){
+        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+
+        if( !$registros ) exit();        
+
+        $spreadsheet = new Spreadsheet();
+        $sheet       = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'NRO');
+        $sheet->setCellValue('B1', 'FECHA');
+        $sheet->setCellValue('C1', 'IMPORTE');
+        $sheet->setCellValue('D1', 'MOV');
+        $sheet->setCellValue('E1', 'DH');
+        $sheet->setCellValue('F1', 'COD');
+        $sheet->setCellValue('G1', 'CUENTA');
+        $sheet->setCellValue('H1', 'CONCEPTO');
+        
+        $cont = 0;
+        $rows = 2;
+        foreach($registros as $r){
+            $cont++;
+            $fecha    = $r['re_fecha'];
+            $importe  = $r['re_importe'];
+            $mov      = $r['tipo_mov'];
+            $dh       = $r['cu_dh'];
+            $cod      = $r['cu_codigo'];
+            $cuenta   = $r['cu_cuenta'];
+            $concepto = $r['re_desc'];
+
+            $sheet->setCellValue('A'.$rows, $cont);
+            $sheet->setCellValue('B'.$rows, $fecha);
+            //$sheet->getCell('B'.$rows, $codigo)->getStyle()->getNumberFormat()->setFormatCode('#');
+            $sheet->setCellValue('C'.$rows, $importe);
+            $sheet->setCellValue('D'.$rows, $mov);
+            $sheet->setCellValue('E'.$rows, $dh);
+            $sheet->setCellValue('F'.$rows, $cod);
+            $sheet->setCellValue('G'.$rows, $cuenta);
+             $sheet->setCellValue('H'.$rows, $concepto);
+            $rows++;
+        }
+        foreach (range('A','H') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        /* header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="reporte_'.date('d-m-Y h:i:s').'.xlsx"');
+        header('Cache-Control: max-age=0'); */
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('public/reporte.xlsx');
+        $writer->save('php://output');
+
+        echo "<script>window.open('".base_url('public/reporte.xlsx')."','_blank' );$('#msj').html('')</script>";
+        exit();
+        
+    }
+
+    /* private function excelLCaja_($mes, $anio){
         $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
 
         if( !$registros ) exit();
@@ -297,10 +360,26 @@ class Registro extends BaseController
         //echo  $tabla; 
 
         exit();
-    }
+    } */
 
-    private function pdfLCaja($mes, $anio){
-        echo "pdf";
+    public function pdfLCaja($mes, $anio){
+        $options = new \Dompdf\Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new \Dompdf\Dompdf($options);
+
+        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+        if( !$registros ) exit();
+        
+        $data['registros'] = $registros;
+
+        $dompdf->loadHtml(view('sistema/registro/pdfLCaja', $data));
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream("presupuesto.pdf", array("Attachment" => false));
+        exit;
     }
 
 

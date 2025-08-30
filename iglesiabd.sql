@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-08-2025 a las 22:46:01
+-- Tiempo de generación: 30-08-2025 a las 17:42:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -91,7 +91,8 @@ INSERT INTO `cuenta` (`idcuenta`, `cu_dh`, `cu_codigo`, `cu_cuenta`, `cu_observa
 (26, 'Haber', '755', 'Ofrenda visitantes', 'Ofrenda visitantes'),
 (27, 'Haber', '756', 'Ofrenda niños E. dominical', 'Ofrenda niños E. dominical'),
 (28, 'Haber', '757', 'Por acción social', 'Ganancia x acción Social'),
-(29, 'Haber', '759', 'Otros ingresos de Gestión', 'Aporte para gas, otros');
+(29, 'Haber', '759', 'Otros ingresos de Gestión', 'Aporte para gas, otros'),
+(30, 'Haber', '140', 'Saldo Inicial', 'Saldo inicial de las iglesias');
 
 -- --------------------------------------------------------
 
@@ -111,9 +112,10 @@ CREATE TABLE `iglesia` (
 --
 
 INSERT INTO `iglesia` (`idiglesia`, `ig_iglesia`, `ig_direccion`, `ig_pastor`) VALUES
-(1, 'Asociación de Iglesias Cristianas', 'por definir ok', 'Encargado Alberto Ortiz'),
+(1, 'Asociación Evangélica Avivamiento Peruano Emmanuel a las Naciones', 'Ascope - La Libertad', 'Alberto Izquierdo'),
 (4, 'Iglesia Monte de Sión - Sintuco', 'Calle Bolivar 123 - Chocope,  Ascope, La Libertad', 'Alipio Avila Valencia'),
-(5, 'Iglesia Bethel Casa Grande', 'Urb Miguel Grau 2da Etapa', 'Juan Perez');
+(5, 'Iglesia Bethel Casa Grande', 'Urb Miguel Grau 2da Etapa', 'Juan Perez'),
+(7, 'Iglesia Lirio de los Valles', 'Careaga', 'Oscar Barreto');
 
 -- --------------------------------------------------------
 
@@ -129,9 +131,34 @@ CREATE TABLE `registro` (
   `us_creador` int(11) NOT NULL,
   `idcuenta` int(11) NOT NULL,
   `idresponsable_caja` int(11) NOT NULL,
+  `re_mov` tinyint(4) NOT NULL,
   `re_fechareg` timestamp NOT NULL DEFAULT current_timestamp(),
   `re_fechaact` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `registro`
+--
+
+INSERT INTO `registro` (`idregistro`, `re_fecha`, `re_importe`, `re_desc`, `us_creador`, `idcuenta`, `idresponsable_caja`, `re_mov`, `re_fechareg`, `re_fechaact`) VALUES
+(1, '2025-05-02', 16.00, 'Ofrenda recogida', 2, 24, 1, 1, '2025-08-29 14:19:42', '2025-08-29 14:19:42'),
+(2, '2025-05-03', 300.00, 'Pasajes mes Pastor Alipio', 2, 10, 1, 2, '2025-08-29 14:22:40', '2025-08-29 14:22:40'),
+(3, '2025-05-06', 30.00, 'Julia Juárez', 2, 22, 1, 1, '2025-08-29 14:23:43', '2025-08-29 14:23:43'),
+(4, '2025-05-06', 363.00, 'Leonel Cueva', 2, 22, 1, 1, '2025-08-29 14:28:09', '2025-08-29 14:28:09'),
+(5, '2025-03-01', 3000.00, 'saldo inicial de la iglesia monte de sion', 2, 30, 1, 1, '2025-08-29 16:41:26', '2025-08-29 16:41:26'),
+(6, '2025-03-03', 150.00, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:02', '2025-08-29 18:13:02'),
+(7, '2025-03-05', 120.50, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:40', '2025-08-29 18:13:40'),
+(8, '2025-03-05', 200.00, 'capacitacion al sistema', 2, 8, 1, 2, '2025-08-29 18:14:09', '2025-08-29 18:14:09'),
+(9, '2025-03-20', 80.00, 'atencion a visitantes de iglesias', 2, 9, 4, 2, '2025-08-29 18:15:18', '2025-08-29 18:15:18'),
+(10, '2025-03-23', 2.20, 'ofrenda de niños', 2, 27, 6, 1, '2025-08-29 18:16:36', '2025-08-29 18:16:36'),
+(11, '2025-04-01', 100.00, 'Raquel Uceda - diezmo de marzo', 2, 23, 1, 1, '2025-08-29 18:23:52', '2025-08-29 18:23:52'),
+(12, '2025-04-04', 150.00, 'Alberto Oriz - diezmo', 2, 22, 1, 1, '2025-08-29 18:24:20', '2025-08-29 18:24:20'),
+(13, '2025-04-16', 50.00, 'compra de flores', 2, 16, 1, 2, '2025-08-29 19:28:08', '2025-08-29 19:28:08'),
+(14, '2025-04-29', 85.00, 'clases de canto', 2, 8, 4, 2, '2025-08-29 19:36:18', '2025-08-29 19:37:03'),
+(15, '2025-04-29', 12.00, 'clases de canto', 2, 24, 1, 1, '2025-08-29 19:36:35', '2025-08-29 19:36:47'),
+(16, '2025-05-29', 106.00, 'Otros ingresos', 2, 29, 7, 1, '2025-08-29 19:44:10', '2025-08-29 19:44:10'),
+(17, '2025-05-10', 55.50, 'Compra de flores para todo el templo', 2, 16, 1, 2, '2025-08-30 13:51:27', '2025-08-30 13:51:27'),
+(18, '2025-05-20', 55.50, 'Julia Juarez - diezmo', 2, 22, 1, 1, '2025-08-30 13:52:14', '2025-08-30 13:52:14');
 
 -- --------------------------------------------------------
 
@@ -152,10 +179,30 @@ CREATE TABLE `responsable_caja` (
 --
 
 INSERT INTO `responsable_caja` (`idresponsable_caja`, `re_nombres`, `idiglesia`, `idcaja`, `us_creador`) VALUES
-(1, 'Nolberto Solano', 4, 1, 2),
+(1, 'Juana Juarez De La Cruz', 4, 1, 2),
 (2, 'Paolo Guerrero', 5, 1, 3),
 (3, 'Nolberto Solano', 5, 2, 3),
-(4, 'Jeferson Farfán', 4, 2, 2);
+(4, 'Digna Flores', 4, 2, 2),
+(5, 'Lidia Briceño', 4, 3, 2),
+(6, 'Raquel Uceda', 4, 4, 2),
+(7, 'Evelyn Mesa', 4, 5, 2),
+(8, 'Juana Juarez De La Cruz', 4, 6, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `saldo`
+--
+
+CREATE TABLE `saldo` (
+  `idsaldo` int(11) NOT NULL,
+  `sa_fechareg` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `sa_mes` tinyint(4) NOT NULL,
+  `sa_anio` smallint(6) NOT NULL,
+  `sa_tipo` tinyint(4) NOT NULL,
+  `sa_saldo` decimal(10,2) NOT NULL,
+  `idiglesia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -201,9 +248,10 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idusuario`, `us_usuario`, `idiglesia`, `idtipo_usuario`, `us_password`, `us_nombre`, `us_creador`, `us_fechareg`, `us_fechaact`) VALUES
 (1, 'lcalderons', 1, 1, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Luis A. Calderón Sánchez', NULL, '2025-08-20 21:13:48', '2025-08-22 19:22:30'),
-(2, 'usuario1', 4, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Usuario1 Alcántara Riacho', 1, '2025-08-22 21:24:02', '2025-08-23 02:58:32'),
+(2, 'jjuarez', 4, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Juana Juarez De La Cruz', 1, '2025-08-22 21:24:02', '2025-08-26 16:38:12'),
 (3, 'usuario2', 5, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Juancito Perez', 1, '2025-08-24 04:35:50', '2025-08-24 04:36:20'),
-(4, 'usuarioSion', 4, 3, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Elias Aviles Cavero', 2, '2025-08-22 21:27:59', '2025-08-22 21:27:59');
+(5, 'srbarreto', 7, 2, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Sr Barreto', 1, '2025-08-26 16:29:03', '2025-08-26 16:29:03'),
+(6, 'auxiliar', 7, 3, '$2a$12$YmtIBS/VsxVywSQHV4A2.uFU8VcIdeY.pJDE0ZjKocqkKMwFw/Hka', 'Usuario Auxiliar', 5, '2025-08-26 16:35:20', '2025-08-26 16:35:20');
 
 --
 -- Índices para tablas volcadas
@@ -244,6 +292,13 @@ ALTER TABLE `responsable_caja`
   ADD KEY `idcaja` (`idcaja`);
 
 --
+-- Indices de la tabla `saldo`
+--
+ALTER TABLE `saldo`
+  ADD PRIMARY KEY (`idsaldo`),
+  ADD KEY `idx_idiglesia` (`idiglesia`);
+
+--
 -- Indices de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
@@ -272,25 +327,31 @@ ALTER TABLE `caja`
 -- AUTO_INCREMENT de la tabla `cuenta`
 --
 ALTER TABLE `cuenta`
-  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesia`
 --
 ALTER TABLE `iglesia`
-  MODIFY `idiglesia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idiglesia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `responsable_caja`
 --
 ALTER TABLE `responsable_caja`
-  MODIFY `idresponsable_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idresponsable_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `saldo`
+--
+ALTER TABLE `saldo`
+  MODIFY `idsaldo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
@@ -302,7 +363,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
