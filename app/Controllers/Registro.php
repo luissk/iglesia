@@ -210,5 +210,98 @@ class Registro extends BaseController
         }
     }
 
+    public function reportesRegistros(){
+        if( !session('idusuario') ){
+            return redirect()->to('/');
+        }
+
+        if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+        
+        $data['title']           = "Reportes de Registros";
+        $data['registrosRepLinkActive'] = 1;       
+
+        return view('sistema/registro/reporteReg', $data);
+    }
+
+    public function generaReporteLCaja(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $mes     = $this->request->getVar('mesCa');
+            $anio    = trim($this->request->getVar('anioCa'));
+            $tipoRep = $this->request->getVar('tipoRepCa');
+
+            if( $mes != '' & $anio != '' && $tipoRep != '' ){
+                if( $tipoRep == 'excel' ){
+                    $this->excelLCaja($mes, $anio);
+                }else if( $tipoRep == 'pdf' ){
+                    $this->pdfLCaja($mes, $anio);
+                }
+            }
+
+        }
+    }
+
+    private function excelLCaja($mes, $anio){
+        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+
+        if( !$registros ) exit();
+        //print_r($registros); exit();
+
+        $tabla = '
+        <table border="1">
+            <tr>
+                <th>NRO</th>
+                <th>FECHA</th>
+                <th>IMPORTE</th>
+                <th>MOV</th>
+                <th>DH</th>
+                <th>COD</th>
+                <th>CUENTA</th>
+                <th>CONCEPTO</th>
+            </tr>
+        ';
+
+        $cont = 0;
+        foreach($registros as $r){
+            $cont++;
+            $fecha    = $r['re_fecha'];
+            $importe  = $r['re_importe'];
+            $mov      = $r['tipo_mov'];
+            $dh       = $r['cu_dh'];
+            $cod      = $r['cu_codigo'];
+            $cuenta   = $r['cu_cuenta'];
+            $concepto = $r['re_desc'];
+
+            $tabla .= "
+            <tr>
+                <td>$cont</td>
+                <td>$fecha</td>
+                <td>$importe</td>
+                <td>$mov</td>
+                <td>$dh</td>
+                <td>$cod</td>
+                <td>$cuenta</td>
+                <td>$concepto</td>
+            </tr>
+            ";
+        }
+        $tabla .= "</table>";
+        
+        $filename = 'reporte_lcaja_'.date('d-m-Y h:i:s').'.xls';
+        header ( "Content-Type: application/vnd.ms-excel" ); 
+        header ( "Content-Disposition: attachment; filename=$filename" );
+        
+        // Representar datos de Excel 
+        //echo  $tabla; 
+
+        exit();
+    }
+
+    private function pdfLCaja($mes, $anio){
+        echo "pdf";
+    }
+
 
 }

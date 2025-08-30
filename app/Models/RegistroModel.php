@@ -39,6 +39,22 @@ class RegistroModel extends Model{
         return $st->getRowArray();
     }
 
+    public function listarParaReporte($idiglesia,$mes,$anio,$dh = [1,2]){
+        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov, 
+        cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,ca.ca_caja 
+        from registro re 
+        inner join usuario us on re.us_creador=us.idusuario 
+        inner join iglesia ig on us.idiglesia=ig.idiglesia 
+        inner join cuenta cu on re.idcuenta=cu.idcuenta 
+        inner join responsable_caja rc on re.idresponsable_caja=rc.idresponsable_caja 
+        inner join caja ca on rc.idcaja=ca.idcaja 
+        where us.idiglesia = ? and month(re.re_fecha) = ? and year(re.re_fecha) = ? and cu.cu_dh in ? 
+         order by re.re_fecha";
+        $st = $this->db->query($query,  [$idiglesia,$mes,$anio,$dh]);
+
+        return $st->getResultArray();
+    }
+
     public function insertarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov){
         $query = "insert into registro(re_fecha,re_importe,re_desc,us_creador,idcuenta,idresponsable_caja,re_mov) values(?,?,?,?,?,?,?)";
         $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov]);
