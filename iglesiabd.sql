@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-08-2025 a las 17:42:11
+-- Tiempo de generación: 01-09-2025 a las 00:27:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -133,32 +133,34 @@ CREATE TABLE `registro` (
   `idresponsable_caja` int(11) NOT NULL,
   `re_mov` tinyint(4) NOT NULL,
   `re_fechareg` timestamp NOT NULL DEFAULT current_timestamp(),
-  `re_fechaact` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `re_fechaact` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `idiglesia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `registro`
 --
 
-INSERT INTO `registro` (`idregistro`, `re_fecha`, `re_importe`, `re_desc`, `us_creador`, `idcuenta`, `idresponsable_caja`, `re_mov`, `re_fechareg`, `re_fechaact`) VALUES
-(1, '2025-05-02', 16.00, 'Ofrenda recogida', 2, 24, 1, 1, '2025-08-29 14:19:42', '2025-08-29 14:19:42'),
-(2, '2025-05-03', 300.00, 'Pasajes mes Pastor Alipio', 2, 10, 1, 2, '2025-08-29 14:22:40', '2025-08-29 14:22:40'),
-(3, '2025-05-06', 30.00, 'Julia Juárez', 2, 22, 1, 1, '2025-08-29 14:23:43', '2025-08-29 14:23:43'),
-(4, '2025-05-06', 363.00, 'Leonel Cueva', 2, 22, 1, 1, '2025-08-29 14:28:09', '2025-08-29 14:28:09'),
-(5, '2025-03-01', 3000.00, 'saldo inicial de la iglesia monte de sion', 2, 30, 1, 1, '2025-08-29 16:41:26', '2025-08-29 16:41:26'),
-(6, '2025-03-03', 150.00, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:02', '2025-08-29 18:13:02'),
-(7, '2025-03-05', 120.50, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:40', '2025-08-29 18:13:40'),
-(8, '2025-03-05', 200.00, 'capacitacion al sistema', 2, 8, 1, 2, '2025-08-29 18:14:09', '2025-08-29 18:14:09'),
-(9, '2025-03-20', 80.00, 'atencion a visitantes de iglesias', 2, 9, 4, 2, '2025-08-29 18:15:18', '2025-08-29 18:15:18'),
-(10, '2025-03-23', 2.20, 'ofrenda de niños', 2, 27, 6, 1, '2025-08-29 18:16:36', '2025-08-29 18:16:36'),
-(11, '2025-04-01', 100.00, 'Raquel Uceda - diezmo de marzo', 2, 23, 1, 1, '2025-08-29 18:23:52', '2025-08-29 18:23:52'),
-(12, '2025-04-04', 150.00, 'Alberto Oriz - diezmo', 2, 22, 1, 1, '2025-08-29 18:24:20', '2025-08-29 18:24:20'),
-(13, '2025-04-16', 50.00, 'compra de flores', 2, 16, 1, 2, '2025-08-29 19:28:08', '2025-08-29 19:28:08'),
-(14, '2025-04-29', 85.00, 'clases de canto', 2, 8, 4, 2, '2025-08-29 19:36:18', '2025-08-29 19:37:03'),
-(15, '2025-04-29', 12.00, 'clases de canto', 2, 24, 1, 1, '2025-08-29 19:36:35', '2025-08-29 19:36:47'),
-(16, '2025-05-29', 106.00, 'Otros ingresos', 2, 29, 7, 1, '2025-08-29 19:44:10', '2025-08-29 19:44:10'),
-(17, '2025-05-10', 55.50, 'Compra de flores para todo el templo', 2, 16, 1, 2, '2025-08-30 13:51:27', '2025-08-30 13:51:27'),
-(18, '2025-05-20', 55.50, 'Julia Juarez - diezmo', 2, 22, 1, 1, '2025-08-30 13:52:14', '2025-08-30 13:52:14');
+INSERT INTO `registro` (`idregistro`, `re_fecha`, `re_importe`, `re_desc`, `us_creador`, `idcuenta`, `idresponsable_caja`, `re_mov`, `re_fechareg`, `re_fechaact`, `idiglesia`) VALUES
+(1, '2025-05-02', 16.00, 'Ofrenda recogida', 2, 24, 1, 1, '2025-08-29 14:19:42', '2025-08-31 17:01:31', 4),
+(2, '2025-05-03', 300.00, 'Pasajes mes Pastor Alipio', 2, 10, 1, 2, '2025-08-29 14:22:40', '2025-08-31 17:01:31', 4),
+(3, '2025-05-06', 30.00, 'Julia Juárez', 2, 22, 1, 1, '2025-08-29 14:23:43', '2025-08-31 17:01:31', 4),
+(4, '2025-05-06', 363.00, 'Leonel Cueva', 2, 22, 1, 1, '2025-08-29 14:28:09', '2025-08-31 17:01:31', 4),
+(5, '2025-03-01', 3000.00, 'saldo inicial de la iglesia monte de sion', 2, 30, 1, 1, '2025-08-29 16:41:26', '2025-08-31 17:01:31', 4),
+(6, '2025-03-03', 150.00, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:02', '2025-08-31 17:01:31', 4),
+(7, '2025-03-05', 120.50, 'ofrendas', 2, 25, 1, 1, '2025-08-29 18:13:40', '2025-08-31 17:01:31', 4),
+(8, '2025-03-05', 200.00, 'capacitacion al sistema', 2, 8, 1, 2, '2025-08-29 18:14:09', '2025-08-31 17:01:31', 4),
+(9, '2025-03-20', 80.00, 'atencion a visitantes de iglesias', 2, 9, 4, 2, '2025-08-29 18:15:18', '2025-08-31 17:01:31', 4),
+(10, '2025-03-23', 2.20, 'ofrenda de niños', 2, 27, 6, 1, '2025-08-29 18:16:36', '2025-08-31 17:01:31', 4),
+(11, '2025-04-01', 100.00, 'Raquel Uceda - diezmo de marzo', 2, 23, 1, 1, '2025-08-29 18:23:52', '2025-08-31 17:01:31', 4),
+(12, '2025-04-04', 150.00, 'Alberto Oriz - diezmo', 2, 22, 1, 1, '2025-08-29 18:24:20', '2025-08-31 17:01:31', 4),
+(13, '2025-04-16', 50.00, 'compra de flores', 2, 16, 1, 2, '2025-08-29 19:28:08', '2025-08-31 17:01:31', 4),
+(14, '2025-04-29', 85.00, 'clases de canto', 2, 8, 4, 2, '2025-08-29 19:36:18', '2025-08-31 17:01:31', 4),
+(15, '2025-04-29', 12.00, 'clases de canto', 2, 24, 1, 1, '2025-08-29 19:36:35', '2025-08-31 17:01:31', 4),
+(16, '2025-05-29', 106.00, 'Otros ingresos', 2, 29, 7, 1, '2025-08-29 19:44:10', '2025-08-31 17:01:31', 4),
+(17, '2025-05-10', 55.50, 'Compra de flores para todo el templo', 2, 16, 1, 2, '2025-08-30 13:51:27', '2025-08-31 17:01:31', 4),
+(18, '2025-05-20', 55.50, 'Julia Juarez - diezmo', 2, 22, 1, 1, '2025-08-30 13:52:14', '2025-08-31 17:01:31', 4),
+(19, '2025-05-30', 250.00, 'Pago a copastor', 2, 7, 1, 2, '2025-08-31 17:21:09', '2025-08-31 17:21:09', 4);
 
 -- --------------------------------------------------------
 
@@ -187,22 +189,6 @@ INSERT INTO `responsable_caja` (`idresponsable_caja`, `re_nombres`, `idiglesia`,
 (6, 'Raquel Uceda', 4, 4, 2),
 (7, 'Evelyn Mesa', 4, 5, 2),
 (8, 'Juana Juarez De La Cruz', 4, 6, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `saldo`
---
-
-CREATE TABLE `saldo` (
-  `idsaldo` int(11) NOT NULL,
-  `sa_fechareg` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `sa_mes` tinyint(4) NOT NULL,
-  `sa_anio` smallint(6) NOT NULL,
-  `sa_tipo` tinyint(4) NOT NULL,
-  `sa_saldo` decimal(10,2) NOT NULL,
-  `idiglesia` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -282,7 +268,8 @@ ALTER TABLE `registro`
   ADD PRIMARY KEY (`idregistro`),
   ADD KEY `fk_registro_usuario1_idx` (`us_creador`),
   ADD KEY `fk_registro_cuenta1_idx` (`idcuenta`),
-  ADD KEY `idresponsable_caja` (`idresponsable_caja`);
+  ADD KEY `idresponsable_caja` (`idresponsable_caja`),
+  ADD KEY `idx_iglesia_fecha` (`idiglesia`,`re_fecha`);
 
 --
 -- Indices de la tabla `responsable_caja`
@@ -290,13 +277,6 @@ ALTER TABLE `registro`
 ALTER TABLE `responsable_caja`
   ADD PRIMARY KEY (`idresponsable_caja`),
   ADD KEY `idcaja` (`idcaja`);
-
---
--- Indices de la tabla `saldo`
---
-ALTER TABLE `saldo`
-  ADD PRIMARY KEY (`idsaldo`),
-  ADD KEY `idx_idiglesia` (`idiglesia`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -339,19 +319,13 @@ ALTER TABLE `iglesia`
 -- AUTO_INCREMENT de la tabla `registro`
 --
 ALTER TABLE `registro`
-  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idregistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `responsable_caja`
 --
 ALTER TABLE `responsable_caja`
   MODIFY `idresponsable_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `saldo`
---
-ALTER TABLE `saldo`
-  MODIFY `idsaldo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

@@ -170,7 +170,7 @@ class Registro extends BaseController
                 
             }else{
 
-                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov) ){
+                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,session('idiglesia')) ){
                     echo '<script>
                         Swal.fire({
                             title: "Registro Guardado",
@@ -253,21 +253,27 @@ class Registro extends BaseController
     private function excelLCaja($mes, $anio){
         $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
 
-        if( !$registros ) exit();        
+        if( !$registros ) exit();
+        
+        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes);
+        //print_r($saldos);exit();
 
         $spreadsheet = new Spreadsheet();
         $sheet       = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'NRO');
-        $sheet->setCellValue('B1', 'FECHA');
-        $sheet->setCellValue('C1', 'IMPORTE');
-        $sheet->setCellValue('D1', 'MOV');
-        $sheet->setCellValue('E1', 'DH');
-        $sheet->setCellValue('F1', 'COD');
-        $sheet->setCellValue('G1', 'CUENTA');
-        $sheet->setCellValue('H1', 'CONCEPTO');
+        $sheet->setCellValue('B1', 'SALDO ANT');
+        $sheet->setCellValue('C1', $saldos['saldo_inicial']);
+
+        $sheet->setCellValue('A3', 'NRO');
+        $sheet->setCellValue('B3', 'FECHA');
+        $sheet->setCellValue('C3', 'IMPORTE');
+        $sheet->setCellValue('D3', 'MOV');
+        $sheet->setCellValue('E3', 'DH');
+        $sheet->setCellValue('F3', 'COD');
+        $sheet->setCellValue('G3', 'CUENTA');
+        $sheet->setCellValue('H3', 'CONCEPTO');
         
         $cont = 0;
-        $rows = 2;
+        $rows = 4;
         foreach($registros as $r){
             $cont++;
             $fecha    = $r['re_fecha'];
@@ -367,10 +373,17 @@ class Registro extends BaseController
         $options->setIsRemoteEnabled(true);
         $dompdf = new \Dompdf\Dompdf($options);
 
-        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
-        if( !$registros ) exit();
+        $registros_i = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1]);
+        $registros_e = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[2]);
+        //if( !$registros_i ) exit();
+
+        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes);
         
-        $data['registros'] = $registros;
+        $data['registros_i'] = $registros_i;
+        $data['registros_e'] = $registros_e;
+        $data['saldos']      = $saldos;
+        $data['anio']        = $anio;
+        $data['mes']         = $mes;
 
         $dompdf->loadHtml(view('sistema/registro/pdfLCaja', $data));
 
@@ -382,5 +395,17 @@ class Registro extends BaseController
         exit;
     }
 
+    private function obtenerSaldosMensualesLCaja($idiglesia, $anio, $mes){
+        $primer_dia_mes = sprintf('%04d-%02d-01', $anio, $mes);
+        $primer_dia_siguiente_mes = date('Y-m-01', strtotime('+1 month', strtotime($primer_dia_mes)));
+
+        $saldo_inicial = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_mes)['saldo'] ?? 0;
+        $saldo_final   = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_siguiente_mes)['saldo'] ?? 0;
+
+        return [
+            'saldo_inicial' => $saldo_inicial,
+            'saldo_final' => $saldo_final,
+        ];
+    }
 
 }

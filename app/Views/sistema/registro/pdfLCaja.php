@@ -1,6 +1,7 @@
 <?php
+$arr_meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
 
-
+$mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 ?>
 
 <!doctype html>
@@ -15,19 +16,19 @@
         color: #333;
     }
     @page { 
-        margin: 170px 50px 80px 60px;
+        margin: 80px 50px 80px 60px;
     }
     header {
         position: fixed;
-        top: -140px;
+        top: -50px;
         left: 0px;
         right: 0px;
-        height: 120px;
+        height: 30px;
 
         /** Extra personal styles **/
         text-align: center;
         border-bottom: 2px solid #444;
-
+        /* background-color: red; */
     }
 
     footer {
@@ -48,24 +49,21 @@
         content: counter(page);
     }
 
-    .tablapdf thead tr th{
-        background-color: #ddd;
-        padding: 5px 0;
+    .cuerpo_tablas table tr td{
+        border: 1px solid #dedede;
     }
-    .tablapdf tbody tr td{
-        padding: 5px;
-        text-align: center;
-        border: 1px solid #ddd;
-    }
-    .tablapdf tbody tr td.left{
-        text-align: left;
+
+    .saldos{text-align: right;}
+    .saldos b{
+        background-color: #dedede;
+        padding: 6px;
     }
 </style>
 
 </head>
 <body>
     <header>
-        HEADER
+        Libro de Caja "<?=session('iglesia')?>"
     </header>
     <footer>
         <table width="100%">
@@ -75,86 +73,145 @@
         </table>
     </footer>
 
-    <section style='font-size:12px'>
-        <div class="app-content mt-4">
-    <div class="container-fluid">
-<div class="row">
-    <div class="col-sm-12">
-<?php
+    <section style='font-size:12px' class="cuerpo_tablas">
+        <div class="saldos">
+            <b>Saldo Anterior: S/. <?=$saldos['saldo_inicial']?></b>
+        </div>
+        <br>
+        <div>
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <thead>
+                <tr>
+                    <th colspan="5" bgcolor="#87e1eb">INGRESOS (<?=$mes_anio?>)</th>
+                </tr>
+                <tr bgcolor="#dedede">
+                    <th width="10%">Fecha</th>
+                    <th width="5%">Cod</th>
+                    <th width="27%">Cuenta</th>
+                    <th width="40%">Descripción</th>
+                    <th width="13%">Importe (S/.)</th>
+                </tr>
+                </thead>
+                <?php               
+                // Variables para rastrear el grupo anterior (PARA AGRUPAR LAS FILAS CUANDO SE REPITE LA FECHA Y EL CODIGO)
+                $fecha_anterior     = null;
+                $codcuenta_anterior = null;
 
-// El array de datos que proporcionaste
-$registro = $registros;
+                $total_i = 0;
+                foreach($registros_i as $ing){
+                    $fecha_i   = date("d/m/Y", strtotime($ing['re_fecha']));
+                    $cod_i     = $ing['cu_codigo'];
+                    $cuenta_i  = $ing['cu_cuenta'];
+                    $desc_i    = $ing['re_desc'];
+                    $importe_i = $ing['re_importe'];
 
-$totales_por_grupo = [];
+                    $total_i += $importe_i;
 
-foreach ($registro as $fila) {
-    // Creamos una clave única para el grupo
-    $clave_grupo = $fila['re_fecha'] . '|' . $fila['cu_codigo'] . '|' . $fila['cu_cuenta'];
-    
-    // Si la clave no existe, la inicializamos en 0
-    if (!isset($totales_por_grupo[$clave_grupo])) {
-        $totales_por_grupo[$clave_grupo] = 0;
-    }
-    
-    // Sumamos el importe a la clave del grupo
-    $totales_por_grupo[$clave_grupo] += floatval($fila['re_importe']);
-}
+                    $fecha_actual     = $fecha_i;
+                    $codcuenta_actual = $cod_i;
 
-// Ahora $totales_por_grupo contiene los totales correctos para cada grupo
-// print_r($totales_por_grupo);
-/* Ejemplo de salida:
-Array
-(
-    [2025-05-02|753|Ofrenda recogida] => 16
-    [2025-05-03|631|Transporte y gastos de viaje] => 300
-    [2025-05-06|751|Diezmo actual] => 393 // <- El total de 30 + 363
-    // ...
-)
-*/
+                    echo "<tr>";
 
+                    // Si la fecha o la cuenta cambian, mostrar los valores
+                    if ($fecha_actual != $fecha_anterior || $codcuenta_actual != $codcuenta_anterior) {
+                        echo "<td>$fecha_actual</td>";
+                        echo "<td>$cod_i</td>";
+                        echo "<td>$cuenta_i</td>";
+                    }else{
+                        echo "<td></td>";
+                        echo "<td></td>";
+                        echo "<td></td>";
+                    }
 
-// ... (El código de la primera parte debe ir aquí para que $totales_por_grupo exista)
+                    echo "<td>$desc_i</td>";
+                    echo "<td align='right'>$importe_i</td>";
+                    echo "</tr>";
 
-$grupo_anterior = null;
+                    $fecha_anterior     = $fecha_actual;
+                    $codcuenta_anterior = $codcuenta_actual;
+                }
+                ?>
+                <tr bgcolor="#dedede">
+                    <th colspan="4" align="right">TOTAL (S/.)</th>
+                    <th align="right"><?=$total_i?></th>
+                </tr>
+            </table>
+        </div>
 
-echo '<table class="table">';
-echo '<tr><th>Fecha</th><th>Código</th><th>Cuenta</th><th>Descripción</th><th>Total Grupo</th></tr>';
+        <br><br>
 
-foreach ($registro as $fila) {
-    $clave_grupo = $fila['re_fecha'] . '|' . $fila['cu_codigo'] . '|' . $fila['cu_cuenta'];
-    
-    // Verificamos si este es un nuevo grupo
-    if ($clave_grupo != $grupo_anterior) {
-        // Mostramos la fila con la información del grupo y el total
-        echo '<tr>';
-        echo '<td>' . $fila['re_fecha'] . '</td>';
-        echo '<td>' . $fila['cu_codigo'] . '</td>';
-        echo '<td>' . $fila['cu_cuenta'] . '</td>';
-        echo '<td>' . $fila['re_desc'] . '</td>';
-        echo '<td>' . number_format($totales_por_grupo[$clave_grupo], 2) . '</td>';
-        echo '</tr>';
-    } else {
-        // Si es el mismo grupo, mostramos la fila con celdas vacías para el grupo
-        echo '<tr>';
-        echo '<td></td>'; // Celda vacía para la fecha
-        echo '<td></td>'; // Celda vacía para el código
-        echo '<td></td>'; // Celda vacía para la cuenta
-        echo '<td>' . $fila['re_desc'] . '</td>';
-        echo '<td></td>'; // Celda vacía para el total
-        echo '</tr>';
-    }
-    
-    // Actualizamos el grupo anterior para la próxima iteración
-    $grupo_anterior = $clave_grupo;
-}
+        <div>
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <thead>
+                <tr>
+                    <th colspan="5" bgcolor="#f6f86f">EGRESOS (<?=$mes_anio?>)</th>
+                </tr>
+                <tr bgcolor="#dedede">
+                    <th width="10%">Fecha</th>
+                    <th width="5%">Cod</th>
+                    <th width="27%">Cuenta</th>
+                    <th width="40%">Descripción</th>
+                    <th width="13%">Importe (S/.)</th>
+                </tr>
+                </thead>
+                <?php
+                // Variables para rastrear el grupo anterior (PARA AGRUPAR LAS FILAS CUANDO SE REPITE LA FECHA Y EL CODIGO)
+                $fecha_anterior     = null;
+                $codcuenta_anterior = null;
 
-echo '</table>';
+                $total_e = 0;
+                foreach($registros_e as $egr){
+                    $fecha_e   = date("d/m/Y", strtotime($egr['re_fecha']));
+                    $cod_e     = $egr['cu_codigo'];
+                    $cuenta_e  = $egr['cu_cuenta'];
+                    $desc_e    = $egr['re_desc'];
+                    $importe_e = $egr['re_importe'];
 
-?>
-</div>
-</div>
-</div>
-</div>
+                    $total_e += $importe_e;
+
+                    $fecha_actual     = $fecha_e;
+                    $codcuenta_actual = $cod_e;
+
+                    echo "<tr>";
+
+                    if ($fecha_actual != $fecha_anterior || $codcuenta_actual != $codcuenta_anterior) {
+                        echo "<td>$fecha_e</td>";
+                        echo "<td>$cod_e</td>";
+                        echo "<td>$cuenta_e</td>";
+                    }else{
+                        echo "<td></td>";
+                        echo "<td></td>";
+                        echo "<td></td>";
+                    }
+                    echo "<td>$desc_e</td>";
+                    echo "<td align='right'>$importe_e</td>";
+                    echo "</tr>";
+
+                    $fecha_anterior     = $fecha_actual;
+                    $codcuenta_anterior = $codcuenta_actual;
+                }
+                ?>
+                <tr bgcolor="#dedede">
+                    <th colspan="4" align="right">TOTAL (S/.)</th>
+                    <th align="right"><?=$total_e?></th>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="saldos">
+            <b>Saldo Final: S/. <?=$saldos['saldo_final']?></b>
+        </div>
+
+        <?php
+       /*  echo "<pre>";
+        print_r($saldos);
+
+        print_r($registros_i);
+
+        print_r($registros_e);
+        echo "</pre>"; */
+        ?>
+
     </section>
 </body>
 </html>
