@@ -271,6 +271,7 @@ class Registro extends BaseController
         $sheet->setCellValue('F3', 'COD');
         $sheet->setCellValue('G3', 'CUENTA');
         $sheet->setCellValue('H3', 'CONCEPTO');
+        $sheet->setCellValue('I3', 'CAJA');
         
         $cont = 0;
         $rows = 4;
@@ -283,6 +284,7 @@ class Registro extends BaseController
             $cod      = $r['cu_codigo'];
             $cuenta   = $r['cu_cuenta'];
             $concepto = $r['re_desc'];
+            $caja     = $r['ca_caja'];
 
             $sheet->setCellValue('A'.$rows, $cont);
             $sheet->setCellValue('B'.$rows, $fecha);
@@ -292,22 +294,28 @@ class Registro extends BaseController
             $sheet->setCellValue('E'.$rows, $dh);
             $sheet->setCellValue('F'.$rows, $cod);
             $sheet->setCellValue('G'.$rows, $cuenta);
-             $sheet->setCellValue('H'.$rows, $concepto);
+            $sheet->setCellValue('H'.$rows, $concepto);
+            $sheet->setCellValue('I'.$rows, $caja);
             $rows++;
         }
-        foreach (range('A','H') as $col) {
+        foreach (range('A','I') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
 
-        /* header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="reporte_'.date('d-m-Y h:i:s').'.xlsx"');
-        header('Cache-Control: max-age=0'); */
+        $file = 'reporte_lcaja.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$file.'"');
+        header('Cache-Control: max-age=0');
+        
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $writer->save('public/reporte.xlsx');
+        $writer->save('public/'.$file);
         $writer->save('php://output');
 
-        echo "<script>window.open('".base_url('public/reporte.xlsx')."','_blank' );$('#msj').html('')</script>";
+        echo "<script>window.open('".base_url('public/'.$file)."','_blank' );$('#msj').html('')</script>";
+
+        //unlink('public/'.$file);
         exit();
         
     }
@@ -391,7 +399,7 @@ class Registro extends BaseController
 
         $dompdf->render();
 
-        $dompdf->stream("presupuesto.pdf", array("Attachment" => false));
+        $dompdf->stream("reporte_lcaja_".time().".pdf", array("Attachment" => false));
         exit;
     }
 

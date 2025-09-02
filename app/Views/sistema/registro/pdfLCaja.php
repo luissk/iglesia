@@ -63,8 +63,18 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 </head>
 <body>
     <header>
-        Libro de Caja "<?=session('iglesia')?>"
+        <table width="100%">
+            <tr>
+                <th width="75%" align="left" style="font-size: 12px;">
+                    <?=session('iglesia')?>
+                </th>
+                <th width="25%" align="right" style="font-size: 22px;">
+                    <?=$mes_anio?>
+                </th>
+            </tr>
+        </table>        
     </header>
+
     <footer>
         <table width="100%">
             <tr>
@@ -74,32 +84,30 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
     </footer>
 
     <section style='font-size:12px' class="cuerpo_tablas">
-        <div class="saldos">
-            <b>Saldo Anterior: S/. <?=$saldos['saldo_inicial']?></b>
-        </div>
-        <br>
         <div>
             <table width="100%" cellspacing="0" cellpadding="5">
                 <thead>
-                <tr>
-                    <th colspan="5" bgcolor="#87e1eb">INGRESOS (<?=$mes_anio?>)</th>
-                </tr>
-                <tr bgcolor="#dedede">
-                    <th width="10%">Fecha</th>
-                    <th width="5%">Cod</th>
-                    <th width="27%">Cuenta</th>
-                    <th width="40%">Descripción</th>
-                    <th width="13%">Importe (S/.)</th>
-                </tr>
+                    <tr>
+                        <th align="left" colspan="5" style="font-size: 24px; color: #e74c3c">Debe</th>
+                    </tr>
+                    <tr bgcolor="#dedede">
+                        <th width="5%">Día</th>
+                        <th width="5%">Cod</th>
+                        <th width="30%">Cuenta</th>
+                        <th width="42%">Descripción</th>
+                        <th width="13%">Importe (S/.)</th>
+                    </tr>
                 </thead>
+                <tr style="font-weight: bolder;">
+                    <td align="center">01</td>
+                    <td></td>
+                    <td colspan="2">SALDO ANTERIOR</td>
+                    <td align="right"><?=number_format($saldos['saldo_inicial'],2,".",",")?></td>
+                </tr>
                 <?php               
-                // Variables para rastrear el grupo anterior (PARA AGRUPAR LAS FILAS CUANDO SE REPITE LA FECHA Y EL CODIGO)
-                $fecha_anterior     = null;
-                $codcuenta_anterior = null;
-
                 $total_i = 0;
                 foreach($registros_i as $ing){
-                    $fecha_i   = date("d/m/Y", strtotime($ing['re_fecha']));
+                    $fecha_i   = date("d", strtotime($ing['re_fecha']));
                     $cod_i     = $ing['cu_codigo'];
                     $cuenta_i  = $ing['cu_cuenta'];
                     $desc_i    = $ing['re_desc'];
@@ -107,61 +115,42 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 
                     $total_i += $importe_i;
 
-                    $fecha_actual     = $fecha_i;
-                    $codcuenta_actual = $cod_i;
-
                     echo "<tr>";
-
-                    // Si la fecha o la cuenta cambian, mostrar los valores
-                    if ($fecha_actual != $fecha_anterior || $codcuenta_actual != $codcuenta_anterior) {
-                        echo "<td>$fecha_actual</td>";
-                        echo "<td>$cod_i</td>";
-                        echo "<td>$cuenta_i</td>";
-                    }else{
-                        echo "<td></td>";
-                        echo "<td></td>";
-                        echo "<td></td>";
-                    }
-
+                    echo "<td align='center'>$fecha_i</td>";
+                    echo "<td>$cod_i</td>";
+                    echo "<td>$cuenta_i</td>";
                     echo "<td>$desc_i</td>";
-                    echo "<td align='right'>$importe_i</td>";
+                    echo "<td align='right'>".number_format($ing['re_importe'], 2, ".", ",")."</td>";
                     echo "</tr>";
-
-                    $fecha_anterior     = $fecha_actual;
-                    $codcuenta_anterior = $codcuenta_actual;
                 }
                 ?>
                 <tr bgcolor="#dedede">
-                    <th colspan="4" align="right">TOTAL (S/.)</th>
-                    <th align="right"><?=$total_i?></th>
+                    <th colspan="4" align="right">INGRESOS DEL MES (S/.)</th>
+                    <th align="right"><?=number_format($total_i,2,".",",")?></th>
                 </tr>
             </table>
         </div>
 
-        <br><br>
+        <div style="page-break-after:always;"></div>
 
         <div>
             <table width="100%" cellspacing="0" cellpadding="5">
                 <thead>
-                <tr>
-                    <th colspan="5" bgcolor="#f6f86f">EGRESOS (<?=$mes_anio?>)</th>
-                </tr>
-                <tr bgcolor="#dedede">
-                    <th width="10%">Fecha</th>
-                    <th width="5%">Cod</th>
-                    <th width="27%">Cuenta</th>
-                    <th width="40%">Descripción</th>
-                    <th width="13%">Importe (S/.)</th>
-                </tr>
+                    <tr>
+                        <th align="left" colspan="5" style="font-size: 24px; color: #e74c3c">Haber</th>
+                    </tr>
+                    <tr bgcolor="#dedede">
+                        <th width="5%">Día</th>
+                        <th width="5%">Cod</th>
+                        <th width="30%">Cuenta</th>
+                        <th width="42%">Descripción</th>
+                        <th width="13%">Importe (S/.)</th>
+                    </tr>
                 </thead>
                 <?php
-                // Variables para rastrear el grupo anterior (PARA AGRUPAR LAS FILAS CUANDO SE REPITE LA FECHA Y EL CODIGO)
-                $fecha_anterior     = null;
-                $codcuenta_anterior = null;
-
                 $total_e = 0;
                 foreach($registros_e as $egr){
-                    $fecha_e   = date("d/m/Y", strtotime($egr['re_fecha']));
+                    $fecha_e   = date("d", strtotime($egr['re_fecha']));
                     $cod_e     = $egr['cu_codigo'];
                     $cuenta_e  = $egr['cu_cuenta'];
                     $desc_e    = $egr['re_desc'];
@@ -169,37 +158,24 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 
                     $total_e += $importe_e;
 
-                    $fecha_actual     = $fecha_e;
-                    $codcuenta_actual = $cod_e;
-
                     echo "<tr>";
-
-                    if ($fecha_actual != $fecha_anterior || $codcuenta_actual != $codcuenta_anterior) {
-                        echo "<td>$fecha_e</td>";
-                        echo "<td>$cod_e</td>";
-                        echo "<td>$cuenta_e</td>";
-                    }else{
-                        echo "<td></td>";
-                        echo "<td></td>";
-                        echo "<td></td>";
-                    }
+                    echo "<td align='center'>$fecha_e</td>";
+                    echo "<td>$cod_e</td>";
+                    echo "<td>$cuenta_e</td>";
                     echo "<td>$desc_e</td>";
-                    echo "<td align='right'>$importe_e</td>";
+                    echo "<td align='right'>".number_format($importe_e,2,".",",")."</td>";
                     echo "</tr>";
-
-                    $fecha_anterior     = $fecha_actual;
-                    $codcuenta_anterior = $codcuenta_actual;
                 }
                 ?>
                 <tr bgcolor="#dedede">
-                    <th colspan="4" align="right">TOTAL (S/.)</th>
-                    <th align="right"><?=$total_e?></th>
+                    <th colspan="4" align="right">EGRESOS DEL MES (S/.)</th>
+                    <th align="right"><?=number_format($total_e,2,".",",")?></th>
                 </tr>
             </table>
         </div>
         <br>
         <div class="saldos">
-            <b>Saldo Final: S/. <?=$saldos['saldo_final']?></b>
+            <b>SALDO PROXIMO MES: S/. <?=number_format($saldos['saldo_final'],2,".",",")?></b>
         </div>
 
         <?php
