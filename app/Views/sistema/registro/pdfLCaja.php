@@ -137,7 +137,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
             <table width="100%" cellspacing="0" cellpadding="5">
                 <thead>
                     <tr>
-                        <th align="left" colspan="5" style="font-size: 24px; color: #e74c3c">Haber</th>
+                        <th align="right" colspan="5" style="font-size: 24px; color: #e74c3c">Haber</th>
                     </tr>
                     <tr bgcolor="#dedede">
                         <th width="5%">Día</th>
