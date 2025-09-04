@@ -417,14 +417,26 @@ class Registro extends BaseController
     }
 
 
-    public function nuevaCompra(){
+    public function nuevaCompra($id = ''){
         if( !session('idusuario') ){
             return redirect()->to('/');
         }
 
         if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+
+        if( $id != '' ){
+            if( $compra = $this->modeloRegistro->obtenerCompra($id, session('idiglesia')) ){
+                
+                $data['compra_bd'] = $compra;
+                $data['deta_bd']   = $this->modeloRegistro->listarDetalleCompra($id);
+                $data['title']     = "Editar compra";
+            }else{
+                return redirect()->to('/');
+            }
+        }else{
+            $data['title'] = "Nueva compra";
+        }        
         
-        $data['title']           = "Nueva compra";
         $data['registrosLinkActive'] = 1;
         
         $data['proveedores'] = $this->modeloRegistro->listarProveedores();
@@ -594,6 +606,145 @@ class Registro extends BaseController
                 </script>';
             }            
 
+        }
+    }
+
+    public function registrarCompra(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            //print_r($_POST);
+
+            $items     = json_decode($this->request->getVar('items'), true);
+            $count_items = count($items);
+            if( $count_items == 0 ){
+                exit();
+            }
+
+            $fecha     = trim($this->request->getVar('fecha'));
+            $factura   = trim($this->request->getVar('factura'));
+            $proveedor = $this->request->getVar('proveedor');
+            $idcompra  = $this->request->getVar('idcompra_e');//para editar
+
+            if( $fecha == '' || $factura == '' || $proveedor == '' ) exit();
+
+            //print_r($items);
+
+            if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra) ){
+                if( $this->modeloRegistro->borrarDetalleCompra($idcompra) ){
+                    $res = FALSE;
+                    foreach( $items as $i ){
+                        $glosa    = $i['glosa'];
+                        $cuenta   = $i['idcuenta'];
+                        $precio   = $i['precio'];
+                        $cantidad = $i['cantidad'];
+                        $subt     = $i['subt'];
+
+                        if( $this->modeloRegistro->insertarDetalleCompra($glosa,$precio,$cantidad,$subt,$cuenta,$idcompra) ){
+                            $res = TRUE;
+                        }                      
+                    }
+                    if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $idcompra)){
+                        $res = TRUE;
+                    }
+                    if( $res ){
+                        echo '<script>
+                            Swal.fire({
+                                title: "Compra Actualizada",
+                                text: "",
+                                icon: "success",
+                                showConfirmButton: true,
+                                allowOutsideClick: false,
+                            });
+                        </script>';
+                    }
+                }
+            }else{
+                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia')) ){
+                    $res = FALSE;
+                    foreach( $items as $i ){
+                        $glosa    = $i['glosa'];
+                        $cuenta   = $i['idcuenta'];
+                        $precio   = $i['precio'];
+                        $cantidad = $i['cantidad'];
+                        $subt     = $i['subt'];
+                        
+                        if( $this->modeloRegistro->insertarDetalleCompra($glosa,$precio,$cantidad,$subt,$cuenta,$idcompra_i) ){
+                            $res = TRUE;
+                        }
+                    }
+                    if( $res ){
+                        echo '<script>
+                            Swal.fire({
+                                title: "Compra Registrada",
+                                text: "",
+                                icon: "success",
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                            });
+                            eliminarDetalleLocalStorage();
+                            limpiarCabecera();
+                            setTimeout(function(){location.href="'.base_url('registros#libroCompras').'"}, 1500);
+                        </script>';
+                    }
+                }
+            }
+        }
+    }
+
+    public function eliminarLCompra(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $idcompra = $this->request->getVar('id');
+
+            $eliminar = FALSE;
+            $mensaje = "";
+
+            /* $tablas = ['compra_detalle'];
+            foreach( $tablas as $t ){
+                $total = $this->modeloRegistro->verificarCompraTieneRegEnTablas($idcompra,$t)['total'];
+                if( $total > 0 ){
+                    $mensaje .= "<div class='text-start'>La compra $total registros en la tabla '$t'.</div>";
+                    $eliminar = TRUE;
+                }
+            }
+
+            if( $eliminar ){
+                echo '<script>
+                    Swal.fire({
+                        title: "La compra no puede ser eliminada",
+                        html: "'.$mensaje.'",
+                        icon: "warning",
+                    });
+                </script>';
+                exit();
+            } */
+            if( $this->modeloRegistro->borrarDetalleCompra($idcompra) ){
+                if( $this->modeloRegistro->eliminarCompra($idcompra) ){
+                echo '<script>
+                        Swal.fire({
+                            title: "Compra Eliminada",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dataTableReload(2);
+                    </script>';
+                }
+            }       
+        }
+    }
+
+    public function listarLCompraDT(){
+        if( $this->request->isAJAX() ){
+			//print_r($_POST);
+
+			$registros = $this->modeloRegistro->listarCompras(session('idiglesia'));
+			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
         }
     }
 

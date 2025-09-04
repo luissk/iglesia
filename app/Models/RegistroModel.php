@@ -134,4 +134,103 @@ class RegistroModel extends Model{
         return $st;
     }
 
+    //COMPRA
+    public function obtenerCompra($idcompra, $idiglesia = ''){
+        $criterio = '';
+        if( $idiglesia != '' ){
+            $criterio .= " and co.idiglesia = ?";
+        }
+        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idcompra = ?  $criterio";
+
+        if( $criterio != '' )
+            $st = $this->db->query($query, [$idcompra, $idiglesia]);
+        else
+            $st = $this->db->query($query, [$idcompra]);
+
+        return $st->getRowArray();
+    }
+
+    public function listarCompras($idiglesia){
+        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre,
+            format( (sum(cd.cd_subtotal) * 0.18 + sum(cd.cd_subtotal)), 2) as totalpagado 
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            inner join compra_detalle cd on co.idcompra=cd.idcompra
+            where co.idiglesia = ?
+            GROUP by co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre";
+        $st = $this->db->query($query, [$idiglesia]);
+
+        return $st->getResultArray();
+    }
+
+    public function listarDetalleCompra($idcompra){
+        $query = "select cd.idcompra_detalle,cd.cd_glosa,cd.cd_precio,cd.cd_cant,cd.cd_subtotal,cd.idcuenta,
+            cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion
+            from compra_detalle cd
+            inner join cuenta cu on cd.idcuenta=cu.idcuenta
+            where cd.idcompra = ?";
+        $st = $this->db->query($query, [$idcompra]);
+
+        return $st->getResultArray();
+    }
+
+    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia){
+        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia) values(?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia]);
+
+        return $this->db->insertID();
+    }
+    
+    public function modificarCompra($fecha, $factura, $proveedor, $idcompra){
+        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=? where idcompra=?";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idcompra]);
+
+        return $st;
+    }
+
+    public function insertarDetalleCompra($glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra){
+        $query = "insert into compra_detalle(cd_glosa,cd_precio,cd_cant,cd_subtotal,idcuenta,idcompra) values(?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra]);
+
+        return $st;
+    }
+
+    public function borrarDetalleCompra($idcompra){
+        $query = "delete from compra_detalle where idcompra=?";
+        $st = $this->db->query($query, [$idcompra]);
+
+        return $st;
+    }
+
+    //VERIFICAR SI TIENE REGISTRO EN TABLAS
+    public function verificarCompraTieneRegEnTablas($idcompra, $tabla){
+        $query = "select count(idcompra) as total from $tabla where idcompra=?";
+        $st = $this->db->query($query, [$idcompra]);
+
+        return $st->getRowArray();
+    }
+
+    public function eliminarCompra($idcompra){
+        $query = "delete from compra where idcompra=?";
+        $st = $this->db->query($query, [$idcompra]);
+
+        return $st;
+    }
+
 }

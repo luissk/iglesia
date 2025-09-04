@@ -40,6 +40,11 @@ $routes->get('pdfLCaja/(:any)/(:any)', 'Registro::pdfLCaja/$1/$2');
 $routes->post('formularioLCaja', 'Registro::formularioLibroCaja');
 
 $routes->get('nueva-compra', 'Registro::nuevaCompra');
+$routes->get('editar-compra-(:num)', 'Registro::nuevaCompra/$1');
 $routes->post('lista-proveedor-dt', 'Registro::listaProveedorDT');
 $routes->post('registro-proveedor','Registro::registrarProveedor');
 $routes->post('elimina-proveedor','Registro::eliminarProveedor');
+$routes->post('registro-compra','Registro::registrarCompra');
+
+$routes->post('lista-lcompra-dt', 'Registro::listarLCompraDT');
+$routes->post('elimina-lcompra', 'Registro::eliminarLCompra');

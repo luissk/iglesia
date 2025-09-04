@@ -9,10 +9,10 @@
             <div class="card-header p-0 pt-1 border-bottom-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#libroCaja">LIBRO DE CAJAS</a>
+                        <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#libroCaja" href="#libroCaja">LIBRO DE CAJAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#libroCompras">LIBRO DE COMPRAS</a>
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroCompras" href="#libroCompras">LIBRO DE COMPRAS</a>
                     </li>
                 </ul>
             </div>
@@ -61,13 +61,11 @@
                             <table id="tblLibroCompra" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <!-- <th>#</th> -->
                                         <th>Fecha</th>
-                                        <th>Importe (S/.)</th>
-                                        <th>Concepto</th>
-                                        <th>Caja</th>                                        
-                                        <th>Cuenta</th>
-                                        <th>Mov</th>
+                                        <th>Total Fact (S/.)</th>
+                                        <th>Factura</th>
+                                        <th>Ruc</th>                                        
+                                        <th>Razon</th>
                                         <th>Opción</th>
                                     </tr>
                                 </thead>
@@ -157,7 +155,7 @@ $(function(){
         formLCaja($(this).data('id'))
     });
 
-     $('#tblLibroCaja').on('click', '.eliminar', function(e){
+    $('#tblLibroCaja').on('click', '.eliminar', function(e){
         Swal.fire({
             title: "¿Estás seguro en eliminar el Registro?",
             showCancelButton: true,
@@ -176,9 +174,61 @@ $(function(){
     });
 
 
-
     $table2 = $('#tblLibroCompra').dataTable({
-        "pageLength": 50
+        "ajax":{
+            "url": 'lista-lcompra-dt',
+            "dataSrc":"",
+            "type": "POST",
+            "data": {
+                id:1
+                //"desc": function() { return $('#desc').val() },
+                //"fecha_ini": function() { return $('#fecha_ini').val() }, 
+                //"fecha_fin": function() { return $('#fecha_fin').val() }
+            },
+            "complete": function(xhr, responseText){
+                /* console.log(xhr);
+                console.log(xhr.responseText); //*** responseJSON: Array[0] */
+            }
+        },
+        "columns":[
+            {"data": "co_fecha"},
+            {"data": "totalpagado"},
+            {"data": "co_factura"},
+            {"data": "pr_ruc"},
+            {"data": "pr_razon"},
+            {"data": "idcompra",
+                "mRender": function (data, type, row) {
+                    //console.log(row);
+                    return `
+                    <a title='editar' class='link-success editar' role='button' href="editar-compra-${data}">
+                        <i class='fa fa-edit'></i>
+                    </a> 
+                    <a title='eliminar' class='link-danger ms-1 eliminar' role='button' data-id=${data}>
+                        <i class='fa fa-trash-alt'></i>
+                    </a>`;
+                }
+            }
+        ],
+        "aaSorting": [[ 0, "desc" ]],
+        "pageLength": 25
+    });
+
+    $('#tblLibroCompra').on('click', '.eliminar', function(e){
+        Swal.fire({
+            title: "¿Estás seguro en eliminar el Registro?",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('elimina-lcompra', {
+                    id: $(this).data('id')
+                }, function(data){
+                    //console.log(data)
+                    $('#msj').html(data);
+                });
+            }
+        });        
     });
 
    
@@ -201,6 +251,31 @@ function dataTableReload(opt = 1){
     else if(opt == 2)
         $table2.DataTable().ajax.reload()
 }
+
+
+
+
+
+//PARA LOS TABS
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Obtiene el hash de la URL (ej. #perfil)
+  const hash = window.location.hash;
+
+  // 2. Si hay un hash, busca el botón o enlace del tab correspondiente
+  if (hash) {
+    // Busca el elemento que tiene data-bs-target con el mismo valor que el hash
+    const tabTriggerEl = document.querySelector(`[data-bs-target="${hash}"]`);
+
+    // 3. Si se encuentra el elemento, activa la pestaña
+    if (tabTriggerEl) {
+      // Crea una nueva instancia del componente Tab de Bootstrap
+      const tab = new bootstrap.Tab(tabTriggerEl);
+      
+      // Muestra la pestaña
+      tab.show();
+    }
+  }
+});
 </script>
 
 <?php echo $this->endSection();?>

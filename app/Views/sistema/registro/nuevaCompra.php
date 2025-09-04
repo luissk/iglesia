@@ -2,6 +2,47 @@
 
 <?php echo $this->section('contenido');?>
 
+<?php
+if( isset($compra_bd) && $compra_bd ){
+    /* echo "<pre>";
+    print_r($compra_bd);
+    print_r($deta_bd);
+    echo "</pre>"; */
+
+    $idcompra_bd  = $compra_bd['idcompra'];
+    $fecha_bd     = $compra_bd['co_fecha'];
+    $factura_bd   = $compra_bd['co_factura'];
+    $proveedor_bd = $compra_bd['idproveedor'];
+    
+    $items = [];
+    foreach( $deta_bd as $i ){
+        $item = array(
+            'glosa'     => $i['cd_glosa'],
+            'codcuenta' => $i['cu_codigo'],
+            'idcuenta'  => $i['idcuenta'],
+            'precio'    => $i['cd_precio'],
+            'cantidad'  => $i['cd_cant'],
+            'subt'      => $i['cd_subtotal'],
+        );
+        array_push($items, $item);
+    }
+
+    $items_bd     = json_encode($items, JSON_HEX_APOS);
+
+    $btn_title = "MODIFICAR COMPRA";
+
+
+}else{
+    $idcompra_bd  = "";
+    $fecha_bd     = date('Y-m-d');
+    $factura_bd   = "";
+    $proveedor_bd = "";
+    $items_bd     = json_encode([]);
+
+    $btn_title = "REGISTRAR COMPRA";
+}
+?>
+
 <div class="app-content mt-4">
     <div class="container-fluid">
 
@@ -17,12 +58,12 @@
                 <div class="row">                    
                     <div class="col-sm-3">
                         <label for="fecha" class="form-label fw-semibold">Ingrese una fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?=date('Y-m-d')?>">
+                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?=$fecha_bd?>">
                         <div id="msj-fecha" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-2">
                         <label for="factura" class="form-label fw-semibold">Nro Factura</label>
-                        <input type="text" class="form-control" id="factura" name="factura" value="" placeholder="F-1-120" maxlength="10">
+                        <input type="text" class="form-control" id="factura" name="factura" value="<?=$factura_bd?>" placeholder="F-1-120" maxlength="10">
                         <div id="msj-factura" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-5">
@@ -35,7 +76,9 @@
                                 $ruc = $pro['pr_ruc'];
                                 $razon = $pro['pr_razon'];
 
-                                echo "<option value=$idproveedor>$ruc - $razon</option>";
+                                $selected_pr = $idproveedor == $proveedor_bd ? 'selected' : '';
+
+                                echo "<option value=$idproveedor $selected_pr>$ruc - $razon</option>";
                             }
                             ?>
                         </select>
@@ -87,36 +130,45 @@
                 </div>
             </div>
         </div>
-
-        <div class="card card-danger card-outline">
-            <div class="card-header pt-1 pb-0 border-bottom-1">
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <h5 class="">Detalle</h5>
+        
+        <div class="row">
+            <div class="col-lg-12 col-xl-10 offset-xl-1 col-xxl-6 offset-xxl-3">
+                <div class="card card-danger card-outline">
+                    <div class="card-header pt-1 pb-0 border-bottom-1">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h5 class="">Detalle</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-sm" id="detalleTabla">
+                                    <thead>
+                                        <tr>
+                                            <th>Glosa</th>
+                                            <th>Cuenta</th>
+                                            <th class="text-end">Precio</th>
+                                            <th class="text-center">Cantidad</th>
+                                            <th class="text-end">Precio T</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
+                
                 <div class="row">
-                    <div class="col-sm-12 table-responsive">
-                        <table class="table table-sm" id="detalleTabla">
-                            <thead>
-                                <tr>
-                                    <th>Glosa</th>
-                                    <th>Cuenta</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio T</th>
-                                    <th>Opcion</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                    <div class="col-sm-12 text-end">
+                        <input type="hidden" id="idcompra_e" name="idcompra_e" value="<?=$idcompra_bd?>">
+                        <button class="btn btn-primary" id="btnCompra"><?=$btn_title?></button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div id="msj"></div>
@@ -183,7 +235,15 @@ var $dtblProveedor;
 // LocalStorage
 const FACTURA_KEY = 'detalle';
 // Array en memoria que contiene los detalles de la factura
-let detallesFactura = [];
+let detallesFactura = <?=$items_bd?>;//[];
+
+<?php
+if( $idcompra_bd != '' ){
+?>
+    localStorage.setItem(FACTURA_KEY, JSON.stringify(detallesFactura));
+<?php
+}
+?>
 
 $(function(){
     cargarDetalle();
@@ -237,7 +297,7 @@ $(function(){
             btnHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
         btn.setAttribute('disabled', 'disabled');
         btn.innerHTML = `${btnHTML} PROCESANDO...`;
-        console.log(txtbtn)
+        //console.log(txtbtn)
         $.post('registro-proveedor', $(this).serialize(), function(data){
             //console.log(data);
             $('[id^="msj-"').text("");                
@@ -343,6 +403,46 @@ $(function(){
         $('#msjObs').text('');
     });
 
+    $('#btnCompra').on('click', function(e){
+        e.preventDefault();
+        e.preventDefault();
+        let btn = document.querySelector('#btnProveedor'),
+            txtbtn = btn.textContent,
+            btnHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        btn.setAttribute('disabled', 'disabled');
+        btn.innerHTML = `${btnHTML} PROCESANDO...`;
+
+        if( detallesFactura.length == 0 || $('#fecha').val() == '' || $('#factura').val() == '' || $('#proveedor').val()== '' ){
+            Swal.fire({title: "Por favor, rellena los campos", icon: "error"});
+            btn.removeAttribute('disabled');
+            btn.innerHTML = txtbtn;
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append('fecha', $('#fecha').val());
+        formData.append('factura', $('#factura').val());
+        formData.append('proveedor', $('#proveedor').val());
+        formData.append('idcompra_e', $('#idcompra_e').val());
+        formData.append('items', JSON.stringify(detallesFactura));
+
+        $.ajax({
+            method: 'POST',
+            url: 'registro-compra',
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                console.log(data);
+                btn.removeAttribute('disabled');
+                btn.innerHTML = txtbtn; 
+                $('#msj').html(data);
+            }
+        });
+
+    });
+
 });
 
 function dtProvReload(){
@@ -379,22 +479,49 @@ function cargarDetalle() {
     }
 }
 
+function formateaPrecio(precio){
+    const precioFormateado = precio.toLocaleString('es-PE', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+    return precioFormateado;
+}
+
 function mostrarDetalleEnTabla() {
     const tablaBody = document.querySelector('#detalleTabla tbody');
     tablaBody.innerHTML = ''; // Limpiar la tabla
 
+    let subtotal = 0, subtotalIGV = 0, igv = 0.18, total = 0;
+
     detallesFactura.forEach((item, index) => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
-            <td>${item.glosa}</td>
+            <td><a href='javascript:void(0)' onclick="eliminarItem(${index})"><i class='fas fa-trash-alt'></i></a> &nbsp; ${item.glosa}</td>
             <td>${item.codcuenta}</td>
-            <td>${item.precio}</td>
-            <td>${item.cantidad}</td>
-            <td>${item.precio * item.cantidad}</td>
-            <td><a onclick="eliminarItem(${index})"><i class='fas fa-trash-alt'></i></a></td>
+            <td align="right">${formateaPrecio(Number(item.precio))}</td>
+            <td align="center">${item.cantidad}</td>
+            <td align="right">${formateaPrecio(item.precio * item.cantidad)}</td>
         `;
         tablaBody.appendChild(fila);
+        
+        subtotal += (item.precio * item.cantidad);
     });
+
+    if( subtotal > 0 ){
+        subtotalIGV = subtotal * igv;
+        total = subtotal + subtotalIGV;
+
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td colspan="4" align="right">
+                SubTotal: <br>
+                IGV(18%): <br>
+                TOTAL:
+            </td>
+            <td align="right">${formateaPrecio(subtotal)} <br> ${formateaPrecio(subtotalIGV)} <br> ${formateaPrecio(total)}</td>
+        `;
+        tablaBody.appendChild(fila);
+    }
 }
 
 function eliminarItem(index){
@@ -405,49 +532,17 @@ function eliminarItem(index){
     mostrarDetalleEnTabla();
 }
 
-///MODEOLOOOO
-document.getElementById('guardarBtn').addEventListener('click', function() {
-    // Obtener los datos del encabezado
-    const facturaCompleta = {
-        nroFactura: document.getElementById('nroFactura').value,
-        fecha: document.getElementById('fechaFactura').value,
-        proveedor: document.getElementById('proveedor').value,
-        // Y el detalle que está en el array de JavaScript
-        detalle: detallesFactura
-    };
+function eliminarDetalleLocalStorage(){
+    localStorage.removeItem(FACTURA_KEY);
+    detallesFactura = [];
+    mostrarDetalleEnTabla();
+}
 
-    // Verificar que haya productos en el detalle
-    if (facturaCompleta.detalle.length === 0) {
-        alert("El detalle no puede estar vacío.");
-        return;
-    }
+function limpiarCabecera(){
+    $('#factura').val('');
+    $('#proveedor').val('');
+}
 
-    // Enviar los datos a un script de PHP (por ejemplo, 'guardar_factura.php')
-    fetch('guardar_factura.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        // Convertir todo el objeto a un string JSON para enviarlo
-        body: JSON.stringify(facturaCompleta)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Factura guardada con éxito!');
-            // Opcional: limpiar localStorage después de guardar
-            localStorage.removeItem(FACTURA_KEY);
-            // Redireccionar o limpiar la interfaz
-            window.location.reload();
-        } else {
-            alert('Error al guardar la factura: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Ocurrió un error al conectar con el servidor.');
-    });
-});
 </script>
 
 <?php echo $this->endSection();?>
