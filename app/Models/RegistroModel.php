@@ -83,4 +83,55 @@ class RegistroModel extends Model{
         return $st;
     }
 
+
+    public function listarProveedores(){
+        $query = "select * from proveedor";
+        $st = $this->db->query($query);
+
+        return $st->getResultArray();
+    }
+
+    public function obtenerProveedor($idproveedor){
+        $query = "select * from proveedor where idproveedor = ?";
+        $st = $this->db->query($query, [$idproveedor]);
+
+        return $st->getRowArray();
+    }
+
+    public function verificarRuc($ruc){
+        $query = "select idproveedor as total from proveedor where pr_ruc = ?";
+        $st = $this->db->query($query, [$ruc]);
+
+        return $st->getRowArray();
+    }
+
+    public function registrarProveedor($ruc, $razon){
+        $query = "insert into proveedor(pr_ruc,pr_razon) values(?,?)";
+        $st = $this->db->query($query, [$ruc, $razon]);
+
+        return $this->db->insertID();
+    }
+
+    public function modificarProveedor($ruc, $razon, $idproveedor){
+        $query = "update proveedor set pr_ruc = ?,pr_razon = ? where idproveedor = ?";
+        $st = $this->db->query($query, [$ruc, $razon, $idproveedor]);
+
+        return $st;
+    }
+
+    //VERIFICAR SI TIENE REGISTRO EN TABLAS
+    public function verificarProvTieneRegEnTablas($idproveedor, $tabla){
+        $query = "select count(idiglesia) as total from $tabla where idproveedor=?";
+        $st = $this->db->query($query, [$idproveedor]);
+
+        return $st->getRowArray();
+    }
+
+    public function eliminarProveedor($idproveedor){
+        $query = "delete from proveedor where idproveedor = ?";
+        $st = $this->db->query($query, [$idproveedor]);
+
+        return $st;
+    }
+
 }

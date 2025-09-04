@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2025 a las 02:04:02
+-- Tiempo de generación: 04-09-2025 a las 02:31:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,6 +43,36 @@ INSERT INTO `caja` (`idcaja`, `ca_caja`) VALUES
 (4, 'Evangelismo'),
 (5, 'Juventud'),
 (6, 'Escuela Bíblica');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra`
+--
+
+CREATE TABLE `compra` (
+  `idcompra` int(11) NOT NULL,
+  `co_fecha` date NOT NULL,
+  `co_factura` varchar(10) NOT NULL,
+  `idproveedor` int(11) NOT NULL,
+  `us_creador` int(11) NOT NULL,
+  `idiglesia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compra_detalle`
+--
+
+CREATE TABLE `compra_detalle` (
+  `idcompra_detalle` int(11) NOT NULL,
+  `cd_glosa` varchar(100) NOT NULL,
+  `cd_precio` decimal(10,2) NOT NULL,
+  `cd_cant` smallint(6) NOT NULL,
+  `cd_subtotal` decimal(10,2) NOT NULL,
+  `idcuenta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -92,7 +122,8 @@ INSERT INTO `cuenta` (`idcuenta`, `cu_dh`, `cu_codigo`, `cu_cuenta`, `cu_observa
 (27, 'Haber', '756', 'Ofrenda niños E. dominical', 'Ofrenda niños E. dominical'),
 (28, 'Haber', '757', 'Por acción social', 'Ganancia x acción Social'),
 (29, 'Haber', '759', 'Otros ingresos de Gestión', 'Aporte para gas, otros'),
-(30, 'Haber', '140', 'Saldo Inicial', 'Saldo inicial de las iglesias');
+(30, 'Haber', '140', 'Saldo Inicial', 'Saldo inicial de las iglesias'),
+(31, 'Debe', '401', 'Igv', '-');
 
 -- --------------------------------------------------------
 
@@ -116,6 +147,29 @@ INSERT INTO `iglesia` (`idiglesia`, `ig_iglesia`, `ig_direccion`, `ig_pastor`) V
 (4, 'Iglesia Monte de Sión - Sintuco', 'Calle Bolivar 123 - Chocope,  Ascope, La Libertad', 'Alipio Avila Valencia'),
 (5, 'Iglesia Bethel Casa Grande', 'Urb Miguel Grau 2da Etapa', 'Juan Perez'),
 (7, 'Iglesia Lirio de los Valles', 'Careaga', 'Oscar Barreto');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+
+CREATE TABLE `proveedor` (
+  `idproveedor` int(11) NOT NULL,
+  `pr_ruc` varchar(11) NOT NULL,
+  `pr_razon` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`idproveedor`, `pr_ruc`, `pr_razon`) VALUES
+(1, '20100190797', 'Gloria S.A.'),
+(2, '10454872296', 'LUISCS S.A.C.'),
+(6, '11111111111', 'sxczczxc'),
+(7, '13123123131', '13123123'),
+(8, '14785236987', 'PRUEBA SAC');
 
 -- --------------------------------------------------------
 
@@ -250,6 +304,18 @@ ALTER TABLE `caja`
   ADD PRIMARY KEY (`idcaja`);
 
 --
+-- Indices de la tabla `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`idcompra`);
+
+--
+-- Indices de la tabla `compra_detalle`
+--
+ALTER TABLE `compra_detalle`
+  ADD PRIMARY KEY (`idcompra_detalle`);
+
+--
 -- Indices de la tabla `cuenta`
 --
 ALTER TABLE `cuenta`
@@ -260,6 +326,12 @@ ALTER TABLE `cuenta`
 --
 ALTER TABLE `iglesia`
   ADD PRIMARY KEY (`idiglesia`);
+
+--
+-- Indices de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  ADD PRIMARY KEY (`idproveedor`);
 
 --
 -- Indices de la tabla `registro`
@@ -304,16 +376,34 @@ ALTER TABLE `caja`
   MODIFY `idcaja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `idcompra` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `compra_detalle`
+--
+ALTER TABLE `compra_detalle`
+  MODIFY `idcompra_detalle` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `cuenta`
 --
 ALTER TABLE `cuenta`
-  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idcuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `iglesia`
 --
 ALTER TABLE `iglesia`
   MODIFY `idiglesia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  MODIFY `idproveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `registro`

@@ -54,7 +54,7 @@
                                 <h5 class="mb-0">Registros Libro de Compras</h5>
                             </div>
                             <div class="col-sm-6 text-end">
-                                <a class="btn btn-warning" role="button" data-bs-toggle="modal" data-bs-target="#modalLCompras">Nuevo Registro L. Compra</a>
+                                <a class="btn btn-warning" role="button" href="nueva-compra">Nuevo Registro L. Compra</a>
                             </div>
                         </div>
                         <div class="row table-responsive mt-3" id="">

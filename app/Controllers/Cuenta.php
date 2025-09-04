@@ -171,7 +171,7 @@ class Cuenta extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['registro'];
+            $tablas = ['registro','compra_detalle'];
             foreach( $tablas as $t ){
                 $total = $this->modeloCuenta->verificarCuentaTieneRegEnTablas($idcuenta,$t)['total'];
                 if( $total > 0 ){

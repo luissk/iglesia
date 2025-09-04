@@ -416,4 +416,186 @@ class Registro extends BaseController
         ];
     }
 
+
+    public function nuevaCompra(){
+        if( !session('idusuario') ){
+            return redirect()->to('/');
+        }
+
+        if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+        
+        $data['title']           = "Nueva compra";
+        $data['registrosLinkActive'] = 1;
+        
+        $data['proveedores'] = $this->modeloRegistro->listarProveedores();
+        $data['cuentas']     = $this->modeloCuenta->listarCuentas(2);
+
+        return view('sistema/registro/nuevaCompra', $data);
+    }
+
+    public function listaProveedorDT(){
+        if( $this->request->isAJAX() ){
+			//print_r($_POST);
+
+			$registros = $this->modeloRegistro->listarProveedores();
+			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
+        }
+    }
+
+    public function registrarProveedor(){
+         if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            //print_r($_POST);exit();
+
+            $ruc         = trim($this->request->getVar('npruc'));
+            $razon       = trim($this->request->getVar('nprazon'));
+            $idproveedor = $this->request->getVar('idproveedor_e');//para editar
+
+            $validation = \Config\Services::validation();
+
+            $data = [
+                'npruc'   => $ruc,
+                'nprazon' => $razon,
+            ];
+
+            $rules = [
+                'npruc' => [
+                    'label' => 'RUC', 
+                    'rules' => 'required|regex_match[/^[0-9]+$/]|max_length[11]',
+                    'errors' => [
+                        'required'    => '* El {field} es requerido.',
+                        'regex_match' => '* El {field} no es válido.',
+                        'max_length'  => '* El {field} debe contener máximo 11 caracteres.'
+                    ]
+                ],
+                'nprazon' => [
+                    'label' => 'RAZON', 
+                    'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[100]',
+                    'errors' => [
+                        'required'    => '* La {field} es requerido.',
+                        'regex_match' => '* La {field} no es válido.',
+                        'max_length'  => '* La {field} debe contener máximo 100 caracteres.'
+                    ]
+                ],
+            ];
+
+            $validation->setRules($rules);
+
+            if (!$validation->run($data)) {
+                return $this->response->setJson(['errors' => $validation->getErrors()]);
+            }
+
+            $proveedor_bd = $this->modeloRegistro->obtenerProveedor($idproveedor);
+
+            if( $proveedor_bd ){
+                $ruc_bd = $proveedor_bd['pr_ruc'];
+                if( $ruc != $ruc_bd ){
+                    if( $this->modeloRegistro->verificarRuc($ruc) ){
+                        echo '<script>
+                            Swal.fire({
+                                title: "El RUC ya existe",
+                                icon: "error"
+                            });
+                        </script>';
+                        exit();
+                    }
+                }
+
+                if( $this->modeloRegistro->modificarProveedor($ruc, $razon, $idproveedor) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Proveedor Modificado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dtProvReload();
+                        limpiarCamposProv();
+                        cargarSelectProv(2, '.$ruc.', "'.$razon.'", '.$idproveedor.');
+                    </script>';
+                }
+                
+            }else{
+                if( $this->modeloRegistro->verificarRuc($ruc) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "El RUC ya existe",
+                            icon: "error"
+                        });
+                    </script>';
+                    exit();
+                }
+
+                if( $id = $this->modeloRegistro->registrarProveedor($ruc, $razon) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Proveedor Guardado",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                        dtProvReload();
+                        limpiarCamposProv();
+                        cargarSelectProv(1, '.$ruc.', "'.$razon.'", '.$id.');
+                    </script>';
+                }
+
+            }
+
+        }
+    }
+
+    public function eliminarProveedor(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $idproveedor = $this->request->getVar('id');
+
+            $eliminar = FALSE;
+            $mensaje = "";
+
+            $tablas = ['compra'];
+            foreach( $tablas as $t ){
+                $total = $this->modeloRegistro->verificarProvTieneRegEnTablas($idproveedor,$t)['total'];
+                if( $total > 0 ){
+                    $mensaje .= "<div class='text-start'>El proveedor tiene $total registros en la tabla '$t'.</div>";
+                    $eliminar = TRUE;
+                }
+            }
+
+            if( $eliminar ){
+                echo '<script>
+                    Swal.fire({
+                        title: "El proveedor no puede ser eliminado",
+                        html: "'.$mensaje.'",
+                        icon: "warning",
+                    });
+                </script>';
+                exit();
+            }
+
+            if( $this->modeloRegistro->eliminarProveedor($idproveedor) ){
+                echo '<script>
+                    Swal.fire({
+                        title: "Proveedor Eliminado",
+                        text: "",
+                        icon: "success",
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                    });
+                    dtProvReload();
+                    limpiarCamposProv();
+                    cargarSelectProv(3, "", "", '.$idproveedor.');
+                </script>';
+            }            
+
+        }
+    }
+
+
 }

@@ -5,9 +5,14 @@ use CodeIgniter\Model;
 
 class CuentaModel extends Model{
 
-    public function listarCuentas(){
-        $query = "select * from cuenta";
-        $st = $this->db->query($query);
+    public function listarCuentas($dh = ''){
+        if( $dh != '' ){
+            $query = "select * from cuenta where cu_dh = ?";
+            $st = $this->db->query($query, [$dh]);
+        }else{
+            $query = "select * from cuenta";
+            $st = $this->db->query($query);
+        }        
 
         return $st->getResultArray();
     }

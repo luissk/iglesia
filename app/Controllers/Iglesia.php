@@ -148,7 +148,7 @@ class Iglesia extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['usuario','responsable_caja','registro'];
+            $tablas = ['usuario','responsable_caja','registro','compra'];
             foreach( $tablas as $t ){
                 $total = $this->modeloIglesia->verificarIglesiaTieneRegEnTablas($idiglesia,$t)['total'];
                 if( $total > 0 ){

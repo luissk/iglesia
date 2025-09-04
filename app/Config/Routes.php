@@ -38,3 +38,8 @@ $routes->post('genera-reportelcaja', 'Registro::generaReporteLCaja');
 $routes->get('pdfLCaja/(:any)/(:any)', 'Registro::pdfLCaja/$1/$2');
 
 $routes->post('formularioLCaja', 'Registro::formularioLibroCaja');
+
+$routes->get('nueva-compra', 'Registro::nuevaCompra');
+$routes->post('lista-proveedor-dt', 'Registro::listaProveedorDT');
+$routes->post('registro-proveedor','Registro::registrarProveedor');
+$routes->post('elimina-proveedor','Registro::eliminarProveedor');
