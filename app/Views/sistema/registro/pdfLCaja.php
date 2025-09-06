@@ -107,11 +107,12 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 <?php               
                 $total_i = 0;
                 foreach($registros_i as $ing){
-                    $fecha_i   = date("d", strtotime($ing['re_fecha']));
-                    $cod_i     = $ing['cu_codigo'];
-                    $cuenta_i  = $ing['cu_cuenta'];
-                    $desc_i    = $ing['re_desc'];
-                    $importe_i = $ing['re_importe'];
+                    $fecha_i    = date("d", strtotime($ing['re_fecha']));
+                    $cod_i      = $ing['cu_codigo'];
+                    $cuenta_i   = $ing['cu_cuenta'];
+                    $desc_i     = $ing['re_desc'];
+                    $importe_i  = $ing['re_importe'];
+                    $idcuenta_i = $ing['idcuenta'];
 
                     $total_i += $importe_i;
 

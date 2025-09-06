@@ -163,6 +163,7 @@ class Registro extends BaseController
                             icon: "success",
                             showConfirmButton: true,
                             allowOutsideClick: false,
+                            allowEnterKey:false,
                         });
                         dataTableReload(1);
                     </script>';
@@ -178,7 +179,9 @@ class Registro extends BaseController
                             icon: "success",
                             showConfirmButton: true,
                             allowOutsideClick: false,
+                            allowEnterKey:false,
                         });
+                        $("#importe").val("");
                         dataTableReload(1);
                     </script>';
                 }

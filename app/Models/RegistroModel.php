@@ -40,7 +40,7 @@ class RegistroModel extends Model{
     }
 
     public function listarParaReporte($idiglesia,$mes,$anio,$mov = [1,2]){
-        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov, 
+        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov,re.idcuenta,
         cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,ca.ca_caja 
         from registro re 
         inner join usuario us on re.us_creador=us.idusuario 
@@ -49,7 +49,7 @@ class RegistroModel extends Model{
         inner join responsable_caja rc on re.idresponsable_caja=rc.idresponsable_caja 
         inner join caja ca on rc.idcaja=ca.idcaja 
         where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and re.re_mov in ? 
-         order by re.re_fecha";
+         order by re.re_fecha,re.idregistro";
         $st = $this->db->query($query,  [$idiglesia,$anio,$mes,$mov]);
 
         return $st->getResultArray();
