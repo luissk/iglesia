@@ -27,7 +27,7 @@
                         </div>
                         <form id="frmRepLCaja">
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label for="mesCa" class="form-label fw-semibold">Seleccione un mes</label>
                                     <select class="form-select" name="mesCa" id="mesCa" required>
                                         <option value="">Nro de Mes</option>
@@ -44,6 +44,22 @@
                                     <label for="anioCa" class="form-label fw-semibold">Año</label>
                                     <input type="text" class="form-control" id="anioCa" name="anioCa" maxlength="4" minlength="4" value="<?=date('Y')?>" required>
                                     <div id="msj-anioCa" class="form-text text-danger"></div>
+                                </div>
+                                <div class="col-sm-4 col-lg-3 col-xxl-2">
+                                    <label for="caja" class="form-label fw-semibold">Seleccione una Caja</label>
+                                    <select class="form-select" name="cajaCa" id="cajaCa">
+                                        <option value="">Seleccione</option>
+                                        <?php
+                                        foreach( $cajas as $c ){
+                                            $idcaja        = $c['idcaja'];
+                                            $caja          = $c['ca_caja'];
+                                            $nombres       = $c['re_nombres'];
+                                            $idresponsable = $c['idresponsable_caja'];
+
+                                            echo "<option value=$idcaja>$caja ($nombres)</option>"; 
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="tipoRepCa" class="form-label fw-semibold">Tipo</label>

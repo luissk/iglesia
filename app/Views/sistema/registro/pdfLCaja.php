@@ -65,10 +65,10 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
     <header>
         <table width="100%">
             <tr>
-                <th width="75%" align="left" style="font-size: 12px;">
+                <th width="70%" align="left" style="font-size: 12px;">
                     <?=session('iglesia')?>
                 </th>
-                <th width="25%" align="right" style="font-size: 22px;">
+                <th width="30%" align="right" style="font-size: 22px;">
                     <?=$mes_anio?>
                 </th>
             </tr>
@@ -174,9 +174,26 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 </tr>
             </table>
         </div>
-        <br>
+        <br><br>
         <div class="saldos">
-            <b>SALDO PROXIMO MES: S/. <?=number_format($saldos['saldo_final'],2,".",",")?></b>
+            <table width='100%' cellpadding="5" cellspacing="0" border="0">
+                <tr align="right">
+                    <th width='80%'>Saldo Anterior:</th>
+                    <td>S/. <?=number_format($saldos['saldo_inicial'],2,".",",")?></td>
+                </tr>
+                <tr align="right">
+                    <th>Ingresos del mes:</th>
+                    <td>S/. <?=number_format($total_i,2,".",",")?></td>
+                </tr>
+                <tr align="right">
+                    <th>Egresos del mes:</th>
+                    <td style="color: red">(S/. <?=number_format($total_e,2,".",",")?>)</td>
+                </tr>
+                <tr align="right">
+                    <th>SALDO PROX. MES:</th>
+                    <td>S/. <?=number_format($saldos['saldo_final'],2,".",",")?></td>
+                </tr>
+            </table>
         </div>
 
         <?php

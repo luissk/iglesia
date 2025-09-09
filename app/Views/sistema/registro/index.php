@@ -21,10 +21,42 @@
 
                     <div class="tab-pane active" id="libroCaja">
                         <div class="row">
-                            <div class="col-sm-6 d-flex align-items-center">
-                                <h5 class="mb-0">Registros Libro de Cajas</h5>
+                            <div class="col-sm-4 col-lg-3 col-xxl-2">
+                                <label for="caja" class="form-label">Seleccione una Caja</label>
+                                <select class="form-select" name="caja_filter" id="caja_filter">
+                                    <option value="">Seleccione</option>
+                                    <?php
+                                    foreach( $cajas as $c ){
+                                        $idcaja        = $c['idcaja'];
+                                        $caja          = $c['ca_caja'];
+                                        $nombres       = $c['re_nombres'];
+                                        $idresponsable = $c['idresponsable_caja'];
+
+                                        echo "<option value=$idcaja>$caja ($nombres)</option>"; 
+                                    }
+                                    ?>
+                                </select>
                             </div>
-                            <div class="col-sm-6 text-end">
+                            <div class="col-lg-2 col-xxl-1">
+                                <label for="mes_filter" class="form-label">Mes</label>
+                                <select class="form-select" name="mes_filter" id="mes_filter" required>
+                                    <option value="">Nro de Mes</option>
+                                    <?php
+                                    for( $i = 1; $i <= 12; $i++ ){                                           
+                                        $select_mes = $i == date('m') ? 'selected' : '';
+                                        echo "<option value=$i  $select_mes>$i</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-xxl-1">
+                                <label for="anio_filter" class="form-label">Año</label>
+                                <input type="text" class="form-control" id="anio_filter" name="anio_filter" maxlength="4" minlength="4" value="<?=date('Y')?>" required>
+                            </div>
+                            <div class="col-lg-2 col-xxl-1 d-flex align-items-end pb-1">
+                                <button class="btn btn-sm btn-outline-primary" id="btnFiltrar"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                            </div>
+                            <div class="col-lg-3 col-xxl-7 text-end">
                                 <a class="btn btn-warning" role="button" id="btnModalLCaja">Nuevo Registro L. Caja</a>
                             </div>
                         </div>
@@ -112,10 +144,9 @@ $(function(){
             "dataSrc":"",
             "type": "POST",
             "data": {
-                id:1
-                //"desc": function() { return $('#desc').val() },
-                //"fecha_ini": function() { return $('#fecha_ini').val() }, 
-                //"fecha_fin": function() { return $('#fecha_fin').val() }
+                "caja": function() { return $('#caja_filter').val() },
+                "mes": function() { return $('#mes_filter').val() }, 
+                "anio": function() { return $('#anio_filter').val() }
             },
             "complete": function(xhr, responseText){
                 /* console.log(xhr);
@@ -171,6 +202,20 @@ $(function(){
                 });
             }
         });        
+    });
+
+    $("#btnFiltrar").on('click', function(e){
+        e.preventDefault();
+        let btn = document.querySelector('#btnFiltrar'),
+            txtbtn = btn.innerHTML,
+            btnHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        btn.setAttribute('disabled', 'disabled');
+        btn.innerHTML = `${btnHTML} ...`;
+
+        dataTableReload();
+
+        btn.removeAttribute('disabled');
+        btn.innerHTML = txtbtn;
     });
 
 

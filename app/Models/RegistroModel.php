@@ -5,7 +5,22 @@ use CodeIgniter\Model;
 
 class RegistroModel extends Model{
 
-    public function listarRegistros($idiglesia){
+    public function listarRegistros($idiglesia,$anio = '', $mes = '', $caja = ''){
+        $params = [$idiglesia];
+        $where_more = "";
+        if( $anio != '' ){
+            $where_more .= " and year(re.re_fecha) = ?";
+            array_push($params, $anio);
+        } 
+        if( $mes != '' ){
+            $where_more .= " and month(re.re_fecha) = ?";
+            array_push($params, $mes);
+        }
+        if( $caja != '' ){
+            $where_more .= " and re.idcaja = ?";
+            array_push($params, $caja);
+        }
+
         $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,
             re.re_mov,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov,us.us_nombre,ig.ig_iglesia,ig.ig_direccion,ig.ig_pastor,
             cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion,
@@ -16,8 +31,8 @@ class RegistroModel extends Model{
             inner join cuenta cu on re.idcuenta=cu.idcuenta
             inner join responsable_caja rc on re.idresponsable_caja=rc.idresponsable_caja
             inner join caja ca on rc.idcaja=ca.idcaja 
-            where re.idiglesia = ? ";//order by re.idregistro desc
-        $st = $this->db->query($query,  [$idiglesia]);
+            where re.idiglesia = ? $where_more";//order by re.idregistro desc
+        $st = $this->db->query($query,  $params);
 
         return $st->getResultArray();
     }
@@ -39,7 +54,14 @@ class RegistroModel extends Model{
         return $st->getRowArray();
     }
 
-    public function listarParaReporte($idiglesia,$mes,$anio,$mov = [1,2]){
+    public function listarParaReporte($idiglesia,$mes,$anio,$mov = [1,2],$caja = ''){
+        $params = [$idiglesia,$anio,$mes,$mov];
+        $where_more = "";
+        if($caja != ''){
+            $where_more .= " and re.idcaja = ? ";
+            array_push($params, $caja);
+        }
+
         $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov,re.idcuenta,
         cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,ca.ca_caja 
         from registro re 
@@ -48,30 +70,37 @@ class RegistroModel extends Model{
         inner join cuenta cu on re.idcuenta=cu.idcuenta 
         inner join responsable_caja rc on re.idresponsable_caja=rc.idresponsable_caja 
         inner join caja ca on rc.idcaja=ca.idcaja 
-        where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and re.re_mov in ? 
+        where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and re.re_mov in ? $where_more 
          order by re.re_fecha,re.idregistro";
-        $st = $this->db->query($query,  [$idiglesia,$anio,$mes,$mov]);
+        $st = $this->db->query($query,  $params);
 
         return $st->getResultArray();
     }
 
-    public function obtenerSaldos($idiglesia, $fecha){
-        $query = "select SUM(CASE WHEN re_mov = 1 THEN re_importe ELSE -re_importe END) AS saldo FROM registro WHERE idiglesia = ? and re_fecha < ?";
-        $st = $this->db->query($query,  [$idiglesia, $fecha]);
+    public function obtenerSaldos($idiglesia, $fecha, $caja = ''){
+        $params = [$idiglesia, $fecha];
+        $where_more = "";
+        if($caja != ''){
+            $where_more .= " and idcaja = ?";
+            array_push($params, $caja);
+        }
+
+        $query = "select SUM(CASE WHEN re_mov = 1 THEN re_importe ELSE -re_importe END) AS saldo FROM registro WHERE idiglesia = ? and re_fecha < ? $where_more";
+        $st = $this->db->query($query,  $params);
 
         return $st->getRowArray();
     }
 
-    public function insertarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idiglesia){
-        $query = "insert into registro(re_fecha,re_importe,re_desc,us_creador,idcuenta,idresponsable_caja,re_mov,idiglesia) values(?,?,?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idiglesia]);
+    public function insertarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia){
+        $query = "insert into registro(re_fecha,re_importe,re_desc,us_creador,idcuenta,idresponsable_caja,re_mov,idcaja,idiglesia) values(?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia]);
 
         return $st;
     }
 
-    public function modificarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idregistro){
-        $query = "update registro set re_fecha=?,re_importe=?,re_desc=?,us_creador=?,idcuenta=?,idresponsable_caja=?,re_mov=? where idregistro=?";
-        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idregistro]);
+    public function modificarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idregistro){
+        $query = "update registro set re_fecha=?,re_importe=?,re_desc=?,us_creador=?,idcuenta=?,idresponsable_caja=?,re_mov=?,idcaja=? where idregistro=?";
+        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idregistro]);
 
         return $st;
     }

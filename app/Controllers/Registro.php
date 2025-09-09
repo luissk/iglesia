@@ -30,7 +30,10 @@ class Registro extends BaseController
 
         if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
         
-        $data['title']           = "Registros del Sistema";
+        $data['title'] = "Registros del Sistema";
+
+        $data['cajas'] = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));//PARA EL FILTRO DE CAJAS
+
         $data['registrosLinkActive'] = 1;       
 
         return view('sistema/registro/index', $data);
@@ -38,9 +41,11 @@ class Registro extends BaseController
 
     public function listarLCajaDT(){
         if( $this->request->isAJAX() ){
-			//print_r($_POST);
+            $caja = $this->request->getVar('caja');
+            $mes  = $this->request->getVar('mes');
+            $anio = $this->request->getVar('anio');
 
-			$registros = $this->modeloRegistro->listarRegistros(session('idiglesia'));
+			$registros = $this->modeloRegistro->listarRegistros(session('idiglesia'), $anio, $mes, $caja);
 			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
         }
     }
@@ -153,9 +158,13 @@ class Registro extends BaseController
 
             $registro_bd = $this->modeloRegistro->obtenerRegistro($idregistro);
 
+            //OBTENER TAMBIEN EL IDCAJA PARA EL REGISTRO
+            $cajabd   = $this->modeloCaja->obtenerResponsableDeCaja($idcajaresp);
+            $idcajabd = $cajabd['idcaja'];
+
             if( $registro_bd ){
 
-                if( $this->modeloRegistro->modificarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idregistro) ){
+                if( $this->modeloRegistro->modificarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,$idregistro) ){
                     echo '<script>
                         Swal.fire({
                             title: "Registro Modificado",
@@ -171,7 +180,7 @@ class Registro extends BaseController
                 
             }else{
 
-                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,session('idiglesia')) ){
+                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,session('idiglesia')) ){
                     echo '<script>
                         Swal.fire({
                             title: "Registro Guardado",
@@ -225,7 +234,9 @@ class Registro extends BaseController
         if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
         
         $data['title']           = "Reportes de Registros";
-        $data['registrosRepLinkActive'] = 1;       
+        $data['registrosRepLinkActive'] = 1;
+        
+        $data['cajas'] = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));
 
         return view('sistema/registro/reporteReg', $data);
     }
@@ -237,28 +248,29 @@ class Registro extends BaseController
 
             $mes     = $this->request->getVar('mesCa');
             $anio    = trim($this->request->getVar('anioCa'));
+            $caja    = $this->request->getVar('cajaCa');
             $tipoRep = $this->request->getVar('tipoRepCa');
 
             if( $mes != '' & $anio != '' && $tipoRep != '' ){
                 if( $tipoRep == 'excel' ){
-                    $this->excelLCaja($mes, $anio);
+                    $this->excelLCaja($mes, $anio, $caja);
                 }else if( $tipoRep == 'pdf' ){
                     //$this->pdfLCaja($mes, $anio);
-                    $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+                    $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1,2],$caja);
                     if( !$registros ) exit();
-                    echo "<script>window.open('".base_url('pdfLCaja/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
+                    echo "<script>window.open('".base_url('pdfLCaja/'.$mes.'/'.$anio.'/'.$caja.'')."','_blank' );$('#msj').html('')</script>";
                 }
             }
 
         }
     }
 
-    private function excelLCaja($mes, $anio){
-        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio);
+    private function excelLCaja($mes, $anio, $caja){
+        $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1,2],$caja);
 
         if( !$registros ) exit();
         
-        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes);
+        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes,$caja);
         //print_r($saldos);exit();
 
         $spreadsheet = new Spreadsheet();
@@ -379,16 +391,16 @@ class Registro extends BaseController
         exit();
     } */
 
-    public function pdfLCaja($mes, $anio){
+    public function pdfLCaja($mes, $anio, $caja = ''){
         $options = new \Dompdf\Options();
         $options->setIsRemoteEnabled(true);
         $dompdf = new \Dompdf\Dompdf($options);
 
-        $registros_i = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1]);
-        $registros_e = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[2]);
+        $registros_i = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1],$caja);
+        $registros_e = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[2],$caja);
         //if( !$registros_i ) exit();
 
-        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes);
+        $saldos = $this->obtenerSaldosMensualesLCaja(session('idiglesia'),$anio,$mes,$caja);
         
         $data['registros_i'] = $registros_i;
         $data['registros_e'] = $registros_e;
@@ -406,12 +418,12 @@ class Registro extends BaseController
         exit;
     }
 
-    private function obtenerSaldosMensualesLCaja($idiglesia, $anio, $mes){
+    private function obtenerSaldosMensualesLCaja($idiglesia, $anio, $mes, $caja = ''){
         $primer_dia_mes = sprintf('%04d-%02d-01', $anio, $mes);
         $primer_dia_siguiente_mes = date('Y-m-01', strtotime('+1 month', strtotime($primer_dia_mes)));
 
-        $saldo_inicial = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_mes)['saldo'] ?? 0;
-        $saldo_final   = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_siguiente_mes)['saldo'] ?? 0;
+        $saldo_inicial = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_mes, $caja)['saldo'] ?? 0;
+        $saldo_final   = $this->modeloRegistro->obtenerSaldos($idiglesia, $primer_dia_siguiente_mes, $caja)['saldo'] ?? 0;
 
         return [
             'saldo_inicial' => $saldo_inicial,
@@ -443,7 +455,7 @@ class Registro extends BaseController
         $data['registrosLinkActive'] = 1;
         
         $data['proveedores'] = $this->modeloRegistro->listarProveedores();
-        $data['cuentas']     = $this->modeloCuenta->listarCuentas(2);
+        $data['cuentas']     = $this->modeloCuenta->listarCuentas(1);
 
         return view('sistema/registro/nuevaCompra', $data);
     }
