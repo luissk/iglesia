@@ -170,6 +170,7 @@ class RegistroModel extends Model{
             $criterio .= " and co.idiglesia = ?";
         }
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -189,26 +190,21 @@ class RegistroModel extends Model{
 
     public function listarCompras($idiglesia){
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
-            us.us_nombre,
-            format( (sum(cd.cd_subtotal) * 0.18 + sum(cd.cd_subtotal)), 2) as totalpagado 
+            us.us_nombre
             from compra co
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario
-            inner join compra_detalle cd on co.idcompra=cd.idcompra
-            where co.idiglesia = ?
-            GROUP by co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            pr.pr_ruc,pr.pr_razon,
-            ig.ig_iglesia,
-            us.us_nombre";
+            where co.idiglesia = ?";
         $st = $this->db->query($query, [$idiglesia]);
 
         return $st->getResultArray();
     }
 
-    public function listarDetalleCompra($idcompra){
+    /* public function listarDetalleCompra($idcompra){
         $query = "select cd.idcompra_detalle,cd.cd_glosa,cd.cd_precio,cd.cd_cant,cd.cd_subtotal,cd.idcuenta,
             cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion
             from compra_detalle cd
@@ -217,43 +213,43 @@ class RegistroModel extends Model{
         $st = $this->db->query($query, [$idcompra]);
 
         return $st->getResultArray();
-    }
+    } */
 
-    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia){
-        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia) values(?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia]);
+    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase){
+        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentabase) values(?,?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase]);
 
         return $this->db->insertID();
     }
     
-    public function modificarCompra($fecha, $factura, $proveedor, $idcompra){
-        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=? where idcompra=?";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idcompra]);
+    public function modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $idcompra){
+        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=?, co_subt=?, co_igv=?, co_total=?, cuentafact=?, cuentabase=? where idcompra=?";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $idcompra]);
 
         return $st;
     }
 
-    public function insertarDetalleCompra($glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra){
+    /* public function insertarDetalleCompra($glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra){
         $query = "insert into compra_detalle(cd_glosa,cd_precio,cd_cant,cd_subtotal,idcuenta,idcompra) values(?,?,?,?,?,?)";
         $st = $this->db->query($query, [$glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra]);
 
         return $st;
-    }
+    } */
 
-    public function borrarDetalleCompra($idcompra){
+    /* public function borrarDetalleCompra($idcompra){
         $query = "delete from compra_detalle where idcompra=?";
         $st = $this->db->query($query, [$idcompra]);
 
         return $st;
-    }
+    } */
 
     //VERIFICAR SI TIENE REGISTRO EN TABLAS
-    public function verificarCompraTieneRegEnTablas($idcompra, $tabla){
+    /* public function verificarCompraTieneRegEnTablas($idcompra, $tabla){
         $query = "select count(idcompra) as total from $tabla where idcompra=?";
         $st = $this->db->query($query, [$idcompra]);
 
         return $st->getRowArray();
-    }
+    } */
 
     public function eliminarCompra($idcompra){
         $query = "delete from compra where idcompra=?";

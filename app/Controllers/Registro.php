@@ -443,7 +443,7 @@ class Registro extends BaseController
             if( $compra = $this->modeloRegistro->obtenerCompra($id, session('idiglesia')) ){
                 
                 $data['compra_bd'] = $compra;
-                $data['deta_bd']   = $this->modeloRegistro->listarDetalleCompra($id);
+                /* $data['deta_bd']   = $this->modeloRegistro->listarDetalleCompra($id); */
                 $data['title']     = "Editar compra";
             }else{
                 return redirect()->to('/');
@@ -629,80 +629,52 @@ class Registro extends BaseController
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
-            //print_r($_POST);
+            //print_r($_POST);exit();
 
-            $items     = json_decode($this->request->getVar('items'), true);
+            /* $items     = json_decode($this->request->getVar('items'), true);
             $count_items = count($items);
             if( $count_items == 0 ){
                 exit();
-            }
+            } */
 
             $fecha     = trim($this->request->getVar('fecha'));
             $factura   = trim($this->request->getVar('factura'));
             $proveedor = $this->request->getVar('proveedor');
+            $subt      = $this->request->getVar('subt');
+            $igv       = $this->request->getVar('igv');
+            $total     = $this->request->getVar('total');
+            $cuenta    = $this->request->getVar('cuenta');
             $idcompra  = $this->request->getVar('idcompra_e');//para editar
 
-            if( $fecha == '' || $factura == '' || $proveedor == '' ) exit();
+            if( $subt == '' || $igv == '' || $total == '' || $cuenta == '' || $fecha == '' || $factura == '' || $proveedor == '' ) exit();
 
             //print_r($items);
 
             if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra) ){
-                if( $this->modeloRegistro->borrarDetalleCompra($idcompra) ){
-                    $res = FALSE;
-                    foreach( $items as $i ){
-                        $glosa    = $i['glosa'];
-                        $cuenta   = $i['idcuenta'];
-                        $precio   = $i['precio'];
-                        $cantidad = $i['cantidad'];
-                        $subt     = $i['subt'];
-
-                        if( $this->modeloRegistro->insertarDetalleCompra($glosa,$precio,$cantidad,$subt,$cuenta,$idcompra) ){
-                            $res = TRUE;
-                        }                      
-                    }
-                    if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $idcompra)){
-                        $res = TRUE;
-                    }
-                    if( $res ){
-                        echo '<script>
-                            Swal.fire({
-                                title: "Compra Actualizada",
-                                text: "",
-                                icon: "success",
-                                showConfirmButton: true,
-                                allowOutsideClick: false,
-                            });
-                        </script>';
-                    }
+                if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, 421, $cuenta, $idcompra)){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Compra Actualizada",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                        });
+                    </script>';
                 }
             }else{
-                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia')) ){
-                    $res = FALSE;
-                    foreach( $items as $i ){
-                        $glosa    = $i['glosa'];
-                        $cuenta   = $i['idcuenta'];
-                        $precio   = $i['precio'];
-                        $cantidad = $i['cantidad'];
-                        $subt     = $i['subt'];
-                        
-                        if( $this->modeloRegistro->insertarDetalleCompra($glosa,$precio,$cantidad,$subt,$cuenta,$idcompra_i) ){
-                            $res = TRUE;
-                        }
-                    }
-                    if( $res ){
-                        echo '<script>
-                            Swal.fire({
-                                title: "Compra Registrada",
-                                text: "",
-                                icon: "success",
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                            });
-                            eliminarDetalleLocalStorage();
-                            limpiarCabecera();
-                            setTimeout(function(){location.href="'.base_url('registros#libroCompras').'"}, 1500);
-                        </script>';
-                    }
+                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, 421, $cuenta) ){
+                    echo '<script>
+                        Swal.fire({
+                            title: "Compra Registrada",
+                            text: "",
+                            icon: "success",
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                        });
+                        limpiarCabecera();
+                        setTimeout(function(){location.href="'.base_url('registros#libroCompras').'"}, 1500);
+                    </script>';
                 }
             }
         }
@@ -737,20 +709,19 @@ class Registro extends BaseController
                 </script>';
                 exit();
             } */
-            if( $this->modeloRegistro->borrarDetalleCompra($idcompra) ){
-                if( $this->modeloRegistro->eliminarCompra($idcompra) ){
-                echo '<script>
-                        Swal.fire({
-                            title: "Compra Eliminada",
-                            text: "",
-                            icon: "success",
-                            showConfirmButton: true,
-                            allowOutsideClick: false,
-                        });
-                        dataTableReload(2);
-                    </script>';
-                }
-            }       
+            if( $this->modeloRegistro->eliminarCompra($idcompra) ){
+            echo '<script>
+                    Swal.fire({
+                        title: "Compra Eliminada",
+                        text: "",
+                        icon: "success",
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                    });
+                    dataTableReload(2);
+                </script>';
+            }
+      
         }
     }
 

@@ -237,7 +237,7 @@ $(function(){
         },
         "columns":[
             {"data": "co_fecha"},
-            {"data": "totalpagado"},
+            {"data": "co_total"},
             {"data": "co_factura"},
             {"data": "pr_ruc"},
             {"data": "pr_razon"},

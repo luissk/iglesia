@@ -6,38 +6,29 @@
 if( isset($compra_bd) && $compra_bd ){
     /* echo "<pre>";
     print_r($compra_bd);
-    print_r($deta_bd);
     echo "</pre>"; */
 
-    $idcompra_bd  = $compra_bd['idcompra'];
-    $fecha_bd     = $compra_bd['co_fecha'];
-    $factura_bd   = $compra_bd['co_factura'];
-    $proveedor_bd = $compra_bd['idproveedor'];
-    
-    $items = [];
-    foreach( $deta_bd as $i ){
-        $item = array(
-            'glosa'     => $i['cd_glosa'],
-            'codcuenta' => $i['cu_codigo'],
-            'idcuenta'  => $i['idcuenta'],
-            'precio'    => $i['cd_precio'],
-            'cantidad'  => $i['cd_cant'],
-            'subt'      => $i['cd_subtotal'],
-        );
-        array_push($items, $item);
-    }
-
-    $items_bd     = json_encode($items, JSON_HEX_APOS);
+    $idcompra_bd   = $compra_bd['idcompra'];
+    $fecha_bd      = $compra_bd['co_fecha'];
+    $factura_bd    = $compra_bd['co_factura'];
+    $proveedor_bd  = $compra_bd['idproveedor'];
+    $subt_bd       = $compra_bd['co_subt'];
+    $igv_bd        = $compra_bd['co_igv'];
+    $total_bd      = $compra_bd['co_total'];
+    $cuentabase_bd = $compra_bd['cuentabase'];
 
     $btn_title = "MODIFICAR COMPRA";
 
 
 }else{
-    $idcompra_bd  = "";
-    $fecha_bd     = date('Y-m-d');
-    $factura_bd   = "";
-    $proveedor_bd = "";
-    $items_bd     = json_encode([]);
+    $idcompra_bd   = "";
+    $fecha_bd      = date('Y-m-d');
+    $factura_bd    = "";
+    $proveedor_bd  = "";
+    $subt_bd       = "";
+    $igv_bd        = "";
+    $total_bd      = "";
+    $cuentabase_bd = "";
 
     $btn_title = "REGISTRAR COMPRA";
 }
@@ -90,20 +81,20 @@ if( isset($compra_bd) && $compra_bd ){
                     <div class="col-sm-12">
                         &nbsp;
                     </div>
-                    <div class="col-sm-5">
-                        <label for="glosa" class="form-label fw-semibold">Glosa</label>
-                        <input type="text" class="form-control" id="glosa" name="glosa" value="" placeholder="" maxlength="100">
-                        <div id="msj-glosa" class="form-text text-danger"></div>
+                    <div class="col-sm-2">
+                        <label for="subt" class="form-label fw-semibold">Subtotal</label>
+                        <input type="text" class="form-control numerocondecimal" id="subt" name="subt" value="<?=$subt_bd?>" placeholder="" maxlength="10">
+                        <div id="msj-subt" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-2">
-                        <label for="precio" class="form-label fw-semibold">Precio</label>
-                        <input type="text" class="form-control numerocondecimal" id="precio" name="precio" value="" placeholder="" maxlength="10" autocomplete="off">
-                        <div id="msj-precio" class="form-text text-danger"></div>
+                        <label for="igv" class="form-label fw-semibold">IGV</label>
+                        <input type="text" class="form-control numerocondecimal" id="igv" name="igv" value="<?=$igv_bd?>" placeholder="" maxlength="10" autocomplete="off">
+                        <div id="msj-igv" class="form-text text-danger"></div>
                     </div>
-                    <div class="col-sm-1">
-                        <label for="cantidad" class="form-label fw-semibold">Cant</label>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" value="" placeholder="" maxlength="5" autocomplete="off">
-                        <div id="msj-cantidad" class="form-text text-danger"></div>
+                    <div class="col-sm-2">
+                        <label for="total" class="form-label fw-semibold">Total</label>
+                        <input type="number" class="form-control numerocondecimal" id="total" name="total" value="<?=$total_bd?>" placeholder="" maxlength="10" autocomplete="off">
+                        <div id="msj-total" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-4">
                         <label for="cuenta" class="form-label fw-semibold">Cuenta</label>
@@ -117,56 +108,23 @@ if( isset($compra_bd) && $compra_bd ){
                                 $cu_cuenta      = $cu['cu_cuenta'];
                                 $cu_observacion = $cu['cu_observacion'];
 
-                                echo "<option value=$idcuenta  data-obs='$cu_observacion' data-codigo='$cu_codigo'>$cu_codigo - $cu_cuenta</option>";
+                                $cuenta_sel = $idcuenta == $cuentabase_bd ? 'selected' : '';
+
+                                echo "<option value=$idcuenta $cuenta_sel  data-obs='$cu_observacion' data-codigo='$cu_codigo'>$cu_codigo - $cu_cuenta</option>";
                             }
                             ?>
                         </select>
                         <div id="msjObs" class="small text-secondary-emphasis"></div>
                         <div id="msj-cuenta" class="form-text text-danger"></div>
                     </div>
-                    <div class="col-sm-12 mt-3 text-center">
-                        <a class="btn btn-outline-danger" id="addGlosa">Agregar Glosa a Detalle</a>
-                    </div>
                 </div>
             </div>
         </div>
         
         <div class="row">
-            <div class="col-lg-12 col-xl-10 offset-xl-1 col-xxl-6 offset-xxl-3">
-                <div class="card card-danger card-outline">
-                    <div class="card-header pt-1 pb-0 border-bottom-1">
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <h5 class="">Detalle</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 table-responsive">
-                                <table class="table table-sm" id="detalleTabla">
-                                    <thead>
-                                        <tr>
-                                            <th>Glosa</th>
-                                            <th>Cuenta</th>
-                                            <th class="text-end">Precio</th>
-                                            <th class="text-center">Cantidad</th>
-                                            <th class="text-end">Precio T</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-sm-12 text-end">
-                        <input type="hidden" id="idcompra_e" name="idcompra_e" value="<?=$idcompra_bd?>">
-                        <button class="btn btn-primary" id="btnCompra"><?=$btn_title?></button>
-                    </div>
-                </div>
+            <div class="col-sm-12 text-end">
+                <input type="hidden" id="idcompra_e" name="idcompra_e" value="<?=$idcompra_bd?>">
+                <button class="btn btn-primary" id="btnCompra"><?=$btn_title?></button>
             </div>
         </div>
     </div>
@@ -232,21 +190,7 @@ if( isset($compra_bd) && $compra_bd ){
 <script>
 var $dtblProveedor;
 
-// LocalStorage
-const FACTURA_KEY = 'detalle';
-// Array en memoria que contiene los detalles de la factura
-let detallesFactura = <?=$items_bd?>;//[];
-
-<?php
-if( $idcompra_bd != '' ){
-?>
-    localStorage.setItem(FACTURA_KEY, JSON.stringify(detallesFactura));
-<?php
-}
-?>
-
 $(function(){
-    cargarDetalle();
 
     $(".numerocondecimal").on("keypress keyup blur",function (event) {
         $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -348,59 +292,23 @@ $(function(){
         $("#msj").html("");
     });
 
-    $('#frmCompra').on('change', '#cuenta', function(e){
+    $('#cuenta').on('change', function(e){
         $('#msjObs').text('');
         if( $(this).val() != '' ){
             $('#msjObs').text($(this).find(':selected').data('obs'));
         }
     });
 
-    $("#addGlosa").on('click', function(e){
-        const glosa = $('#glosa'),
-            precio = $('#precio'),
-            cantidad = $('#cantidad'),
-            cuenta = $('#cuenta'),
-            idcuenta = cuenta.val(),
-            codcuenta = cuenta.find(':selected').data('codigo'),
-            fecha = $('#fecha'),
-            factura = $('#factura'),
-            proveedor = $('#proveedor');
-
-        let men = '';
-        if( fecha.val().trim() == '' ) men = 'Ingrese una fecha';
-        else if( factura.val().trim() == '' ) men = 'Ingrese la factura';
-        else if( proveedor.val() == '' ) men = 'Seleccione el proveedor';
-        else if( glosa.val().trim() == '' ) men = 'Ingrese la glosa';
-        else if( precio.val() == '' ) men = 'Ingrese el precio';
-        else if( cantidad.val() == '' ) men = 'Ingrese una cantidad';
-        else if( cuenta.val() == '' ) men = 'Seleccione una cuenta';
-
-        if( men != '' ){
-            Swal.fire({title: men, icon: "error"});
-            return;
+    $('#subt').on('input', function(e){
+        let subt = parseFloat($(this).val());
+        let igv = 0;
+        let total = 0;
+        if( subt > 0 ){
+            igv = subt * 0.18;
+            total = subt + igv;
         }
-
-        const detalle = {
-            glosa: glosa.val(),
-            codcuenta,
-            idcuenta,
-            precio: precio.val(),
-            cantidad: cantidad.val(),
-            subt: parseFloat(precio.val()) * parseInt(cantidad.val())
-        }
-
-        detallesFactura.push(detalle);
-
-        localStorage.setItem(FACTURA_KEY, JSON.stringify(detallesFactura));
-
-        mostrarDetalleEnTabla();
-
-        glosa.val('');
-        precio.val('');
-        cantidad.val('');
-
-        cuenta.prop('selectedIndex', 0);
-        $('#msjObs').text('');
+        $('#igv').val(igv.toFixed(2));
+        $('#total').val(total.toFixed(2));
     });
 
     $('#btnCompra').on('click', function(e){
@@ -412,7 +320,7 @@ $(function(){
         btn.setAttribute('disabled', 'disabled');
         btn.innerHTML = `${btnHTML} PROCESANDO...`;
 
-        if( detallesFactura.length == 0 || $('#fecha').val() == '' || $('#factura').val() == '' || $('#proveedor').val()== '' ){
+        if( $('#subt').val() < 1 || $('#cuenta').val() == '' || $('#fecha').val() == '' || $('#factura').val() == '' || $('#proveedor').val()== '' ){
             Swal.fire({title: "Por favor, rellena los campos", icon: "error"});
             btn.removeAttribute('disabled');
             btn.innerHTML = txtbtn;
@@ -423,8 +331,11 @@ $(function(){
         formData.append('fecha', $('#fecha').val());
         formData.append('factura', $('#factura').val());
         formData.append('proveedor', $('#proveedor').val());
+        formData.append('subt', $('#subt').val());
+        formData.append('igv', $('#igv').val());
+        formData.append('total', $('#total').val());
+        formData.append('cuenta', $('#cuenta').val());
         formData.append('idcompra_e', $('#idcompra_e').val());
-        formData.append('items', JSON.stringify(detallesFactura));
 
         $.ajax({
             method: 'POST',
@@ -469,73 +380,12 @@ function cargarSelectProv($opt, ruc = '', razon = '', id){
     }
 }
 
-// Función para cargar los datos desde localStorage
-function cargarDetalle() {
-    const datosGuardados = localStorage.getItem(FACTURA_KEY);
-    if (datosGuardados) {
-        // JSON.parse() convierte el string de vuelta a un array/objeto
-        detallesFactura = JSON.parse(datosGuardados);
-        mostrarDetalleEnTabla();
-    }
-}
-
 function formateaPrecio(precio){
     const precioFormateado = precio.toLocaleString('es-PE', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     });
     return precioFormateado;
-}
-
-function mostrarDetalleEnTabla() {
-    const tablaBody = document.querySelector('#detalleTabla tbody');
-    tablaBody.innerHTML = ''; // Limpiar la tabla
-
-    let subtotal = 0, subtotalIGV = 0, igv = 0.18, total = 0;
-
-    detallesFactura.forEach((item, index) => {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `
-            <td><a href='javascript:void(0)' onclick="eliminarItem(${index})"><i class='fas fa-trash-alt'></i></a> &nbsp; ${item.glosa}</td>
-            <td>${item.codcuenta}</td>
-            <td align="right">${formateaPrecio(Number(item.precio))}</td>
-            <td align="center">${item.cantidad}</td>
-            <td align="right">${formateaPrecio(item.precio * item.cantidad)}</td>
-        `;
-        tablaBody.appendChild(fila);
-        
-        subtotal += (item.precio * item.cantidad);
-    });
-
-    if( subtotal > 0 ){
-        subtotalIGV = subtotal * igv;
-        total = subtotal + subtotalIGV;
-
-        const fila = document.createElement('tr');
-        fila.innerHTML = `
-            <td colspan="4" align="right">
-                SubTotal: <br>
-                IGV(18%): <br>
-                TOTAL:
-            </td>
-            <td align="right">${formateaPrecio(subtotal)} <br> ${formateaPrecio(subtotalIGV)} <br> ${formateaPrecio(total)}</td>
-        `;
-        tablaBody.appendChild(fila);
-    }
-}
-
-function eliminarItem(index){
-    detallesFactura.splice(index, 1);
-    // Actualizar localStorage con el nuevo array
-    localStorage.setItem(FACTURA_KEY, JSON.stringify(detallesFactura));
-    // Actualizar la tabla en la pantalla
-    mostrarDetalleEnTabla();
-}
-
-function eliminarDetalleLocalStorage(){
-    localStorage.removeItem(FACTURA_KEY);
-    detallesFactura = [];
-    mostrarDetalleEnTabla();
 }
 
 function limpiarCabecera(){
