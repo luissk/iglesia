@@ -644,14 +644,15 @@ class Registro extends BaseController
             $igv       = $this->request->getVar('igv');
             $total     = $this->request->getVar('total');
             $cuenta    = $this->request->getVar('cuenta');
+            $glosa     = $this->request->getVar('glosa');
             $idcompra  = $this->request->getVar('idcompra_e');//para editar
 
-            if( $subt == '' || $igv == '' || $total == '' || $cuenta == '' || $fecha == '' || $factura == '' || $proveedor == '' ) exit();
+            if( $subt == '' || $igv == '' || $total == '' || $cuenta == '' || $glosa == '' || $fecha == '' || $factura == '' || $proveedor == '' ) exit();
 
             //print_r($items);
 
             if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra) ){
-                if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, 421, $cuenta, $idcompra)){
+                if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, 421, $cuenta, $glosa, $idcompra)){
                     echo '<script>
                         Swal.fire({
                             title: "Compra Actualizada",
@@ -663,7 +664,7 @@ class Registro extends BaseController
                     </script>';
                 }
             }else{
-                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, 421, $cuenta) ){
+                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, 421, $cuenta, $glosa) ){
                     echo '<script>
                         Swal.fire({
                             title: "Compra Registrada",

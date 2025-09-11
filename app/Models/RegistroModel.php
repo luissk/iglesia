@@ -170,7 +170,7 @@ class RegistroModel extends Model{
             $criterio .= " and co.idiglesia = ?";
         }
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -190,7 +190,7 @@ class RegistroModel extends Model{
 
     public function listarCompras($idiglesia){
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -215,16 +215,16 @@ class RegistroModel extends Model{
         return $st->getResultArray();
     } */
 
-    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase){
-        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentabase) values(?,?,?,?,?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase]);
+    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa){
+        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentabase,co_glosa) values(?,?,?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa]);
 
         return $this->db->insertID();
     }
     
-    public function modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $idcompra){
-        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=?, co_subt=?, co_igv=?, co_total=?, cuentafact=?, cuentabase=? where idcompra=?";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $idcompra]);
+    public function modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $glosa, $idcompra){
+        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=?, co_subt=?, co_igv=?, co_total=?, cuentafact=?, cuentabase=?, co_glosa=? where idcompra=?";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $glosa, $idcompra]);
 
         return $st;
     }

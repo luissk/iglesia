@@ -16,6 +16,7 @@ if( isset($compra_bd) && $compra_bd ){
     $igv_bd        = $compra_bd['co_igv'];
     $total_bd      = $compra_bd['co_total'];
     $cuentabase_bd = $compra_bd['cuentabase'];
+    $glosa_bd      = $compra_bd['co_glosa'];
 
     $btn_title = "MODIFICAR COMPRA";
 
@@ -29,6 +30,7 @@ if( isset($compra_bd) && $compra_bd ){
     $igv_bd        = "";
     $total_bd      = "";
     $cuentabase_bd = "";
+    $glosa_bd      = "";
 
     $btn_title = "REGISTRAR COMPRA";
 }
@@ -86,7 +88,7 @@ if( isset($compra_bd) && $compra_bd ){
                         <input type="text" class="form-control numerocondecimal" id="subt" name="subt" value="<?=$subt_bd?>" placeholder="" maxlength="10">
                         <div id="msj-subt" class="form-text text-danger"></div>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <label for="igv" class="form-label fw-semibold">IGV</label>
                         <input type="text" class="form-control numerocondecimal" id="igv" name="igv" value="<?=$igv_bd?>" placeholder="" maxlength="10" autocomplete="off">
                         <div id="msj-igv" class="form-text text-danger"></div>
@@ -116,6 +118,11 @@ if( isset($compra_bd) && $compra_bd ){
                         </select>
                         <div id="msjObs" class="small text-secondary-emphasis"></div>
                         <div id="msj-cuenta" class="form-text text-danger"></div>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="glosa" class="form-label fw-semibold">Glosa</label>
+                        <input type="text" class="form-control" id="glosa" name="glosa" value="<?=$glosa_bd?>" placeholder="" maxlength="100" autocomplete="off">
+                        <div id="msj-glosa" class="form-text text-danger"></div>
                     </div>
                 </div>
             </div>
@@ -320,7 +327,7 @@ $(function(){
         btn.setAttribute('disabled', 'disabled');
         btn.innerHTML = `${btnHTML} PROCESANDO...`;
 
-        if( $('#subt').val() < 1 || $('#cuenta').val() == '' || $('#fecha').val() == '' || $('#factura').val() == '' || $('#proveedor').val()== '' ){
+        if( $('#subt').val() < 1 || $('#cuenta').val() == '' || $('#glosa').val() == '' || $('#fecha').val() == '' || $('#factura').val() == '' || $('#proveedor').val()== '' ){
             Swal.fire({title: "Por favor, rellena los campos", icon: "error"});
             btn.removeAttribute('disabled');
             btn.innerHTML = txtbtn;
@@ -335,6 +342,7 @@ $(function(){
         formData.append('igv', $('#igv').val());
         formData.append('total', $('#total').val());
         formData.append('cuenta', $('#cuenta').val());
+        formData.append('glosa', $('#glosa').val());
         formData.append('idcompra_e', $('#idcompra_e').val());
 
         $.ajax({
