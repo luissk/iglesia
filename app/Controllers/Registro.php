@@ -735,5 +735,148 @@ class Registro extends BaseController
         }
     }
 
+    public function generaReporteLCompra(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $mes     = $this->request->getVar('mesCo');
+            $anio    = trim($this->request->getVar('anioCo'));
+            $tipoRep = $this->request->getVar('tipoRepCo');
+
+            if( $mes != '' & $anio != '' && $tipoRep != '' ){
+                if( $tipoRep == 'excel' ){
+                    $this->excelLCompra($mes, $anio);
+                }else if( $tipoRep == 'pdf' ){
+                    $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+                    if( !$registros ) exit();
+                    echo "<script>window.open('".base_url('pdfLCompra/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
+                }
+            }
+
+        }
+    }
+
+    private function excelLCompra($mes, $anio){
+        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+
+        if( !$registros ) exit();
+        
+        $spreadsheet = new Spreadsheet();
+        $sheet       = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A2', '#');
+        $sheet->setCellValue('B2', 'FECHA');
+        $sheet->setCellValue('C2', 'RUC');
+        $sheet->setCellValue('D2', 'PROVEEDOR');
+        $sheet->setCellValue('E2', 'GLOSA');
+        $sheet->setCellValue('F2', 'V. VENTA');
+        $sheet->setCellValue('G2', 'IGV');
+        $sheet->setCellValue('H2', 'TOTAL');
+        
+        $cont = 0;
+        $rows = 3;
+        foreach($registros as $r){
+            $cont++;
+            $fecha = $r['co_fecha'];
+            $ruc   = $r['pr_ruc'];
+            $razon = $r['pr_razon'];
+            $glosa = $r['co_glosa'];
+            $subt  = $r['co_subt'];
+            $igv   = $r['co_igv'];
+            $total = $r['co_total'];
+
+            $sheet->setCellValue('A'.$rows, $cont);
+            $sheet->setCellValue('B'.$rows, $fecha);
+            $sheet->setCellValue('C'.$rows, $ruc);
+            //$sheet->getCell('B'.$rows, $codigo)->getStyle()->getNumberFormat()->setFormatCode('#');
+            $sheet->setCellValue('D'.$rows, $razon);
+            $sheet->setCellValue('E'.$rows, $glosa);
+            $sheet->setCellValue('F'.$rows, $subt);
+            $sheet->setCellValue('G'.$rows, $igv);
+            $sheet->setCellValue('H'.$rows, $total);
+            $rows++;
+        }
+        foreach (range('A','I') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        $file = 'reporte_lcompra.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$file.'"');
+        header('Cache-Control: max-age=0');
+        
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save('public/'.$file);
+        $writer->save('php://output');
+
+        echo "<script>window.open('".base_url('public/'.$file)."','_blank' );$('#msj').html('')</script>";
+
+        //unlink('public/'.$file);
+        exit();
+    }
+
+    public function pdfLCompra($mes, $anio){
+        $options = new \Dompdf\Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new \Dompdf\Dompdf($options);
+
+        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+        
+        $data['registros'] = $registros;
+        $data['anio']      = $anio;
+        $data['mes']       = $mes;
+
+        $dompdf->loadHtml(view('sistema/registro/pdfLCompra', $data));
+
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+
+        $dompdf->stream("reporte_lcompra_".time().".pdf", array("Attachment" => false));
+        exit;
+    }
+
+    public function generaReporteDiario(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $mes     = $this->request->getVar('mesDi');
+            $anio    = trim($this->request->getVar('anioDi'));
+            //$tipoRep = $this->request->getVar('tipoRepDi');
+
+            if( $mes != '' & $anio != '' ){
+                $registros = $this->modeloRegistro->listarParaReporteDiario(session('idiglesia'),$mes,$anio);
+                if( !$registros ) exit();
+                echo "<script>window.open('".base_url('pdfDiario/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
+            }
+
+        }
+    }
+
+    public function pdfDiario($mes, $anio){
+        $options = new \Dompdf\Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new \Dompdf\Dompdf($options);
+
+        $registros = $this->modeloRegistro->listarParaReporteDiario(session('idiglesia'),$mes,$anio);
+        
+        $data['registros'] = $registros;
+        $data['anio']      = $anio;
+        $data['mes']       = $mes;
+
+        $dompdf->loadHtml(view('sistema/registro/pdfDiario', $data));
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream("reporte_diario_".time().".pdf", array("Attachment" => false));
+        exit;
+    }
+
 
 }

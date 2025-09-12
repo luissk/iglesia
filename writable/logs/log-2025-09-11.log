@@ -52,3 +52,512 @@ DEBUG - 2025-09-11 10:45:54 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-09-11 10:46:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-09-11 10:46:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-09-11 10:46:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:34:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:37:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:37:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:37:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:37:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:38:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 11:43:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:10:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:10:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:11:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:15:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:16:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:16:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-09-11 12:19:03 --> ErrorException: Undefined variable $saldos
+[Method: GET, Route: pdfLCompra/7/2025]
+in APPPATH\Views\sistema\registro\pdfLCompra.php on line 106.
+ 1 APPPATH\Views\sistema\registro\pdfLCompra.php(106): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $saldos', 'C:\\xampp\\htdocs\\iglesia\\app\\Views\\sistema\\registro\\pdfLCompra.php', 106)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\iglesia\\app\\Views\\sistema\\registro\\pdfLCompra.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('sistema/registro/pdfLCompra', [], true)
+ 5 APPPATH\Controllers\Registro.php(832): view('sistema/registro/pdfLCompra', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->pdfLCompra('7', '2025')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 12:27:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:27:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:28:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:29:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:29:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:29:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:29:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:29:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:31:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:32:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:33:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:33:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:33:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 12:34:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 13:44:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 13:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 15:40:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 15:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 15:44:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 16:06:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 16:06:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:26:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:27:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:29:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:29:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:29:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:30:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:30:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:31:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:31:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:31:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:33:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:34:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:34:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:34:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 17:34:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:04:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:04:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:04:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:04:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:04:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:04:44 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:04:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:04:46 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:05:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:05:16 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:05:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:05:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:05:22 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:05:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:06:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:06:13 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:06:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:06:14 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:06:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:06:15 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:06:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:06:15 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:06:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-09-11 18:06:15 --> [DEPRECATED] trim(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Registro.php on line 848.
+ 1 APPPATH\Controllers\Registro.php(848): trim(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:06:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-11 18:06:50 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select \tre.re_m...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select \tre.re_m...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select \tre.re_m...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select \tre.re_m...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-09-11 18:06:50 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+[Method: POST, Route: genera-reportediario]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 2 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-11 18:06:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 3 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 4 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-11 18:06:50 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 4 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 5 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:07:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-11 18:07:50 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select \tre.re_m...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select \tre.re_m...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select \tre.re_m...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select \tre.re_m...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-09-11 18:07:50 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+[Method: POST, Route: genera-reportediario]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 2 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-11 18:07:50 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 3 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 4 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-11 18:07:50 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod')
+ 4 APPPATH\Models\RegistroModel.php(261): CodeIgniter\Database\BaseConnection->query('select 	re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod ,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 1 mov, 31  idcu, 401  cod, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+
+            order by mov,cod', [...])
+ 5 APPPATH\Controllers\Registro.php(852): App\Models\RegistroModel->listarParaReporteDiario('4', '7', '2025')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReporteDiario()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-11 18:08:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:09:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:09:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:09:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:09:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:09:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:11:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:16:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:16:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:20:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:25:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:27:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:28:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:28:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:29:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:29:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:41:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:45:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:47:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:49:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 18:58:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:00:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:01:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:06:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:07:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:19:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:20:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:21:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:22:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:24:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:25:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:25:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:26:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:29:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:30:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:30:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:31:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:32:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:33:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:36:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:36:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:37:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:37:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:37:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:38:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:39:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:43:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:44:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-11 19:44:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

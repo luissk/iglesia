@@ -204,17 +204,6 @@ class RegistroModel extends Model{
         return $st->getResultArray();
     }
 
-    /* public function listarDetalleCompra($idcompra){
-        $query = "select cd.idcompra_detalle,cd.cd_glosa,cd.cd_precio,cd.cd_cant,cd.cd_subtotal,cd.idcuenta,
-            cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion
-            from compra_detalle cd
-            inner join cuenta cu on cd.idcuenta=cu.idcuenta
-            where cd.idcompra = ?";
-        $st = $this->db->query($query, [$idcompra]);
-
-        return $st->getResultArray();
-    } */
-
     public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa){
         $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentabase,co_glosa) values(?,?,?,?,?,?,?,?,?,?,?)";
         $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa]);
@@ -229,33 +218,48 @@ class RegistroModel extends Model{
         return $st;
     }
 
-    /* public function insertarDetalleCompra($glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra){
-        $query = "insert into compra_detalle(cd_glosa,cd_precio,cd_cant,cd_subtotal,idcuenta,idcompra) values(?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$glosa,$precio,$cantidad,$subtotal,$cuenta,$idcompra]);
-
-        return $st;
-    } */
-
-    /* public function borrarDetalleCompra($idcompra){
-        $query = "delete from compra_detalle where idcompra=?";
-        $st = $this->db->query($query, [$idcompra]);
-
-        return $st;
-    } */
-
-    //VERIFICAR SI TIENE REGISTRO EN TABLAS
-    /* public function verificarCompraTieneRegEnTablas($idcompra, $tabla){
-        $query = "select count(idcompra) as total from $tabla where idcompra=?";
-        $st = $this->db->query($query, [$idcompra]);
-
-        return $st->getRowArray();
-    } */
-
     public function eliminarCompra($idcompra){
         $query = "delete from compra where idcompra=?";
         $st = $this->db->query($query, [$idcompra]);
 
         return $st;
+    }
+
+    public function listarParaReporteLCompra($idiglesia,$mes,$anio){
+        $params = [$idiglesia,$anio,$mes];
+
+        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            order by co.co_fecha";
+        $st = $this->db->query($query,  $params);
+
+        return $st->getResultArray();
+    }
+
+    public function listarParaReporteDiario($idiglesia,$mes,$anio){
+        $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
+
+        $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, 31  idcu, 401  cod, 'IGV' cuen, sum(co.co_igv)  importe 
+            from compra co
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            order by mov,cod";
+        $st = $this->db->query($query,  $params);
+
+        return $st->getResultArray();
     }
 
 }
