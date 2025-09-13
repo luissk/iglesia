@@ -650,9 +650,10 @@ class Registro extends BaseController
             if( $subt == '' || $igv == '' || $total == '' || $cuenta == '' || $glosa == '' || $fecha == '' || $factura == '' || $proveedor == '' ) exit();
 
             //print_r($items);
-
+            $cuentafact = 4;
+            $cuentaigv  = 31;
             if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra) ){
-                if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, 421, $cuenta, $glosa, $idcompra)){
+                if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $cuentafact, $cuentaigv, $cuenta, $glosa, $idcompra)){
                     echo '<script>
                         Swal.fire({
                             title: "Compra Actualizada",
@@ -664,7 +665,7 @@ class Registro extends BaseController
                     </script>';
                 }
             }else{
-                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, 421, $cuenta, $glosa) ){
+                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, $cuentafact, $cuentaigv, $cuenta, $glosa) ){
                     echo '<script>
                         Swal.fire({
                             title: "Compra Registrada",

@@ -8,7 +8,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>REPORTE</title>
+<title>REPORTE LIBRO DE CAJA</title>
 
 <style type="text/css">
     * {
@@ -131,6 +131,23 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 </tr>
             </table>
         </div>
+        <br>
+        <div class="saldos">
+            <table width='100%' cellpadding="5" cellspacing="0" border="0">
+                <tr align="right">
+                    <th width='80%'>Total de Ingresos:</th>
+                    <td>S/. <?=number_format($total_i,2,".",",")?></td>
+                </tr>
+                <tr align="right">
+                    <th>Saldo Anterior:</th>
+                    <td>S/. <?=number_format($saldos['saldo_inicial'],2,".",",")?></td>
+                </tr>
+                <tr align="right">
+                    <th>Total Ingreso <?=$arr_meses[$mes - 1]?>:</th>
+                    <td>(S/. <?=number_format( $total_i + $saldos['saldo_inicial'] ,2,".",",")?>)</td>
+                </tr>
+            </table>
+        </div>
 
         <div style="page-break-after:always;"></div>
 
@@ -174,24 +191,20 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 </tr>
             </table>
         </div>
-        <br><br>
+        <br>
         <div class="saldos">
             <table width='100%' cellpadding="5" cellspacing="0" border="0">
                 <tr align="right">
-                    <th width='80%'>Saldo Anterior:</th>
-                    <td>S/. <?=number_format($saldos['saldo_inicial'],2,".",",")?></td>
+                    <th width='80%'>Total de Salidas:</th>
+                    <td>S/. <?=number_format($total_e,2,".",",")?></td>
                 </tr>
                 <tr align="right">
-                    <th>Ingresos del mes:</th>
-                    <td>S/. <?=number_format($total_i,2,".",",")?></td>
-                </tr>
-                <tr align="right">
-                    <th>Egresos del mes:</th>
-                    <td style="color: red">(S/. <?=number_format($total_e,2,".",",")?>)</td>
-                </tr>
-                <tr align="right">
-                    <th>SALDO PROX. MES:</th>
+                    <th>Saldo al final de <?=$arr_meses[$mes - 1]?>:</th>
                     <td>S/. <?=number_format($saldos['saldo_final'],2,".",",")?></td>
+                </tr>
+                <tr align="right">
+                    <th>Total General:</th>
+                    <td>(S/. <?=number_format( $total_e + $saldos['saldo_final'] ,2,".",",")?>)</td>
                 </tr>
             </table>
         </div>

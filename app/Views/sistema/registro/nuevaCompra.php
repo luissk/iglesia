@@ -56,7 +56,7 @@ if( isset($compra_bd) && $compra_bd ){
                     </div>
                     <div class="col-sm-2">
                         <label for="factura" class="form-label fw-semibold">Nro Factura</label>
-                        <input type="text" class="form-control" id="factura" name="factura" value="<?=$factura_bd?>" placeholder="F-1-120" maxlength="10">
+                        <input type="text" class="form-control" id="factura" name="factura" value="<?=$factura_bd?>" placeholder="F-1-120" maxlength="13">
                         <div id="msj-factura" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-5">

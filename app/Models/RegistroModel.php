@@ -204,16 +204,16 @@ class RegistroModel extends Model{
         return $st->getResultArray();
     }
 
-    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa){
-        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentabase,co_glosa) values(?,?,?,?,?,?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctabase,$glosa]);
+    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase,$glosa){
+        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentaigv,cuentabase,co_glosa) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase,$glosa]);
 
         return $this->db->insertID();
     }
     
-    public function modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $glosa, $idcompra){
-        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=?, co_subt=?, co_igv=?, co_total=?, cuentafact=?, cuentabase=?, co_glosa=? where idcompra=?";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctabase, $glosa, $idcompra]);
+    public function modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase, $glosa, $idcompra){
+        $query = "update compra set co_fecha=?, co_factura=?, idproveedor=?, co_subt=?, co_igv=?, co_total=?, cuentafact=?, cuentaigv=?, cuentabase=?, co_glosa=? where idcompra=?";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase, $glosa, $idcompra]);
 
         return $st;
     }
@@ -245,7 +245,7 @@ class RegistroModel extends Model{
     }
 
     public function listarParaReporteDiario($idiglesia,$mes,$anio){
-        $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
+        $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
 
         $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
             from registro re 
@@ -253,10 +253,22 @@ class RegistroModel extends Model{
             where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
             GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
             UNION 
-            select 2 mov, 31  idcu, 401  cod, 'IGV' cuen, sum(co.co_igv)  importe 
-            from compra co
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
-            order by mov,cod";
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod;";
         $st = $this->db->query($query,  $params);
 
         return $st->getResultArray();
