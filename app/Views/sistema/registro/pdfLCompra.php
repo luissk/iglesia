@@ -83,19 +83,20 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
         </table>
     </footer>
 
-    <section style='font-size:12px' class="cuerpo_tablas">
+    <section style='font-size:11px' class="cuerpo_tablas">
         <h3 align="center">Reporte de Libro de Compras</h3>
         <div>
             <table width="100%" cellspacing="0" cellpadding="5">
                 <thead>
                     <tr bgcolor="#dedede">
-                        <th width="9%">Fecha</th>
-                        <th width="9%">Ruc</th>
-                        <th width="35%">Proveedor</th>
-                        <th width="23%">Glosa</th>
-                        <th width="8%">V. Venta</th>
-                        <th width="8%">IGV</th>
-                        <th width="8%">Total</th>
+                        <th width="8%">Fecha</th>
+                        <th width="9%">Factura</th>
+                        <th width="8%">Ruc</th>
+                        <th width="32%">Proveedor</th>
+                        <th width="22%">Glosa</th>
+                        <th width="7%">V. Venta</th>
+                        <th width="7%">IGV</th>
+                        <th width="7%">Total</th>
                     </tr>
                 </thead>
                 <?php               
@@ -103,13 +104,14 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 $igv_t   = 0;
                 $total_t = 0;
                 foreach($registros as $r){
-                    $fecha = $r['co_fecha'];
-                    $ruc   = $r['pr_ruc'];
-                    $razon = $r['pr_razon'];
-                    $glosa = $r['co_glosa'];
-                    $subt  = $r['co_subt'];
-                    $igv   = $r['co_igv'];
-                    $total = $r['co_total'];
+                    $fecha   = $r['co_fecha'];
+                    $factura = $r['co_factura'];
+                    $ruc     = $r['pr_ruc'];
+                    $razon   = $r['pr_razon'];
+                    $glosa   = $r['co_glosa'];
+                    $subt    = $r['co_subt'];
+                    $igv     = $r['co_igv'];
+                    $total   = $r['co_total'];
 
                     $subt_t  += $subt;
                     $igv_t   += $igv;
@@ -117,6 +119,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 
                     echo "<tr>";
                     echo "<td align='center'>$fecha</td>";
+                    echo "<td>$factura</td>";
                     echo "<td>$ruc</td>";
                     echo "<td>$razon</td>";
                     echo "<td>$glosa</td>";
@@ -127,6 +130,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 }
                 ?>
                 <tr bgcolor="#dedede">
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>

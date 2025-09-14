@@ -98,6 +98,7 @@
                                         <th>Factura</th>
                                         <th>Ruc</th>                                        
                                         <th>Razon</th>
+                                        <th>Glosa</th>
                                         <th>Opción</th>
                                     </tr>
                                 </thead>
@@ -241,6 +242,7 @@ $(function(){
             {"data": "co_factura"},
             {"data": "pr_ruc"},
             {"data": "pr_razon"},
+            {"data": "co_glosa"},
             {"data": "idcompra",
                 "mRender": function (data, type, row) {
                     //console.log(row);
