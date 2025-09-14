@@ -21,7 +21,7 @@ class RegistroModel extends Model{
             array_push($params, $caja);
         }
 
-        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,
+        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,re.idcompra,
             re.re_mov,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov,us.us_nombre,ig.ig_iglesia,ig.ig_direccion,ig.ig_pastor,
             cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion,
             rc.re_nombres,ca.ca_caja
@@ -38,7 +38,7 @@ class RegistroModel extends Model{
     }
 
     public function obtenerRegistro($idregistro){
-        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,
+        $query = "select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,re.idcompra,
             re.re_mov,CASE WHEN re.re_mov = 1 THEN 'Ingreso' ELSE 'Egreso' END AS tipo_mov,us.us_nombre,ig.ig_iglesia,ig.ig_direccion,ig.ig_pastor,
             cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion,
             rc.re_nombres,ca.ca_caja
@@ -91,16 +91,16 @@ class RegistroModel extends Model{
         return $st->getRowArray();
     }
 
-    public function insertarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia){
-        $query = "insert into registro(re_fecha,re_importe,re_desc,us_creador,idcuenta,idresponsable_caja,re_mov,idcaja,idiglesia) values(?,?,?,?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia]);
+    public function insertarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia,$idcompra){
+        $query = "insert into registro(re_fecha,re_importe,re_desc,us_creador,idcuenta,idresponsable_caja,re_mov,idcaja,idiglesia,idcompra) values(?,?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idiglesia,$idcompra]);
 
         return $st;
     }
 
-    public function modificarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idregistro){
-        $query = "update registro set re_fecha=?,re_importe=?,re_desc=?,us_creador=?,idcuenta=?,idresponsable_caja=?,re_mov=?,idcaja=? where idregistro=?";
-        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idregistro]);
+    public function modificarRegistro($fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idcompra,$idregistro){
+        $query = "update registro set re_fecha=?,re_importe=?,re_desc=?,us_creador=?,idcuenta=?,idresponsable_caja=?,re_mov=?,idcaja=?,idcompra=? where idregistro=?";
+        $st = $this->db->query($query, [$fecha,$importe,$concepto,$idusuario,$idcuenta,$idcajaresp,$mov,$idcaja,$idcompra,$idregistro]);
 
         return $st;
     }
@@ -165,12 +165,14 @@ class RegistroModel extends Model{
 
     //COMPRA
     public function obtenerCompra($idcompra, $idiglesia = ''){
-        $criterio = '';
+        $where = '';
+        $params = [$idcompra];
         if( $idiglesia != '' ){
-            $criterio .= " and co.idiglesia = ?";
+            $where .= " and co.idiglesia = ?";
+            array_push($params, $idiglesia);
         }
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,(case when co.co_status = 1 then 'si' else 'no' end) pagado,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -178,19 +180,22 @@ class RegistroModel extends Model{
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario
-            where co.idcompra = ?  $criterio";
+            where co.idcompra = ?  $where";
 
-        if( $criterio != '' )
-            $st = $this->db->query($query, [$idcompra, $idiglesia]);
-        else
-            $st = $this->db->query($query, [$idcompra]);
+        $st = $this->db->query($query, $params);
 
         return $st->getRowArray();
     }
 
-    public function listarCompras($idiglesia){
+    public function listarCompras($idiglesia, $status = ''){
+        $params = [$idiglesia];
+        $where  = "";
+        if( $status != '' ){
+            $where .= " and co.co_status = ?";
+            array_push($params, $status);
+        }
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,(case when co.co_status = 1 then 'si' else 'no' end) pagado,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -198,8 +203,8 @@ class RegistroModel extends Model{
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario
-            where co.idiglesia = ?";
-        $st = $this->db->query($query, [$idiglesia]);
+            where co.idiglesia = ? $where";
+        $st = $this->db->query($query, $params);
 
         return $st->getResultArray();
     }
@@ -218,9 +223,24 @@ class RegistroModel extends Model{
         return $st;
     }
 
+    //VERIFICAR SI TIENE REGISTRO EN TABLAS
+    public function verificarCompraTieneRegEnTablas($idcompra, $tabla){
+        $query = "select count(idcompra) as total from $tabla where idcompra=?";
+        $st = $this->db->query($query, [$idcompra]);
+
+        return $st->getRowArray();
+    }
+
     public function eliminarCompra($idcompra){
         $query = "delete from compra where idcompra=?";
         $st = $this->db->query($query, [$idcompra]);
+
+        return $st;
+    }
+
+    public function cambiarEstadoCompra($idcompra, $status){
+        $query = "update compra set co_status=? where idcompra=?";
+        $st = $this->db->query($query, [$status, $idcompra]);
 
         return $st;
     }

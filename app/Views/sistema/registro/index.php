@@ -99,6 +99,7 @@
                                         <th>Ruc</th>                                        
                                         <th>Razon</th>
                                         <th>Glosa</th>
+                                        <th>Pagado</th>
                                         <th>Opción</th>
                                     </tr>
                                 </thead>
@@ -226,7 +227,7 @@ $(function(){
             "dataSrc":"",
             "type": "POST",
             "data": {
-                id:1
+                status: '',
                 //"desc": function() { return $('#desc').val() },
                 //"fecha_ini": function() { return $('#fecha_ini').val() }, 
                 //"fecha_fin": function() { return $('#fecha_fin').val() }
@@ -243,6 +244,7 @@ $(function(){
             {"data": "pr_ruc"},
             {"data": "pr_razon"},
             {"data": "co_glosa"},
+            {"data": "pagado"},
             {"data": "idcompra",
                 "mRender": function (data, type, row) {
                     //console.log(row);

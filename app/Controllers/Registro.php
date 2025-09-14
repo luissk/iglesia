@@ -84,6 +84,7 @@ class Registro extends BaseController
             $idcuenta   = $this->request->getVar('cuenta');
             $importe    = $this->request->getVar('importe');
             $idregistro = $this->request->getVar('idregistroe');//para editar
+            $idcompra   = $this->request->getVar('idcompra');//para pagar la factura
 
             $validation = \Config\Services::validation();
 
@@ -163,8 +164,20 @@ class Registro extends BaseController
             $idcajabd = $cajabd['idcaja'];
 
             if( $registro_bd ){
+                //VERIFICAR SI EL REGISTRO TIENE FACTURA PAGADA Y SI LO HA CAMBIADO A OTRA
+                $idcompra_bd = $registro_bd['idcompra'];
+                if( $idcompra_bd > 0 ){//SI TIENE PAGA UNA COMPRA
+                    if( $idcompra_bd != $idcompra ){//VERIFICAR SI SON DIFERENTES
+                        $this->modeloRegistro->cambiarEstadoCompra($idcompra_bd, 0); //SI SON DIFERENTES ACTUALIZAR EL ESTADO DE LA COMPRA ANTERIOR(BD)
+                    }
+                }
 
-                if( $this->modeloRegistro->modificarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,$idregistro) ){
+                if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra, session('idiglesia')) ){
+                    //PAGAR FACTURA
+                    $this->modeloRegistro->cambiarEstadoCompra($idcompra, 1);
+                }
+
+                if( $this->modeloRegistro->modificarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,$idcompra,$idregistro) ){
                     echo '<script>
                         Swal.fire({
                             title: "Registro Modificado",
@@ -178,9 +191,14 @@ class Registro extends BaseController
                     </script>';
                 }
                 
-            }else{
+            }else{                
 
-                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,session('idiglesia')) ){
+                if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,session('idiglesia'),$idcompra) ){
+                    if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra, session('idiglesia')) ){
+                        //PAGAR FACTURA
+                        $this->modeloRegistro->cambiarEstadoCompra($idcompra, 1);
+                    }
+
                     echo '<script>
                         Swal.fire({
                             title: "Registro Guardado",
@@ -207,6 +225,13 @@ class Registro extends BaseController
 
             $idregistro = $this->request->getVar('id');
             if( $registro = $this->modeloRegistro->obtenerRegistro($idregistro) ){
+
+                //VERIFICAR SI EL REGISTRO TIENE FACTURA PAGADA
+                $idcompra_bd = $registro['idcompra'];
+                if( $idcompra_bd > 0 ){//SI TIENE PAGA UNA COMPRA
+                    $this->modeloRegistro->cambiarEstadoCompra($idcompra_bd, 0);
+                }
+
                 if( $this->modeloRegistro->eliminarRegistro($idregistro) ){
                     echo '<script>
                         Swal.fire({
@@ -692,11 +717,11 @@ class Registro extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            /* $tablas = ['compra_detalle'];
+            $tablas = ['registro'];
             foreach( $tablas as $t ){
                 $total = $this->modeloRegistro->verificarCompraTieneRegEnTablas($idcompra,$t)['total'];
                 if( $total > 0 ){
-                    $mensaje .= "<div class='text-start'>La compra $total registros en la tabla '$t'.</div>";
+                    $mensaje .= "<div class='text-start'>La compra ha sido pagada, primero debes eliminar el registro de pago</div>";
                     $eliminar = TRUE;
                 }
             }
@@ -710,7 +735,7 @@ class Registro extends BaseController
                     });
                 </script>';
                 exit();
-            } */
+            }
             if( $this->modeloRegistro->eliminarCompra($idcompra) ){
             echo '<script>
                     Swal.fire({
@@ -730,8 +755,9 @@ class Registro extends BaseController
     public function listarLCompraDT(){
         if( $this->request->isAJAX() ){
 			//print_r($_POST);
+            $status = $this->request->getVar('status');
 
-			$registros = $this->modeloRegistro->listarCompras(session('idiglesia'));
+			$registros = $this->modeloRegistro->listarCompras(session('idiglesia'), $status);
 			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
         }
     }

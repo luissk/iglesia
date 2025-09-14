@@ -195,3 +195,399 @@ DEBUG - 2025-09-13 19:13:13 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-09-13 19:13:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-09-13 19:13:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-09-13 19:13:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:23:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-13 19:27:03 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+ ...' at line 3 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select co.idcom...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcom...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcom...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(202): CodeIgniter\Database\BaseConnection->query('select co.idcom...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-09-13 19:27:03 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+ ...' at line 3
+[Method: POST, Route: lista-lcompra-dt]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(202): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?', [...])
+ 2 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-13 19:27:03 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+ ...' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = \'4\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = \'4\'')
+ 3 APPPATH\Models\RegistroModel.php(202): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?', [...])
+ 4 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-13 19:27:03 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+ ...' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = \'4\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = \'4\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = \'4\'')
+ 4 APPPATH\Models\RegistroModel.php(202): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,x
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?', [...])
+ 5 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-13 19:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:28:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:28:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:28:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:28:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:28:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-09-13 19:40:34 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?  and co.co_status = ?' at line 10 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select co.idcom...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcom...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcom...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(208): CodeIgniter\Database\BaseConnection->query('select co.idcom...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-09-13 19:40:34 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?  and co.co_status = ?' at line 10
+[Method: POST, Route: lista-lcompra-dt]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(208): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?', [...])
+ 2 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-13 19:40:34 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?  and co.co_status = ?' at line 10
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?')
+ 3 APPPATH\Models\RegistroModel.php(208): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?', [...])
+ 4 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-09-13 19:40:34 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?  and co.co_status = ?' at line 10
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?')
+ 4 APPPATH\Models\RegistroModel.php(208): CodeIgniter\Database\BaseConnection->query('select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario
+            where co.idiglesia = ?  and co.co_status = ?', [...])
+ 5 APPPATH\Controllers\Registro.php(734): App\Models\RegistroModel->listarCompras('4')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->listarLCompraDT()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-09-13 19:40:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:40:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 19:43:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 20:57:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:52:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:54:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:54:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 21:54:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:17:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:22:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:25:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:28:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:29:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:29:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:29:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:29:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:29:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:34:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:36:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:38:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:40:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:41:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:42:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:43:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:43:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:43:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:44:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:45:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:46:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-09-13 22:46:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

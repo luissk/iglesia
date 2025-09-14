@@ -9,6 +9,8 @@ if( isset($registro_bd) && $registro_bd ){
     $idcuenta_bd      = $registro_bd['idcuenta'];
     $importe_bd       = $registro_bd['re_importe'];
 
+    $idcompra_bd      = $registro_bd['idcompra'];
+
     $btn_title = "MODIFICAR REGISTRO";
 }else{
     $idregistro_bd    = "";
@@ -18,6 +20,8 @@ if( isset($registro_bd) && $registro_bd ){
     $concepto_bd      = "";
     $idcuenta_bd      = "";
     $importe_bd       = "";
+
+    $idcompra_bd      = "";
 
     $btn_title = "GUARDAR REGISTRO";
 }
@@ -55,14 +59,9 @@ if( isset($registro_bd) && $registro_bd ){
             <label for="fecha" class="form-label fw-semibold">Ingrese una fecha</label>
             <input type="date" class="form-control" id="fecha" name="fecha" value="<?=$fecha_bd?>">
             <div id="msj-fecha" class="form-text text-danger"></div>
-        </div>
+        </div>        
         <div class="col-sm-12 mt-3">
-            <label for="concepto" class="form-label fw-semibold">Concepto</label>
-            <input type="text" class="form-control" id="concepto" name="concepto" maxlength="200" value="<?=$concepto_bd?>">
-            <div id="msj-concepto" class="form-text text-danger"></div>
-        </div>
-        <div class="col-sm-12 mt-3">
-            <label for="cuenta" class="form-label fw-semibold">Seleccione una Cuenta</label>
+            <label for="cuenta" class="form-label fw-semibold">Seleccione una Cuenta &nbsp;</label> <a class="btn btn-sm btn-danger d-none" id="btnVerFacturas">Ver Facturas</a>
             <select class="form-select" name="cuenta" id="cuenta">
                 <option value="">Seleccione</option>
                 <?php
@@ -82,6 +81,11 @@ if( isset($registro_bd) && $registro_bd ){
             <div id="msjObs"></div>
             <div id="msj-cuenta" class="form-text text-danger"></div>
         </div>
+        <div class="col-sm-12 mt-3">
+            <label for="concepto" class="form-label fw-semibold">Concepto</label>
+            <input type="text" class="form-control" id="concepto" name="concepto" maxlength="200" value="<?=$concepto_bd?>">
+            <div id="msj-concepto" class="form-text text-danger"></div>
+        </div>
         <div class="col-sm-4 mt-3">
             <label for="importe" class="form-label fw-semibold">Ingrese el importe</label>
             <input type="text" class="form-control" id="importe" name="importe" maxlength="10" value="<?=$importe_bd?>">
@@ -92,10 +96,40 @@ if( isset($registro_bd) && $registro_bd ){
         <div class="col-sm-12 mt-3 text-end">
             <button type="submit" class="btn btn-danger" id="btnGuardar"><?=$btn_title?></button>
             <input type="hidden" class="form-control" id="idregistroe" name="idregistroe" value="<?=$idregistro_bd?>">
+            <input type="hidden" class="form-control" id="idcompra" name="idcompra" value="<?=$idcompra_bd?>">
         </div>
         <div id="msjRegistro"></div>
     </div>
 </form>
+
+<div class="modal fade" id="modalFacturas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFacturasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h1 class="modal-title fs-5" id="tituloModal">Facturas por pagar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body table-responsive" style="font-size: 14px;">
+                    <table id="tblFacturas" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Total (S/.)</th>
+                                <th>Factura</th>
+                                <th>Ruc</th>                                        
+                                <th>Razon</th>
+                                <th>Glosa</th>
+                                <th>Opción</th>
+                            </tr>
+                        </thead>
+                        <tbody>                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 $('#frmLCaja').on('change', '#mov', function(e){
@@ -103,11 +137,15 @@ $('#frmLCaja').on('change', '#mov', function(e){
     $("#cuenta").prop('selectedIndex', 0);
 
     mostrarOpciones($(this).val());
+
+    verFacturas();
 });
 
 $('#frmLCaja').on('change', '#cuenta', function(e){
     if( $(this).val() != '' ){
         $('#msjObs').text($(this).find(':selected').data('obs'));
+
+        verFacturas();
     }
 });
 
@@ -148,7 +186,25 @@ if( $mov_bd != '' ){
 }
 ?>
 
-$(function(){    
+
+function verFacturas(){
+    if( $('#cuenta').val() == 4 && $('#mov').val() == 2 ){
+        $('#btnVerFacturas').removeClass('d-none');
+    }else{
+        $('#btnVerFacturas').addClass('d-none');
+        if( $("#idcompra").val() != '' )//para limpiar los campos siempre y cuando no haya sido antes seleccionado una factura
+            limpiarDatosFactura();
+    }
+}
+function limpiarDatosFactura(){//
+    $("#concepto").val('');
+    $("#importe").val('');
+    $("#idcompra").val('');
+}
+
+$(function(){
+    
+    var $dtFacturas_x_pagar;
 
     $("#frmLCaja").on('submit', function(e){
         e.preventDefault();
@@ -171,6 +227,66 @@ $(function(){
             btn.removeAttribute('disabled');
             btn.innerHTML = txtbtn;
         });
+    });
+
+
+    $("#btnVerFacturas").on('click', function(e){
+        $("#modalFacturas").modal('show');
+
+        $dtFacturas_x_pagar.DataTable().ajax.reload();
+    });
+
+    $dtFacturas_x_pagar = $('#tblFacturas').dataTable({
+        "ajax":{
+            "url": 'lista-lcompra-dt',
+            "dataSrc":"",
+            "type": "POST",
+            "data": {
+                status: 0
+                //"desc": function() { return $('#desc').val() },
+                //"fecha_ini": function() { return $('#fecha_ini').val() }, 
+                //"fecha_fin": function() { return $('#fecha_fin').val() }
+            },
+            "complete": function(xhr, responseText){
+                /* console.log(xhr);
+                console.log(xhr.responseText); //*** responseJSON: Array[0] */
+            }
+        },
+        "columns":[
+            {"data": "co_fecha"},
+            {"data": "co_total"},
+            {"data": "co_factura"},
+            {"data": "pr_ruc"},
+            {"data": "pr_razon"},
+            {"data": "co_glosa"},
+            {"data": "idcompra",
+                "mRender": function (data, type, row) {
+                    //console.log(row);
+                    return `
+                    <a title='seleccionar' style='font-size:16px' class='link-danger ms-1 seleccionar' role='button' data-id=${data}>
+                        <i class="fa-solid fa-square-check"></i>
+                    </a>`;
+                }
+            }
+        ],
+        "aaSorting": [[ 0, "desc" ]],
+        "pageLength": 25
+    });
+
+    $('#tblFacturas').on('click', '.seleccionar', function(e){
+        let id = $(this).data('id'),
+            fecha = $(this).parent().parent().children()[0].innerText,
+            total = $(this).parent().parent().children()[1].innerText,
+            factura = $(this).parent().parent().children()[2].innerText,
+            ruc = $(this).parent().parent().children()[3].innerText,
+            razon = $(this).parent().parent().children()[4].innerText;
+
+        //console.log(id, fecha, total, factura, ruc, razon);
+        $("#concepto").val(`FACTURA ${factura}, ${ruc}`);
+        $("#importe").val(total);
+        $("#idcompra").val(id);
+
+        $("#modalFacturas").modal('hide');
     });
 
 });
