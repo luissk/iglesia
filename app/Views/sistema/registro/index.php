@@ -303,7 +303,9 @@ function dataTableReload(opt = 1){
 
 
 
-
+$('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash; // Actualiza el hash de la URL con el ID de la pestaña
+});
 
 //PARA LOS TABS
 document.addEventListener('DOMContentLoaded', function() {

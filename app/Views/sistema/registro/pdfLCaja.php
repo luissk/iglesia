@@ -144,7 +144,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                 </tr>
                 <tr align="right">
                     <th>Total Ingreso <?=$arr_meses[$mes - 1]?>:</th>
-                    <td>(S/. <?=number_format( $total_i + $saldos['saldo_inicial'] ,2,".",",")?>)</td>
+                    <td>S/. <?=number_format( $total_i + $saldos['saldo_inicial'] ,2,".",",")?></td>
                 </tr>
             </table>
         </div>
@@ -199,12 +199,12 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
                     <td>S/. <?=number_format($total_e,2,".",",")?></td>
                 </tr>
                 <tr align="right">
-                    <th>Saldo al final de <?=$arr_meses[$mes - 1]?>:</th>
-                    <td>S/. <?=number_format($saldos['saldo_final'],2,".",",")?></td>
+                    <th>Saldo próximo mes:</th>
+                    <td style="color: red">S/. <?=number_format($saldos['saldo_final'],2,".",",")?></td>
                 </tr>
                 <tr align="right">
                     <th>Total General:</th>
-                    <td>(S/. <?=number_format( $total_e + $saldos['saldo_final'] ,2,".",",")?>)</td>
+                    <td>S/. <?=number_format( $total_e + $saldos['saldo_final'] ,2,".",",")?></td>
                 </tr>
             </table>
         </div>
