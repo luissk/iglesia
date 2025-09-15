@@ -283,7 +283,7 @@ class Registro extends BaseController
                     //$this->pdfLCaja($mes, $anio);
                     $registros = $this->modeloRegistro->listarParaReporte(session('idiglesia'),$mes,$anio,[1,2],$caja);
                     if( !$registros ) exit();
-                    echo "<script>window.open('".base_url('pdfLCaja/'.$mes.'/'.$anio.'/'.$caja.'')."','_blank' );$('#msj').html('')</script>";
+                    echo "<script>window.open('".base_url('pdfLCaja/'.$mes.'/'.$anio.'/'.$caja.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
                 }
             }
 
@@ -777,7 +777,7 @@ class Registro extends BaseController
                 }else if( $tipoRep == 'pdf' ){
                     $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
                     if( !$registros ) exit();
-                    echo "<script>window.open('".base_url('pdfLCompra/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
+                    echo "<script>window.open('".base_url('pdfLCompra/'.$mes.'/'.$anio.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
                 }
             }
 
@@ -878,7 +878,7 @@ class Registro extends BaseController
             if( $mes != '' & $anio != '' ){
                 $registros = $this->modeloRegistro->listarParaReporteDiario(session('idiglesia'),$mes,$anio);
                 if( !$registros ) exit();
-                echo "<script>window.open('".base_url('pdfDiario/'.$mes.'/'.$anio.'')."','_blank' );$('#msj').html('')</script>";
+                echo "<script>window.open('".base_url('pdfDiario/'.$mes.'/'.$anio.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
             }
 
         }

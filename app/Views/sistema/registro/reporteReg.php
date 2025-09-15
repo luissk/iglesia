@@ -9,13 +9,13 @@
             <div class="card-header p-0 pt-1 border-bottom-0">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#libroCaja">LIBRO DE CAJAS</a>
+                        <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#libroCaja" href="#libroCaja">LIBRO DE CAJAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#libroCompras">LIBRO DE COMPRAS</a>
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroCompras" href="#libroCompras">LIBRO DE COMPRAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#libroDiario">LIBRO DIARIO</a>
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroDiario" href="#libroDiario">LIBRO DIARIO</a>
                     </li>
                 </ul>
             </div>
@@ -248,8 +248,33 @@ $(function(){
             btn.removeAttribute('disabled');
             btn.innerHTML = txtbtn;
         });
-    })
+    });
 
+});
+
+$('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash; // Actualiza el hash de la URL con el ID de la pestaña
+});
+
+//PARA LOS TABS
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Obtiene el hash de la URL (ej. #perfil)
+  const hash = window.location.hash;
+
+  // 2. Si hay un hash, busca el botón o enlace del tab correspondiente
+  if (hash) {
+    // Busca el elemento que tiene data-bs-target con el mismo valor que el hash
+    const tabTriggerEl = document.querySelector(`[data-bs-target="${hash}"]`);
+
+    // 3. Si se encuentra el elemento, activa la pestaña
+    if (tabTriggerEl) {
+      // Crea una nueva instancia del componente Tab de Bootstrap
+      const tab = new bootstrap.Tab(tabTriggerEl);
+      
+      // Muestra la pestaña
+      tab.show();
+    }
+  }
 });
 
 </script>
