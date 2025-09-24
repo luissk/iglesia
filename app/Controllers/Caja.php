@@ -16,25 +16,27 @@ class Caja extends BaseController
         $this->session;
     }
 
-    public function index(){
+    public function index($opt){
         if( !session('idusuario') ){
             return redirect()->to('sistema');
         }
 
         if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) return redirect()->to('sistema');
 
-        $data['title']           = 'Cajas del Sistema';
-        $data['cajasLinkActive'] = 1;
-
-        if( session('idtipo_usuario') == 1 ){
-            $data['cajas'] = $this->modeloCaja->listarCajas();
+        if( session('idtipo_usuario') == 1 && $opt == 'sis' ){
+            $data['title']              = 'Cajas del Sistema';
+            $data['cajasLinkActiveSis'] = 1;
+            $data['cajas']              = $this->modeloCaja->listarCajas();
             return view('sistema/caja/index', $data);
-        }else if( session('idtipo_usuario') == 2 ){
-            $data['title']        = 'Responsables de Caja';
-            $data['cajas']        = $this->modeloCaja->listarCajas();
-            $data['responsables'] = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));
+        }else if( (session('idtipo_usuario') == 1 || session('idtipo_usuario') == 2) && $opt == 'res' ){
+            $data['title']           = 'Responsables de Caja';
+            $data['cajasLinkActiveRes'] = 1;
+            $data['cajas']           = $this->modeloCaja->listarCajas();
+            $data['responsables']    = $this->modeloCaja->listarResponsablesDeCaja(session('idiglesia'));
             return view('sistema/caja/admin', $data);
-        }   
+        }else{
+            return redirect()->to('sistema');
+        }
  
     }
 
@@ -176,7 +178,7 @@ class Caja extends BaseController
     public function registrarResponsable(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) exit();
 
             //validar si el usuario que crea existe
             $us_crea = $this->modeloUsuario->obtenerUsuario(session('idusuario'));
@@ -292,7 +294,7 @@ class Caja extends BaseController
     public function eliminarResponsable(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 ) exit();
 
             $idresponsable = $this->request->getVar('id');
 

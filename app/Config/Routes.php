@@ -18,7 +18,8 @@ $routes->get('usuarios', 'Usuario::index');
 $routes->post('registro-usuario', 'Usuario::registrarUsuario');
 $routes->post('elimina-usuario', 'Usuario::eliminarUsuario');
 
-$routes->get('cajas', 'Caja::index');
+//$routes->get('cajas', 'Caja::index');
+$routes->get('cajas-(:any)', 'Caja::index/$1');
 $routes->post('registro-caja', 'Caja::registrarCaja');
 $routes->post('elimina-caja', 'Caja::eliminarCaja');
 $routes->post('registro-responsable', 'Caja::registrarResponsable');

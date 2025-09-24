@@ -144,12 +144,25 @@ if(!session('idusuario')){
                         ?>
 
                         <?php
+                        if( session('idtipo_usuario') == 1 ){
+                        ?>
+                        <li class="nav-item">
+                            <a href="<?=base_url('cajas-sis')?>" class="nav-link <?php echo isset($cajasLinkActiveSis) ? 'active': ''?>">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <p>Cajas del Sistema</p>
+                            </a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+
+                        <?php
                         if( session('idtipo_usuario') == 1 || session('idtipo_usuario') == 2 ){
                         ?>
                         <li class="nav-item">
-                            <a href="<?=base_url('cajas')?>" class="nav-link <?php echo isset($cajasLinkActive) ? 'active': ''?>">
+                            <a href="<?=base_url('cajas-res')?>" class="nav-link <?php echo isset($cajasLinkActiveRes) ? 'active': ''?>">
                                 <i class="fa-solid fa-briefcase"></i>
-                                <p>Cajas</p>
+                                <p>Cajas Responsables</p>
                             </a>
                         </li>
                         <?php
@@ -170,7 +183,7 @@ if(!session('idusuario')){
                         ?>
 
                         <?php
-                        if( session('idtipo_usuario') == 2 || session('idtipo_usuario') == 3 ){
+                        if( session('idtipo_usuario') == 1 || session('idtipo_usuario') == 2 || session('idtipo_usuario') == 3 ){
                         ?>
                         <li class="nav-item">
                             <a href="<?=base_url('registros')?>" class="nav-link <?php echo isset($registrosLinkActive) ? 'active': ''?>">

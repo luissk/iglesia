@@ -28,7 +28,7 @@ class Registro extends BaseController
             return redirect()->to('/');
         }
 
-        if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+        if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
         
         $data['title'] = "Registros del Sistema";
 
@@ -53,7 +53,7 @@ class Registro extends BaseController
     public function formularioLibroCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $idregistro = $this->request->getVar('id');
             if( $registro = $this->modeloRegistro->obtenerRegistro($idregistro) ){
@@ -73,7 +73,7 @@ class Registro extends BaseController
     public function registrarLCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             //print_r($_POST);exit();
 
@@ -221,7 +221,7 @@ class Registro extends BaseController
     public function eliminarLCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $idregistro = $this->request->getVar('id');
             if( $registro = $this->modeloRegistro->obtenerRegistro($idregistro) ){
@@ -256,7 +256,7 @@ class Registro extends BaseController
             return redirect()->to('/');
         }
 
-        if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+        if( session('idtipo_usuario') != 1 &&  session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
         
         $data['title']           = "Reportes de Registros";
         $data['registrosRepLinkActive'] = 1;
@@ -269,7 +269,7 @@ class Registro extends BaseController
     public function generaReporteLCaja(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $mes     = $this->request->getVar('mesCa');
             $anio    = trim($this->request->getVar('anioCa'));
@@ -462,7 +462,7 @@ class Registro extends BaseController
             return redirect()->to('/');
         }
 
-        if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+        if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
 
         if( $id != '' ){
             if( $compra = $this->modeloRegistro->obtenerCompra($id, session('idiglesia')) ){
@@ -497,7 +497,7 @@ class Registro extends BaseController
     public function registrarProveedor(){
          if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             //print_r($_POST);exit();
 
@@ -604,7 +604,7 @@ class Registro extends BaseController
     public function eliminarProveedor(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $idproveedor = $this->request->getVar('id');
 
@@ -652,7 +652,7 @@ class Registro extends BaseController
     public function registrarCompra(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             //print_r($_POST);exit();
 
@@ -710,7 +710,7 @@ class Registro extends BaseController
     public function eliminarLCompra(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $idcompra = $this->request->getVar('id');
 
@@ -765,7 +765,7 @@ class Registro extends BaseController
     public function generaReporteLCompra(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $mes     = $this->request->getVar('mesCo');
             $anio    = trim($this->request->getVar('anioCo'));
@@ -869,7 +869,7 @@ class Registro extends BaseController
     public function generaReporteDiario(){
         if( $this->request->isAJAX() ){
             if( !session('idusuario') ) exit();
-            if( session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $mes     = $this->request->getVar('mesDi');
             $anio    = trim($this->request->getVar('anioDi'));
