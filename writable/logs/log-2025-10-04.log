@@ -1,0 +1,1207 @@
+DEBUG - 2025-10-04 08:19:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 08:19:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 08:19:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:25:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:26:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:26:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:26:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:50:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:52:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:52:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:52:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:52:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:52:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 11:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:07:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:07:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:07:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:14:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:15:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:15:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:15:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:17:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:17:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:17:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:25:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:25:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:25:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:25:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:36:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:36:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:36:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:40:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-04 12:40:04 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '7', '140')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-04 12:40:04 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+[Method: POST, Route: genera-reportecuenta]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 2 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '7', '140')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:40:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 4 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '7', '140')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:40:04 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 4 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 5 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '7', '140')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-04 12:40:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:40:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-04 12:40:15 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-04 12:40:15 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+[Method: POST, Route: genera-reportecuenta]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 2 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:40:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 4 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:40:15 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 4 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,null caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=?
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 5 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-04 12:41:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-04 12:41:26 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-04 12:41:26 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+[Method: POST, Route: genera-reportecuenta]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 2 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:41:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 4 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:41:26 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 4 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 5 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-04 12:42:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:42:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-04 12:42:11 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '141')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-04 12:42:11 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+[Method: POST, Route: genera-reportecuenta]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 2 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '141')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:42:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 4 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '141')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:42:11 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 4 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 5 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '141')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-04 12:43:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:43:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-04 12:43:40 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-04 12:43:40 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+[Method: POST, Route: genera-reportecuenta]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 2 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:43:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 4 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-04 12:43:40 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+  ...' at line 5
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha')
+ 4 APPPATH\Models\RegistroModel.php(367): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = 2025 and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha', [...])
+ 5 APPPATH\Controllers\Registro.php(918): App\Models\RegistroModel->ReportePorCodCuenta('4', '2025', '10', '140')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->generaReportePorCuenta()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-04 12:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:45:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:45:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:46:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:47:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 12:47:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:00:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:00:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:00:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:00:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:00:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:01:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:02:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:03:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:03:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:03:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:03:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:04:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-04 13:05:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

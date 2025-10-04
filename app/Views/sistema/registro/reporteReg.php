@@ -123,11 +123,11 @@
                     <div class="tab-pane fade" id="libroDiario">
                         <div class="row">
                             <div class="row">
-                            <div class="col-sm-6 d-flex align-items-center">
-                                <h5 class="mb-3">Reporte Libro Diario</h5>
+                                <div class="col-sm-6 d-flex align-items-center">
+                                    <h5 class="mb-3">Reporte Libro Diario</h5>
+                                </div>
                             </div>
-                        </div>
-                        <form id="frmRepLDiario">
+                            <form id="frmRepLDiario">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <label for="mesDi" class="form-label fw-semibold">Seleccione un mes</label>
@@ -159,7 +159,22 @@
                                     <button type="submit" class="btn btn-danger" id="btnReporteDi">Ver Reporte</button>
                                 </div>
                             </div>
-                        </form>
+                            </form>
+                            
+                            <div class="row mt-4">
+                                <div class="col-sm-2">
+                                    <label for="cuentaLD" class="form-label fw-semibold">Cuenta</label>
+                                    <input type="text" class="form-control" id="cuentaLD" name="cuentaLD" maxlength="3" value="140" required>
+                                    <div id="msj-cuentaLD" class="form-text text-danger"></div>
+                                </div>
+                                <div class="col-sm-4 d-flex align-items-end pb-1">
+                                    <button class="btn btn-success" id="btnReportePorCuenta">Por Cuenta</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 table-responsive mt-3" id="msjCuenta"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,6 +260,34 @@ $(function(){
                 }
             }
             $("#msj").html(data);
+            btn.removeAttribute('disabled');
+            btn.innerHTML = txtbtn;
+        });
+    });
+
+    $('#btnReportePorCuenta').on('click', function(e){
+        e.preventDefault();
+        let btn = document.querySelector('#btnReportePorCuenta'),
+            txtbtn = btn.textContent,
+            btnHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        btn.setAttribute('disabled', 'disabled');
+        btn.innerHTML = `${btnHTML} PROCESANDO...`;
+
+        $("#msjCuenta").html("...CARGANDO...");
+        $.post('genera-reportecuenta', {
+            mesDi: $("#mesDi").val(),
+            anioDi: $("#anioDi").val(),
+            cuentaLD: $("#cuentaLD").val()
+        }, function(data){
+            //console.log(data);
+            $('[id^="msj-"').text("");                
+            if( data.errors ){  
+                let errors = data.errors;
+                for( let err in errors ){
+                    $('#msj-' + err).text(errors[err]);
+                }
+            }
+            $("#msjCuenta").html(data);
             btn.removeAttribute('disabled');
             btn.innerHTML = txtbtn;
         });

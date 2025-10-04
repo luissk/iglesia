@@ -875,7 +875,7 @@ class Registro extends BaseController
             $anio    = trim($this->request->getVar('anioDi'));
             //$tipoRep = $this->request->getVar('tipoRepDi');
 
-            if( $mes != '' & $anio != '' ){
+            if( $mes != '' && $anio != '' ){
                 $registros = $this->modeloRegistro->listarParaReporteDiario(session('idiglesia'),$mes,$anio);
                 if( !$registros ) exit();
                 echo "<script>window.open('".base_url('pdfDiario/'.$mes.'/'.$anio.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
@@ -903,6 +903,25 @@ class Registro extends BaseController
 
         $dompdf->stream("reporte_diario_".time().".pdf", array("Attachment" => false));
         exit;
+    }
+
+    public function generaReportePorCuenta(){
+        if( $this->request->isAJAX() ){
+            if( !session('idusuario') ) exit();
+            if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
+
+            $mes    = $this->request->getVar('mesDi');
+            $anio   = trim($this->request->getVar('anioDi'));
+            $cuenta = trim($this->request->getVar('cuentaLD'));
+
+            if( $mes != '' && $anio != '' && $cuenta != ''  ){
+                $data['movimientos'] = $this->modeloRegistro->ReportePorCodCuenta(session('idiglesia'), $anio, $mes, $cuenta);
+                return view('sistema/registro/porcuenta', $data);
+            }else{
+                echo "FALTAN DATOS!";
+            }
+
+        }
     }
 
 

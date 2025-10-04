@@ -56,3 +56,5 @@ $routes->get('pdfLCompra/(:any)/(:any)', 'Registro::pdfLCompra/$1/$2');
 
 $routes->post('genera-reportediario', 'Registro::generaReporteDiario');
 $routes->get('pdfDiario/(:any)/(:any)', 'Registro::pdfDiario/$1/$2');
+
+$routes->post('genera-reportecuenta', 'Registro::generaReportePorCuenta');

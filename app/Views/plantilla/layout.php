@@ -188,13 +188,13 @@ if(!session('idusuario')){
                         <li class="nav-item">
                             <a href="<?=base_url('registros')?>" class="nav-link <?php echo isset($registrosLinkActive) ? 'active': ''?>">
                                 <i class="fa-solid fa-list-ol"></i>
-                                <p>Registros</p>
+                                <p>Procesos</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?=base_url('reportes-registros')?>" class="nav-link <?php echo isset($registrosRepLinkActive) ? 'active': ''?>">
                                 <i class="fa-solid fa-chart-bar"></i>
-                                <p>Reporte Registro</p>
+                                <p>Reportes</p>
                             </a>
                         </li>
                         <?php

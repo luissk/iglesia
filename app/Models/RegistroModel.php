@@ -294,4 +294,79 @@ class RegistroModel extends Model{
         return $st->getResultArray();
     }
 
+    public function ReportePorCodCuenta($idiglesia, $anio, $mes, $codcuenta){
+        //$params = [$idiglesia, $codcuenta, $idiglesia, $codcuenta];
+
+        /* $query = "select
+            cu.cu_codigo cuenta,
+            'TOTAL' AS TipoRegistro,
+            -- Columna para la suma de las ENTRADAS
+            SUM(CASE WHEN re.re_mov = 1 THEN re.re_importe ELSE 0 END) AS TotalEntradas,    
+            -- Columna para la suma de las SALIDAS
+            SUM(CASE WHEN re.re_mov = 2 THEN re.re_importe ELSE 0 END) AS TotalSalidas,
+            NULL AS tipo,
+            NULL AS fecha,
+            NULL AS glosa,
+            NULL AS caja
+            FROM
+                registro re
+                inner join cuenta cu on re.idcuenta=cu.idcuenta
+                inner join caja ca on re.idcaja=ca.idcaja
+                where re.idiglesia = 4 and year(re.re_fecha) = 2025 and month(re.re_fecha) = 7 and cu.cu_codigo='140'
+            GROUP BY
+                cu.cu_codigo
+
+            UNION ALL
+
+            -- 2. PARTE: DETALLE DE TRANSACCIONES (Filas de detalle)
+            SELECT
+                cu.cu_codigo cuenta,
+                'DETALLE' AS TipoRegistro,
+                CASE WHEN re.re_mov = 1 THEN re.re_importe ELSE NULL END AS TotalEntradas,
+                -- Muestra el monto solo si es una 'salida', sino NULL
+                CASE WHEN re.re_mov = 2 THEN re.re_importe ELSE NULL END AS TotalSalidas,  -- ya que estas filas son el detalle.
+                re.re_mov AS tipo,
+                re.re_fecha AS fecha,
+                re.re_desc as glosa,
+                ca.ca_caja
+            FROM
+                registro re
+                inner join cuenta cu on re.idcuenta=cu.idcuenta
+                inner join caja ca on re.idcaja=ca.idcaja
+                where re.idiglesia = 4 and year(re.re_fecha) = 2025 and month(re.re_fecha) = 7 and cu.cu_codigo='140'
+            ORDER BY
+                cuenta,
+                TipoRegistro DESC, -- Asegura que el 'TOTAL' aparezca antes que el 'DETALLE'
+                fecha;"; */
+
+        $params = [$idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta];
+
+        $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            inner join caja ca on re.idcaja=ca.idcaja
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+            order by mov,cod,fecha";
+        
+        $st = $this->db->query($query,  $params);
+
+        return $st->getResultArray();
+    }
+
 }

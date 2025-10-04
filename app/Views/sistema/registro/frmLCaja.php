@@ -192,7 +192,7 @@ function verFacturas(){
         $('#btnVerFacturas').removeClass('d-none');
     }else{
         $('#btnVerFacturas').addClass('d-none');
-        if( $("#idcompra").val() != '' )//para limpiar los campos siempre y cuando no haya sido antes seleccionado una factura
+        if( $("#idcompra").val() > 0 )//para limpiar los campos siempre y cuando no haya sido antes seleccionado una factura
             limpiarDatosFactura();
     }
 }
