@@ -172,7 +172,7 @@ class Registro extends BaseController
                     }
                 }
 
-                if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra, session('idiglesia')) ){
+                if( $compra_bd = $this->modeloRegistro->obtenerCompra_PorID($idcompra) ){
                     //PAGAR FACTURA
                     $this->modeloRegistro->cambiarEstadoCompra($idcompra, 1);
                 }
@@ -194,7 +194,7 @@ class Registro extends BaseController
             }else{                
 
                 if( $this->modeloRegistro->insertarRegistro($fecha,$importe,$concepto,session('idusuario'),$idcuenta,$idcajaresp,$mov,$idcajabd,session('idiglesia'),$idcompra) ){
-                    if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra, session('idiglesia')) ){
+                    if( $compra_bd = $this->modeloRegistro->obtenerCompra_PorID($idcompra) ){
                         //PAGAR FACTURA
                         $this->modeloRegistro->cambiarEstadoCompra($idcompra, 1);
                     }
@@ -488,8 +488,9 @@ class Registro extends BaseController
     public function listaProveedorDT(){
         if( $this->request->isAJAX() ){
 			//print_r($_POST);
+            $tipo = $this->request->getVar('tipo');
 
-			$registros = $this->modeloRegistro->listarProveedores();
+			$registros = $this->modeloRegistro->listarProveedores($tipo);
 			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
         }
     }
@@ -503,9 +504,14 @@ class Registro extends BaseController
 
             $ruc         = trim($this->request->getVar('npruc'));
             $razon       = trim($this->request->getVar('nprazon'));
+            $tipo        = $this->request->getVar('tipo');
             $idproveedor = $this->request->getVar('idproveedor_e');//para editar
 
             $validation = \Config\Services::validation();
+
+            //PARA MENSAJITOS
+            $msj_doc = $tipo == 1 ? "Ruc" : "Nro Doc";
+            $msj_per = $tipo == 1 ? "Proveedor" : "Persona";
 
             $data = [
                 'npruc'   => $ruc,
@@ -514,21 +520,21 @@ class Registro extends BaseController
 
             $rules = [
                 'npruc' => [
-                    'label' => 'RUC', 
+                    'label' => $msj_doc, 
                     'rules' => 'required|regex_match[/^[0-9]+$/]|max_length[11]',
                     'errors' => [
-                        'required'    => '* El {field} es requerido.',
-                        'regex_match' => '* El {field} no es válido.',
-                        'max_length'  => '* El {field} debe contener máximo 11 caracteres.'
+                        'required'    => '* {field} es requerido.',
+                        'regex_match' => '* {field} no es válido.',
+                        'max_length'  => '* {field} debe contener máximo 11 caracteres.'
                     ]
                 ],
                 'nprazon' => [
-                    'label' => 'RAZON', 
+                    'label' => $msj_per, 
                     'rules' => 'required|regex_match[/^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\-\",\/ 0-9]+$/]|max_length[100]',
                     'errors' => [
-                        'required'    => '* La {field} es requerido.',
-                        'regex_match' => '* La {field} no es válido.',
-                        'max_length'  => '* La {field} debe contener máximo 100 caracteres.'
+                        'required'    => '* {field} es requerido.',
+                        'regex_match' => '* {field} no es válido.',
+                        'max_length'  => '* {field} debe contener máximo 100 caracteres.'
                     ]
                 ],
             ];
@@ -547,7 +553,7 @@ class Registro extends BaseController
                     if( $this->modeloRegistro->verificarRuc($ruc) ){
                         echo '<script>
                             Swal.fire({
-                                title: "El RUC ya existe",
+                                title: "El '.$msj_doc.' ya existe",
                                 icon: "error"
                             });
                         </script>';
@@ -558,7 +564,7 @@ class Registro extends BaseController
                 if( $this->modeloRegistro->modificarProveedor($ruc, $razon, $idproveedor) ){
                     echo '<script>
                         Swal.fire({
-                            title: "Proveedor Modificado",
+                            title: "'.$msj_per.' Modificado",
                             text: "",
                             icon: "success",
                             showConfirmButton: true,
@@ -574,17 +580,17 @@ class Registro extends BaseController
                 if( $this->modeloRegistro->verificarRuc($ruc) ){
                     echo '<script>
                         Swal.fire({
-                            title: "El RUC ya existe",
+                            title: "El '.$msj_doc.' ya existe",
                             icon: "error"
                         });
                     </script>';
                     exit();
                 }
 
-                if( $id = $this->modeloRegistro->registrarProveedor($ruc, $razon) ){
+                if( $id = $this->modeloRegistro->registrarProveedor($ruc, $razon, $tipo) ){
                     echo '<script>
                         Swal.fire({
-                            title: "Proveedor Guardado",
+                            title: "'.$msj_per.' Guardado",
                             text: "",
                             icon: "success",
                             showConfirmButton: true,
@@ -671,17 +677,28 @@ class Registro extends BaseController
             $cuenta    = $this->request->getVar('cuenta');
             $glosa     = $this->request->getVar('glosa');
             $idcompra  = $this->request->getVar('idcompra_e');//para editar
+            $type      = $this->request->getVar('type');
 
             if( $subt == '' || $igv == '' || $total == '' || $cuenta == '' || $glosa == '' || $fecha == '' || $factura == '' || $proveedor == '' ) exit();
 
             //print_r($items);
-            $cuentafact = 4;
+            //PARA EL FLAG SI ES VENTA O COMPRA
+            if( $type == 1 ){//Compra
+                $cuentafact = 4;
+                $msj_tbl = "Compra";
+                $url = "registros#libroCompras";
+            }else if( $type == 2 ){
+                $cuentafact = 35;
+                $msj_tbl = "Venta";
+                $url = "registros#libroVentas";
+            }
+            
             $cuentaigv  = 31;
-            if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra) ){
+            if( $compra_bd = $this->modeloRegistro->obtenerCompra($idcompra,session('idiglesia'),$type) ){
                 if( $this->modeloRegistro->modificarCompra($fecha, $factura, $proveedor, $subt, $igv, $total, $cuentafact, $cuentaigv, $cuenta, $glosa, $idcompra)){
                     echo '<script>
                         Swal.fire({
-                            title: "Compra Actualizada",
+                            title: "'.$msj_tbl.' Actualizada",
                             text: "",
                             icon: "success",
                             showConfirmButton: true,
@@ -690,17 +707,17 @@ class Registro extends BaseController
                     </script>';
                 }
             }else{
-                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, $cuentafact, $cuentaigv, $cuenta, $glosa) ){
+                if( $idcompra_i = $this->modeloRegistro->insertarCompra($fecha, $factura, $proveedor, session('idusuario'), session('idiglesia'), $subt, $igv, $total, $cuentafact, $cuentaigv, $cuenta, $glosa, $type) ){
                     echo '<script>
                         Swal.fire({
-                            title: "Compra Registrada",
+                            title: "'.$msj_tbl.' Registrada",
                             text: "",
                             icon: "success",
                             showConfirmButton: false,
                             allowOutsideClick: false,
                         });
                         limpiarCabecera();
-                        setTimeout(function(){location.href="'.base_url('registros#libroCompras').'"}, 1500);
+                        setTimeout(function(){location.href="'.base_url($url).'"}, 1500);
                     </script>';
                 }
             }
@@ -713,6 +730,13 @@ class Registro extends BaseController
             if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
             $idcompra = $this->request->getVar('id');
+            $type     = $this->request->getVar('type');
+
+            if( !$this->modeloRegistro->obtenerCompra($idcompra,session('idiglesia'),$type) ) exit();
+
+            //flag mensajes
+            $msj_tbl    = $type == 1 ? 'compra': 'venta';
+            $nro_reload = $type == 1 ? 2       : 3;
 
             $eliminar = FALSE;
             $mensaje = "";
@@ -721,7 +745,7 @@ class Registro extends BaseController
             foreach( $tablas as $t ){
                 $total = $this->modeloRegistro->verificarCompraTieneRegEnTablas($idcompra,$t)['total'];
                 if( $total > 0 ){
-                    $mensaje .= "<div class='text-start'>La compra ha sido pagada, primero debes eliminar el registro de pago</div>";
+                    $mensaje .= "<div class='text-start'>La $msj_tbl ha sido pagada, primero debes eliminar el registro de pago</div>";
                     $eliminar = TRUE;
                 }
             }
@@ -729,7 +753,7 @@ class Registro extends BaseController
             if( $eliminar ){
                 echo '<script>
                     Swal.fire({
-                        title: "La compra no puede ser eliminada",
+                        title: "La '.$msj_tbl.' no puede ser eliminada",
                         html: "'.$mensaje.'",
                         icon: "warning",
                     });
@@ -739,13 +763,13 @@ class Registro extends BaseController
             if( $this->modeloRegistro->eliminarCompra($idcompra) ){
             echo '<script>
                     Swal.fire({
-                        title: "Compra Eliminada",
+                        title: "'.$msj_tbl.' Eliminada",
                         text: "",
                         icon: "success",
                         showConfirmButton: true,
                         allowOutsideClick: false,
                     });
-                    dataTableReload(2);
+                    dataTableReload('.$nro_reload.');
                 </script>';
             }
       
@@ -756,8 +780,9 @@ class Registro extends BaseController
         if( $this->request->isAJAX() ){
 			//print_r($_POST);
             $status = $this->request->getVar('status');
+            $tipo   = $this->request->getVar('tipo');
 
-			$registros = $this->modeloRegistro->listarCompras(session('idiglesia'), $status);
+			$registros = $this->modeloRegistro->listarCompras(session('idiglesia'), $tipo, $status);
 			echo json_encode($registros, JSON_UNESCAPED_UNICODE);
         }
     }
@@ -922,6 +947,33 @@ class Registro extends BaseController
             }
 
         }
+    }
+
+    public function nuevaVenta($id = ''){
+        if( !session('idusuario') ){
+            return redirect()->to('/');
+        }
+
+        if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) return redirect()->to('sistema');
+
+        if( $id != '' ){
+            if( $compra = $this->modeloRegistro->obtenerCompra($id, session('idiglesia'), 2) ){//VENTA
+                
+                $data['compra_bd'] = $compra;
+                $data['title']     = "Editar venta";
+            }else{
+                return redirect()->to('/');
+            }
+        }else{
+            $data['title'] = "Nueva venta";
+        }        
+        
+        $data['registrosLinkActive'] = 1;
+        
+        $data['proveedores'] = $this->modeloRegistro->listarProveedores(2);
+        $data['cuentas']     = $this->modeloCuenta->listarCuentas(2);
+
+        return view('sistema/registro/nuevaVenta', $data);
     }
 
 

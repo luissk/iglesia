@@ -113,9 +113,10 @@ class RegistroModel extends Model{
     }
 
 
-    public function listarProveedores(){
-        $query = "select * from proveedor";
-        $st = $this->db->query($query);
+    public function listarProveedores($tipo = 1){//1: proveedores, 2:clientes
+        $params = [$tipo];
+        $query = "select * from proveedor where pr_type = ?";
+        $st = $this->db->query($query, $params);
 
         return $st->getResultArray();
     }
@@ -134,9 +135,9 @@ class RegistroModel extends Model{
         return $st->getRowArray();
     }
 
-    public function registrarProveedor($ruc, $razon){
-        $query = "insert into proveedor(pr_ruc,pr_razon) values(?,?)";
-        $st = $this->db->query($query, [$ruc, $razon]);
+    public function registrarProveedor($ruc, $razon, $tipo){
+        $query = "insert into proveedor(pr_ruc,pr_razon,pr_type) values(?,?,?)";
+        $st = $this->db->query($query, [$ruc, $razon, $tipo]);
 
         return $this->db->insertID();
     }
@@ -164,54 +165,67 @@ class RegistroModel extends Model{
     }
 
     //COMPRA
-    public function obtenerCompra($idcompra, $idiglesia = ''){
-        $where = '';
+    public function obtenerCompra_PorID($idcompra){
         $params = [$idcompra];
-        if( $idiglesia != '' ){
-            $where .= " and co.idiglesia = ?";
-            array_push($params, $idiglesia);
-        }
-        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,(case when co.co_status = 1 then 'si' else 'no' end) pagado,
-            pr.pr_ruc,pr.pr_razon,
-            ig.ig_iglesia,
-            us.us_nombre
-            from compra co
-            inner join proveedor pr on co.idproveedor=pr.idproveedor
-            inner join iglesia ig on co.idiglesia=ig.idiglesia
-            inner join usuario us on co.us_creador=us.idusuario
-            where co.idcompra = ?  $where";
+        $query = "select * from compra where idcompra = ? ";
 
         $st = $this->db->query($query, $params);
 
         return $st->getRowArray();
     }
 
-    public function listarCompras($idiglesia, $status = ''){
-        $params = [$idiglesia];
+    public function obtenerCompra($idcompra, $idiglesia, $tipo = 1){//1:compra, 2:venta
+        $where = '';
+        $params = [$idcompra, $idiglesia, $tipo];
+        /* if( $idiglesia != '' ){
+            $where .= " and co.idiglesia = ?";
+            array_push($params, $idiglesia);
+        } */
+        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,co.co_type,
+            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,(case when co.co_status = 1 then 'si' else 'no' end) pagado,
+            pr.pr_ruc,pr.pr_razon,
+            ig.ig_iglesia,
+            us.us_nombre,
+            re.idregistro,re.re_fecha,re.re_desc
+            from compra co
+            inner join proveedor pr on co.idproveedor=pr.idproveedor
+            inner join iglesia ig on co.idiglesia=ig.idiglesia
+            inner join usuario us on co.us_creador=us.idusuario 
+            left join registro re on co.idcompra=re.idcompra
+            where co.idcompra = ?  and co.idiglesia = ? and co.co_type = ?";
+
+        $st = $this->db->query($query, $params);
+
+        return $st->getRowArray();
+    }
+
+    public function listarCompras($idiglesia, $tipo, $status = ''){
+        $params = [$idiglesia, $tipo];
         $where  = "";
         if( $status != '' ){
             $where .= " and co.co_status = ?";
             array_push($params, $status);
         }
-        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
+        $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,co.co_type,
             co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co.cuentaigv,co.co_glosa,co.co_status,(case when co.co_status = 1 then 'si' else 'no' end) pagado,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
-            us.us_nombre
+            us.us_nombre,
+            re.idregistro,re.re_fecha,re.re_desc
             from compra co
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
-            inner join usuario us on co.us_creador=us.idusuario
-            where co.idiglesia = ? $where";
+            inner join usuario us on co.us_creador=us.idusuario 
+            left join registro re on co.idcompra=re.idcompra
+            where co.idiglesia = ? and co.co_type = ? $where";
         $st = $this->db->query($query, $params);
 
         return $st->getResultArray();
     }
 
-    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase,$glosa){
-        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentaigv,cuentabase,co_glosa) values(?,?,?,?,?,?,?,?,?,?,?,?)";
-        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase,$glosa]);
+    public function insertarCompra($fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase, $glosa, $type){
+        $query = "insert into compra(co_fecha,co_factura,idproveedor,us_creador,idiglesia,co_subt,co_igv,co_total,cuentafact,cuentaigv,cuentabase,co_glosa,co_type) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $st = $this->db->query($query, [$fecha, $factura, $proveedor, $idusuario, $idiglesia, $subt, $igv, $total, $ctafact, $ctaigv, $ctabase,$glosa,$type]);
 
         return $this->db->insertID();
     }
@@ -265,7 +279,8 @@ class RegistroModel extends Model{
     }
 
     public function listarParaReporteDiario($idiglesia,$mes,$anio){
-        $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
+        $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,
+                $idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
 
         $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
             from registro re 
@@ -276,18 +291,36 @@ class RegistroModel extends Model{
             select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
             from compra co 
             inner join cuenta cu on co.cuentaigv=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
             UNION 
-            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
             from compra co 
             inner join cuenta cu on co.cuentafact=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ?
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
             UNION 
             select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
             from compra co 
             inner join cuenta cu on co.cuentabase=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
             GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
             order by mov,cod;";
         $st = $this->db->query($query,  $params);
 
@@ -341,23 +374,24 @@ class RegistroModel extends Model{
 
         $params = [$idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta];
 
-        $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura
+        $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura,
+            NULL tipo
             from registro re 
             inner join cuenta cu on re.idcuenta=cu.idcuenta 
             inner join caja ca on re.idcaja=ca.idcaja
             where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ? and cu.cu_codigo=?
             UNION 
-            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_igv importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura,co.co_type tipo 
             from compra co 
             inner join cuenta cu on co.cuentaigv=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
             UNION 
-            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_total importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura,co.co_type tipo 
             from compra co 
             inner join cuenta cu on co.cuentafact=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
             UNION 
-            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, co.co_subt importe,co.co_glosa glosa,co.co_fecha fecha,NULL caja,co.co_factura factura,co.co_type tipo 
             from compra co 
             inner join cuenta cu on co.cuentabase=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 

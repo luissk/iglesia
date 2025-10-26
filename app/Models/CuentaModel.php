@@ -45,8 +45,12 @@ class CuentaModel extends Model{
         return $st;
     }
 
-    public function verificarCuentaTieneRegEnTablas($idcuenta, $tabla){
-        $query = "select count(idcuenta) as total from $tabla where idcuenta=?";
+    public function verificarCuentaTieneRegEnTablas($idcuenta, $tabla, $campo = ''){
+        if( $campo != '')
+            $query = "select count($campo) as total from $tabla where $campo=?";
+        else
+            $query = "select count(idcuenta) as total from $tabla where idcuenta=?";
+
         $st = $this->db->query($query, [$idcuenta]);
 
         return $st->getRowArray();

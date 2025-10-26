@@ -1,0 +1,456 @@
+DEBUG - 2025-10-23 18:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:20:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:21:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:23:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:24:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:24:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:25:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:28:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:32:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-10-23 18:32:29 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4 in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mo...', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mo...')
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mo...')
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(311): CodeIgniter\Database\BaseConnection->query('select re.re_mo...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(917): App\Models\RegistroModel->listarParaReporteDiario('1', '10', '2025')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->pdfDiario('10', '2025')
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-10-23 18:32:29 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+[Method: GET, Route: pdfDiario/10/2025]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\RegistroModel.php(311): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;', [...])
+ 2 APPPATH\Controllers\Registro.php(917): App\Models\RegistroModel->listarParaReporteDiario('1', '10', '2025')
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->pdfDiario('10', '2025')
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-23 18:32:29 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;')
+ 3 APPPATH\Models\RegistroModel.php(311): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;', [...])
+ 4 APPPATH\Controllers\Registro.php(917): App\Models\RegistroModel->listarParaReporteDiario('1', '10', '2025')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->pdfDiario('10', '2025')
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-10-23 18:32:29 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by ...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;')
+ 4 APPPATH\Models\RegistroModel.php(311): CodeIgniter\Database\BaseConnection->query('select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
+            from registro re 
+            inner join cuenta cu on re.idcuenta=cu.idcuenta 
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
+            UNION 
+            select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            UNION 
+            select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            UNION 
+            select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION 
+            select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentaigv=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            UNION 
+            select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentafact=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            UNION 
+            select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
+            from compra co 
+            inner join cuenta cu on co.cuentabase=cu.idcuenta
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            order by mov,cod;', [...])
+ 5 APPPATH\Controllers\Registro.php(917): App\Models\RegistroModel->listarParaReporteDiario('1', '10', '2025')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->pdfDiario('10', '2025')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-10-23 18:33:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:35:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:35:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:42:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:43:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:43:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:43:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:45:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:45:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:49:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:49:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:50:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 18:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:02:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:02:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:02:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:06:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:07:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:07:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:07:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:08:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:10:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:11:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:18:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:19:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:23:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:23:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-23 19:24:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

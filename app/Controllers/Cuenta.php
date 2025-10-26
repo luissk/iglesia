@@ -171,13 +171,23 @@ class Cuenta extends BaseController
             $eliminar = FALSE;
             $mensaje = "";
 
-            $tablas = ['registro','compra_detalle'];
+            $tablas = ['registro', ['compra', 'cuentafact'], ['compra', 'cuentabase'], ['compra', 'cuentaigv'] ];
             foreach( $tablas as $t ){
-                $total = $this->modeloCuenta->verificarCuentaTieneRegEnTablas($idcuenta,$t)['total'];
-                if( $total > 0 ){
-                    $mensaje .= "<div class='text-start'>La cuenta tiene $total registros en la tabla '$t'.</div>";
-                    $eliminar = TRUE;
-                }
+                if( is_array($t) ){
+                    $tabla = $t[0];
+                    $campo = $t[1];
+                    $total = $this->modeloCuenta->verificarCuentaTieneRegEnTablas($idcuenta,$tabla,$campo)['total'];
+                    if( $total > 0 ){
+                        $mensaje .= "<div class='text-start'>La cuenta tiene $total registros en la tabla '$tabla'.</div>";
+                        $eliminar = TRUE;
+                    }
+                }else{
+                    $total = $this->modeloCuenta->verificarCuentaTieneRegEnTablas($idcuenta,$t)['total'];
+                    if( $total > 0 ){
+                        $mensaje .= "<div class='text-start'>La cuenta tiene $total registros en la tabla '$t'.</div>";
+                        $eliminar = TRUE;
+                    }
+                }                
             }
 
             if( $eliminar ){

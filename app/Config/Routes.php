@@ -58,3 +58,6 @@ $routes->post('genera-reportediario', 'Registro::generaReporteDiario');
 $routes->get('pdfDiario/(:any)/(:any)', 'Registro::pdfDiario/$1/$2');
 
 $routes->post('genera-reportecuenta', 'Registro::generaReportePorCuenta');
+
+$routes->get('nueva-venta', 'Registro::nuevaVenta');
+$routes->get('editar-venta-(:num)', 'Registro::nuevaVenta/$1');

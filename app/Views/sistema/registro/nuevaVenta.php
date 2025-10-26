@@ -18,7 +18,7 @@ if( isset($compra_bd) && $compra_bd ){
     $cuentabase_bd = $compra_bd['cuentabase'];
     $glosa_bd      = $compra_bd['co_glosa'];
 
-    $btn_title = "MODIFICAR COMPRA";
+    $btn_title = "MODIFICAR VENTA";
 
 
 }else{
@@ -32,7 +32,7 @@ if( isset($compra_bd) && $compra_bd ){
     $cuentabase_bd = "";
     $glosa_bd      = "";
 
-    $btn_title = "REGISTRAR COMPRA";
+    $btn_title = "REGISTRAR VENTA";
 }
 ?>
 
@@ -43,7 +43,7 @@ if( isset($compra_bd) && $compra_bd ){
             <div class="card-header pt-1 pb-0 border-bottom-1">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h4 class="">REGISTRO DE COMPRAS</h4>
+                        <h4 class="">REGISTRO DE VENTAS</h4>
                     </div>
                 </div>
             </div>
@@ -55,12 +55,12 @@ if( isset($compra_bd) && $compra_bd ){
                         <div id="msj-fecha" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-2">
-                        <label for="factura" class="form-label fw-semibold">Nro Factura</label>
-                        <input type="text" class="form-control" id="factura" name="factura" value="<?=$factura_bd?>" placeholder="F-1-120" maxlength="13">
+                        <label for="factura" class="form-label fw-semibold">Nro Boleta</label>
+                        <input type="text" class="form-control" id="factura" name="factura" value="<?=$factura_bd?>" placeholder="B-1-120" maxlength="13">
                         <div id="msj-factura" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-5">
-                        <label for="proveedor" class="form-label fw-semibold">Seleccione un Proveedor</label>
+                        <label for="proveedor" class="form-label fw-semibold">Seleccione una Persona</label>
                         <select class="form-select" name="proveedor" id="proveedor">
                             <option value="">Seleccione</option>
                             <?php
@@ -78,7 +78,7 @@ if( isset($compra_bd) && $compra_bd ){
                         <div id="msj-proveedor" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-2 d-flex align-items-end pb-1">
-                        <a class="btn btn-outline-secondary btn-sm" role="button" data-bs-toggle="modal" data-bs-target="#modalProveedor">+ Proveedor</a>
+                        <a class="btn btn-outline-secondary btn-sm" role="button" data-bs-toggle="modal" data-bs-target="#modalProveedor">+ Persona</a>
                     </div>
                     <div class="col-sm-12">
                         &nbsp;
@@ -130,7 +130,7 @@ if( isset($compra_bd) && $compra_bd ){
         
         <div class="row">
             <div class="col-sm-12 text-end">
-                <input type="hidden" id="type" name="type" value="1">
+                <input type="hidden" id="type" name="type" value="2">
                 <input type="hidden" id="idcompra_e" name="idcompra_e" value="<?=$idcompra_bd?>">
                 <button class="btn btn-primary" id="btnCompra"><?=$btn_title?></button>
             </div>
@@ -144,25 +144,25 @@ if( isset($compra_bd) && $compra_bd ){
     <div class="modal-dialog" style="max-width: 650px;">
         <div class="modal-content">
             <div class="modal-header py-2">
-                <h1 class="modal-title fs-5" id="tituloModal">Proveedores</h1>
+                <h1 class="modal-title fs-5" id="tituloModal">Personas</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
                     <form id="frmProveedor">
                     <div class="row bg-body-secondary py-2">
-                        <h4 class="text-success">Nuevo Proveedor</h4>
+                        <h4 class="text-success">Nueva Persona</h4>
                         <div class="col-sm-4">
-                            <label for="npruc" class="form-label fw-semibold">Nro RUC</label>
+                            <label for="npruc" class="form-label fw-semibold">Nro Doc</label>
                             <input type="text" class="form-control" id="npruc" name="npruc" value="" placeholder="" maxlength="11">
                             <div id="msj-npruc" class="form-text text-danger"></div>
                         </div>
                         <div class="col-sm-5">
-                            <label for="nprazon" class="form-label fw-semibold">Razon Social</label>
+                            <label for="nprazon" class="form-label fw-semibold">Nombre / Razón</label>
                             <input type="text" class="form-control" id="nprazon" name="nprazon" value="" placeholder="" maxlength="100">
                             <div id="msj-nprazon" class="form-text text-danger"></div>
                         </div>
                         <div class="col-sm-2 d-flex align-items-end pb-1">
-                            <input type="hidden" name="tipo" value="1">
+                            <input type="hidden" name="tipo" value="2">
                             <input type="hidden" id="idproveedor_e" name="idproveedor_e">
                             <button class="btn btn-danger" id="btnProveedor">REGISTRAR</button>
                         </div>
@@ -170,14 +170,14 @@ if( isset($compra_bd) && $compra_bd ){
                     </form>
 
                     <div class="row mt-4">
-                        <h4 class="bg-body-secondary py-2 text-success">Listado de Proveedores</h4>
+                        <h4 class="bg-body-secondary py-2 text-success">Listado de Personas</h4>
                         <div class="col-sm-12 table-responsive">
                             <table id="tblProveedor" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <!-- <th>#</th> -->
-                                        <th>RUC</th>
-                                        <th>PROVEEDOR</th>
+                                        <th>Doc</th>
+                                        <th>Nombre / Razón</th>
                                         <th>Opción</th>
                                     </tr>
                                 </thead>
@@ -214,7 +214,7 @@ $(function(){
             "dataSrc":"",
             "type": "POST",
             "data": {
-                tipo:1
+                tipo: 2
                 //"desc": function() { return $('#desc').val() },
                 //"fecha_ini": function() { return $('#fecha_ini').val() }, 
                 //"fecha_fin": function() { return $('#fecha_fin').val() }
@@ -311,13 +311,13 @@ $(function(){
     $('#subt').on('input', function(e){
         let subt = parseFloat($(this).val());
         let igv = 0;
-        let total = 0;
+        /* let total = 0;
         if( subt > 0 ){
             igv = subt * 0.18;
             total = subt + igv;
-        }
+        } */
         $('#igv').val(igv.toFixed(2));
-        $('#total').val(total.toFixed(2));
+        $('#total').val(subt.toFixed(2));
     });
 
     $('#btnCompra').on('click', function(e){

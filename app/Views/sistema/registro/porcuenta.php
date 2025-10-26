@@ -14,7 +14,7 @@ if( $movimientos ){
             <th>GLOSA</th>
             <th>FECHA</th>
             <th>CAJA</th>
-            <th>FACTURA</th>
+            <th>COMPROB.</th>
         </tr>
     </thead>
     <tbody>
@@ -29,12 +29,16 @@ if( $movimientos ){
             $caja    = $m['caja'];
             $factura = $m['factura'];
 
+            $tipobd = $m['tipo']; //1:compra, 2:venta
+
             $tipo = '';
             if( ($mov == 1 || $mov == 2) && $factura == '' ){
                 if( $mov == 1 ) $tipo = "INGRESO";
                 if( $mov == 2 ) $tipo = "EGRESO";
             }else if( $mov == 2 && $factura != '' ){
-                $tipo = "COMPRA";
+                if( $tipobd == 1 ) $tipo = "COMPRA";
+                else if( $tipobd == 2 ) $tipo = "VENTA";
+                
             }
 
             echo "<tr>";

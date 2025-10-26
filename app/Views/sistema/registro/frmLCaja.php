@@ -1,4 +1,5 @@
 <?php
+//echo "<pre>";print_r($cuentas);echo "</pre>";
 if( isset($registro_bd) && $registro_bd ){
     //echo "<pre>";print_r($registro_bd);echo "</pre>";
     $idregistro_bd    = $registro_bd['idregistro'];
@@ -61,7 +62,7 @@ if( isset($registro_bd) && $registro_bd ){
             <div id="msj-fecha" class="form-text text-danger"></div>
         </div>        
         <div class="col-sm-12 mt-3">
-            <label for="cuenta" class="form-label fw-semibold">Seleccione una Cuenta &nbsp;</label> <a class="btn btn-sm btn-danger d-none" id="btnVerFacturas">Ver Facturas</a>
+            <label for="cuenta" class="form-label fw-semibold">Seleccione una Cuenta &nbsp;</label> <a class="btn btn-sm btn-danger d-none" id="btnVerFacturas" tipo=1>Ver Facturas</a>
             <select class="form-select" name="cuenta" id="cuenta">
                 <option value="">Seleccione</option>
                 <?php
@@ -106,7 +107,7 @@ if( isset($registro_bd) && $registro_bd ){
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header py-2">
-                <h1 class="modal-title fs-5" id="tituloModal">Facturas por pagar</h1>
+                <h1 class="modal-title fs-5" id="tituloModalFact">Facturas por pagar</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body table-responsive" style="font-size: 14px;">
@@ -115,9 +116,9 @@ if( isset($registro_bd) && $registro_bd ){
                             <tr>
                                 <th>Fecha</th>
                                 <th>Total (S/.)</th>
-                                <th>Factura</th>
-                                <th>Ruc</th>                                        
-                                <th>Razon</th>
+                                <th>Comprobante</th>
+                                <th>Doc</th>                                        
+                                <th>Razon/Nombre</th>
                                 <th>Glosa</th>
                                 <th>Opción</th>
                             </tr>
@@ -190,6 +191,14 @@ if( $mov_bd != '' ){
 function verFacturas(){
     if( $('#cuenta').val() == 4 && $('#mov').val() == 2 ){
         $('#btnVerFacturas').removeClass('d-none');
+        $('#btnVerFacturas').text('Ver Facturas');
+        $('#btnVerFacturas').attr('tipo', 1)
+        $('#tituloModalFact').html('Facturas por pagar');
+    }else if( $('#cuenta').val() == 35 && $('#mov').val() == 1 ){
+        $('#btnVerFacturas').removeClass('d-none');
+        $('#btnVerFacturas').text('Ver Boletas');
+        $('#btnVerFacturas').attr('tipo', 2)
+        $('#tituloModalFact').html('Boletas por cobrar');
     }else{
         $('#btnVerFacturas').addClass('d-none');
         if( $("#idcompra").val() > 0 )//para limpiar los campos siempre y cuando no haya sido antes seleccionado una factura
@@ -232,7 +241,7 @@ $(function(){
 
     $("#btnVerFacturas").on('click', function(e){
         $("#modalFacturas").modal('show');
-
+        
         $dtFacturas_x_pagar.DataTable().ajax.reload();
     });
 
@@ -241,11 +250,13 @@ $(function(){
             "url": 'lista-lcompra-dt',
             "dataSrc":"",
             "type": "POST",
-            "data": {
-                status: 0
+            "data": function (d) {
+                d.tipo = $('#btnVerFacturas').attr('tipo');
+                d.status =  0;
                 //"desc": function() { return $('#desc').val() },
                 //"fecha_ini": function() { return $('#fecha_ini').val() }, 
                 //"fecha_fin": function() { return $('#fecha_fin').val() }
+                return d;
             },
             "complete": function(xhr, responseText){
                 /* console.log(xhr);
@@ -282,7 +293,10 @@ $(function(){
             razon = $(this).parent().parent().children()[4].innerText;
 
         //console.log(id, fecha, total, factura, ruc, razon);
-        $("#concepto").val(`FACTURA ${factura}, ${ruc}`);
+        if( $('#btnVerFacturas').attr('tipo') == 1 )
+            $("#concepto").val(`FACTURA ${factura}, ${ruc}`);
+        else
+            $("#concepto").val(`BOLETA ${factura}, ${ruc}`);
         $("#importe").val(total);
         $("#idcompra").val(id);
 
