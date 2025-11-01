@@ -52,7 +52,7 @@ $routes->post('lista-lcompra-dt', 'Registro::listarLCompraDT');
 $routes->post('elimina-lcompra', 'Registro::eliminarLCompra');
 
 $routes->post('genera-reportelcompra', 'Registro::generaReporteLCompra');
-$routes->get('pdfLCompra/(:any)/(:any)', 'Registro::pdfLCompra/$1/$2');
+$routes->get('pdfLCompra/(:any)/(:any)', 'Registro::pdfLCompra/$1/$2/$3');
 
 $routes->post('genera-reportediario', 'Registro::generaReporteDiario');
 $routes->get('pdfDiario/(:any)/(:any)', 'Registro::pdfDiario/$1/$2');

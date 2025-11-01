@@ -8,7 +8,7 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>REPORTE DE LIBRO DE COMPRAS</title>
+<title>REPORTE DE LIBRO DE <?=$tipo == 1 ? 'COMPRA' : 'VENTA'?></title>
 
 <style type="text/css">
     * {
@@ -84,15 +84,15 @@ $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
     </footer>
 
     <section style='font-size:11px' class="cuerpo_tablas">
-        <h3 align="center">Reporte de Libro de Compras</h3>
+        <h3 align="center">Reporte de Libro de <?=$tipo == 1 ? 'Compras' : 'Ventas'?></h3>
         <div>
             <table width="100%" cellspacing="0" cellpadding="5">
                 <thead>
                     <tr bgcolor="#dedede">
                         <th width="8%">Fecha</th>
-                        <th width="9%">Factura</th>
-                        <th width="8%">Ruc</th>
-                        <th width="32%">Proveedor</th>
+                        <th width="9%"><?=$tipo == 1 ? 'Factura' : 'Boleta'?></th>
+                        <th width="8%"><?=$tipo == 1 ? 'Ruc' : 'Dni'?></th>
+                        <th width="32%"><?=$tipo == 1 ? 'Proveedor' : 'Persona'?></th>
                         <th width="22%">Glosa</th>
                         <th width="7%">V. Venta</th>
                         <th width="7%">IGV</th>

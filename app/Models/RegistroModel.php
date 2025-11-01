@@ -259,8 +259,8 @@ class RegistroModel extends Model{
         return $st;
     }
 
-    public function listarParaReporteLCompra($idiglesia,$mes,$anio){
-        $params = [$idiglesia,$anio,$mes];
+    public function listarParaReporteLCompra($idiglesia,$mes,$anio,$tipo){
+        $params = [$idiglesia,$anio,$mes,$tipo];
 
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
             co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
@@ -271,7 +271,7 @@ class RegistroModel extends Model{
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = ?
             order by co.co_fecha";
         $st = $this->db->query($query,  $params);
 

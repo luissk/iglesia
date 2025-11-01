@@ -794,23 +794,24 @@ class Registro extends BaseController
 
             $mes     = $this->request->getVar('mesCo');
             $anio    = trim($this->request->getVar('anioCo'));
+            $tipo    = $this->request->getVar('tipoCV');
             $tipoRep = $this->request->getVar('tipoRepCo');
 
-            if( $mes != '' & $anio != '' && $tipoRep != '' ){
+            if( $mes != '' && $anio != '' && $tipoRep != '' && $tipo != '' ){
                 if( $tipoRep == 'excel' ){
-                    $this->excelLCompra($mes, $anio);
+                    $this->excelLCompra($mes, $anio, $tipo);
                 }else if( $tipoRep == 'pdf' ){
-                    $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+                    $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio, $tipo);
                     if( !$registros ) exit();
-                    echo "<script>window.open('".base_url('pdfLCompra/'.$mes.'/'.$anio.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
+                    echo "<script>window.open('".base_url('pdfLCompra/'.$mes.'/'.$anio.'/'.$tipo.'?v='.time().'')."','_blank' );$('#msj').html('')</script>";
                 }
             }
 
         }
     }
 
-    private function excelLCompra($mes, $anio){
-        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+    private function excelLCompra($mes, $anio, $tipo){
+        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio, $tipo);
 
         if( !$registros ) exit();
         
@@ -870,16 +871,17 @@ class Registro extends BaseController
         exit();
     }
 
-    public function pdfLCompra($mes, $anio){
+    public function pdfLCompra($mes, $anio, $tipo){
         $options = new \Dompdf\Options();
         $options->setIsRemoteEnabled(true);
         $dompdf = new \Dompdf\Dompdf($options);
 
-        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio);
+        $registros = $this->modeloRegistro->listarParaReporteLCompra(session('idiglesia'),$mes,$anio, $tipo);
         
         $data['registros'] = $registros;
         $data['anio']      = $anio;
         $data['mes']       = $mes;
+        $data['tipo']      = $tipo;
 
         $dompdf->loadHtml(view('sistema/registro/pdfLCompra', $data));
 

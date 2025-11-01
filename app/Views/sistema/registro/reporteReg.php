@@ -12,7 +12,7 @@
                         <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#libroCaja" href="#libroCaja">LIBRO DE CAJAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroCompras" href="#libroCompras">LIBRO DE COMPRAS</a>
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroCompras" href="#libroCompras">LIBRO DE COMPRAS / VENTAS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroDiario" href="#libroDiario">LIBRO DIARIO</a>
@@ -82,7 +82,7 @@
                     <div class="tab-pane fade" id="libroCompras">
                         <div class="row">
                             <div class="col-sm-6 d-flex align-items-center">
-                                <h5 class="mb-3">Reporte Libro de Compras</h5>
+                                <h5 class="mb-3">Reporte Libro de Compras / Ventas</h5>
                             </div>
                         </div>
                         <form id="frmRepLCompra">
@@ -104,6 +104,14 @@
                                     <label for="anioCo" class="form-label fw-semibold">Año</label>
                                     <input type="text" class="form-control" id="anioCo" name="anioCo" maxlength="4" minlength="4" value="<?=date('Y')?>" required>
                                     <div id="msj-anioCo" class="form-text text-danger"></div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="tipoCV" class="form-label fw-semibold">Mov</label>
+                                    <select class="form-select" name="tipoCV" id="tipoCV" required>
+                                        <option value="1">COMPRA</option>
+                                        <option value="2">VENTA</option>
+                                    </select>
+                                    <div id="msj-tipoCV" class="form-text text-danger"></div>
                                 </div>
                                 <div class="col-sm-2">
                                     <label for="tipoRepCo" class="form-label fw-semibold">Tipo</label>
