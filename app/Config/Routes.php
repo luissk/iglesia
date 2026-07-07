@@ -61,3 +61,9 @@ $routes->post('genera-reportecuenta', 'Registro::generaReportePorCuenta');
 
 $routes->get('nueva-venta', 'Registro::nuevaVenta');
 $routes->get('editar-venta-(:num)', 'Registro::nuevaVenta/$1');
+
+$routes->get('nuevo-varios', 'Asiento::nuevoVarios');
+$routes->get('editar-varios-(:num)', 'Asiento::nuevoVarios/$1');
+$routes->post('procesar_asiento', 'Asiento::procesarAsiento');
+$routes->post('libro-varios-dt', 'Asiento::listarAsientosDT');
+$routes->post('elimina-asiento', 'Asiento::eliminarAsiento');

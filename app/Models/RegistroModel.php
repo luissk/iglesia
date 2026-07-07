@@ -263,7 +263,10 @@ class RegistroModel extends Model{
         $params = [$idiglesia,$anio,$mes,$tipo];
 
         $query = "select co.idcompra, co.co_fecha, co.co_factura,co.idproveedor,co.us_creador,co.idiglesia,
-            co.co_subt,co.co_igv,co.co_total,co.cuentafact,co.cuentabase,co_glosa,
+            co.co_subt,co.co_igv,co.co_total,
+            co.cuentafact,cuf.cu_dh as dhf,cuf.cu_codigo as cufcod,cuf.cu_cuenta as cufcuenta,
+            co.cuentabase,cub.cu_dh as dhb,cub.cu_codigo as cubcod,cub.cu_cuenta as cubcuenta,
+            co.co_glosa,
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre
@@ -271,6 +274,8 @@ class RegistroModel extends Model{
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario
+            inner join cuenta cuf on co.cuentafact=cuf.idcuenta
+            inner join cuenta cub on co.cuentabase=cub.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = ?
             order by co.co_fecha";
         $st = $this->db->query($query,  $params);
@@ -279,46 +284,52 @@ class RegistroModel extends Model{
     }
 
     public function listarParaReporteDiario($idiglesia,$mes,$anio){
+        if( $mes == 0 ){
+            $mes = range(1,12);
+        }else{
+            $mes = [$mes];
+        }
+
         $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,
                 $idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
 
         $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
             from registro re 
             inner join cuenta cu on re.idcuenta=cu.idcuenta 
-            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) = ?
+            where re.idiglesia = ? and year(re.re_fecha) = ? and month(re.re_fecha) in ?
             GROUP by re.re_mov,re.idcuenta,cu.cu_codigo
             UNION 
             select 2 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
             from compra co 
             inner join cuenta cu on co.cuentaigv=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 1 
             UNION 
             select 1 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
             from compra co 
             inner join cuenta cu on co.cuentafact=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 1
             UNION 
             select 2 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
             from compra co 
             inner join cuenta cu on co.cuentabase=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 1 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 1 
             GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
 
             UNION 
             select 1 mov, co.cuentaigv idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_igv) importe 
             from compra co 
             inner join cuenta cu on co.cuentaigv=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 2 
             UNION 
             select 2 mov, co.cuentafact idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_total) importe 
             from compra co 
             inner join cuenta cu on co.cuentafact=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 2
             UNION 
             select 1 mov, co.cuentabase idcu, cu.cu_codigo cod, cu.cu_cuenta cuen, sum(co.co_subt) importe 
             from compra co 
             inner join cuenta cu on co.cuentabase=cu.idcuenta
-            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and co.co_type = 2 
+            where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 2 
             GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
 
             order by mov,cod;";

@@ -140,7 +140,7 @@
                                 <div class="col-sm-2">
                                     <label for="mesDi" class="form-label fw-semibold">Seleccione un mes</label>
                                     <select class="form-select" name="mesDi" id="mesDi" required>
-                                        <option value="">Nro de Mes</option>
+                                        <option value="0">Todo el año</option>
                                         <?php
                                         for( $i = 1; $i <= 12; $i++ ){                                           
                                             $select_mes = $i == date('m') ? 'selected' : '';

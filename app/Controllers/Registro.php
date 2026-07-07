@@ -351,7 +351,7 @@ class Registro extends BaseController
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('public/'.$file);
-        $writer->save('php://output');
+        //$writer->save('php://output');
 
         echo "<script>window.open('".base_url('public/'.$file)."','_blank' );$('#msj').html('')</script>";
 
@@ -826,18 +826,26 @@ class Registro extends BaseController
         $sheet->setCellValue('F2', 'V. VENTA');
         $sheet->setCellValue('G2', 'IGV');
         $sheet->setCellValue('H2', 'TOTAL');
+        $sheet->setCellValue('I2', 'COD CTA F');
+        $sheet->setCellValue('J2', 'CUENTAFACT');
+        $sheet->setCellValue('K2', 'COD CTA B');
+        $sheet->setCellValue('L2', 'CUENTABASE');
         
         $cont = 0;
         $rows = 3;
         foreach($registros as $r){
             $cont++;
-            $fecha = $r['co_fecha'];
-            $ruc   = $r['pr_ruc'];
-            $razon = $r['pr_razon'];
-            $glosa = $r['co_glosa'];
-            $subt  = $r['co_subt'];
-            $igv   = $r['co_igv'];
-            $total = $r['co_total'];
+            $fecha     = $r['co_fecha'];
+            $ruc       = $r['pr_ruc'];
+            $razon     = $r['pr_razon'];
+            $glosa     = $r['co_glosa'];
+            $subt      = $r['co_subt'];
+            $igv       = $r['co_igv'];
+            $total     = $r['co_total'];
+            $cufcod    = $r['cufcod'];
+            $cufcuenta = $r['cufcuenta'];
+            $cubcod    = $r['cubcod'];
+            $cubcuenta = $r['cubcuenta'];
 
             $sheet->setCellValue('A'.$rows, $cont);
             $sheet->setCellValue('B'.$rows, $fecha);
@@ -848,9 +856,13 @@ class Registro extends BaseController
             $sheet->setCellValue('F'.$rows, $subt);
             $sheet->setCellValue('G'.$rows, $igv);
             $sheet->setCellValue('H'.$rows, $total);
+            $sheet->setCellValue('I'.$rows, $cufcod);
+            $sheet->setCellValue('J'.$rows, $cufcuenta);
+            $sheet->setCellValue('K'.$rows, $cubcod);
+            $sheet->setCellValue('L'.$rows, $cubcuenta);
             $rows++;
         }
-        foreach (range('A','I') as $col) {
+        foreach (range('A','L') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
 
@@ -863,7 +875,7 @@ class Registro extends BaseController
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('public/'.$file);
-        $writer->save('php://output');
+        //$writer->save('php://output');
 
         echo "<script>window.open('".base_url('public/'.$file)."','_blank' );$('#msj').html('')</script>";
 

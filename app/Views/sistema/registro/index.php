@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroVentas" href="#libroVentas">LIBRO DE VENTAS</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#libroVarios" href="#libroVarios">LIBRO VARIOS</a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -140,6 +143,33 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="libroVarios">
+                        <div class="row">
+                            <div class="col-sm-6 d-flex align-items-center">
+                                <h5 class="mb-0">Registros Libro Varios</h5>
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <a class="btn btn-warning" role="button" href="nuevo-varios">Nuevo Registro L. Varios</a>
+                            </div>
+                        </div>
+                        <div class="row table-responsive mt-3" id="">
+                            <table id="tblLibroVarios" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Glosa</th>
+                                        <th>Documento</th>
+                                        <th>Total D</th>                                        
+                                        <th>Total H</th>
+                                        <th>Opción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     
                 </div>
             </div>
@@ -172,6 +202,7 @@
     var $table1;
     var $table2;
     var $table3;
+    var $table4;
 $(function(){
     $table1 = $('#tblLibroCaja').dataTable({
         "ajax":{
@@ -385,6 +416,65 @@ $(function(){
         });        
     });
 
+
+    $table4 = $('#tblLibroVarios').dataTable({
+        "ajax":{
+            "url": 'libro-varios-dt',
+            "dataSrc":"",
+            "type": "POST",
+            "data": {
+                //tipo: 2,
+                //status: '',
+                //"desc": function() { return $('#desc').val() },
+                //"fecha_ini": function() { return $('#fecha_ini').val() }, 
+                //"fecha_fin": function() { return $('#fecha_fin').val() }
+            },
+            "complete": function(xhr, responseText){
+                /* console.log(xhr);
+                console.log(xhr.responseText); //*** responseJSON: Array[0] */
+            }
+        },
+        "columns":[
+            {"data": "as_fecha"},
+            {"data": "as_desc"},
+            {"data": "as_nrodoc"},
+            {"data": "as_totald"},
+            {"data": "as_totalh"},
+            {"data": "idasiento",
+                "mRender": function (data, type, row) {
+                    //console.log(row);
+                    return `
+                    <a title='editar' class='link-success editar' role='button' href="editar-varios-${data}">
+                        <i class='fa fa-edit'></i>
+                    </a> 
+                    <a title='eliminar' class='link-danger ms-1 eliminar' role='button' data-id=${data} data-type=2>
+                        <i class='fa fa-trash-alt'></i>
+                    </a>`;
+                }
+            }
+        ],
+        "aaSorting": [[ 0, "desc" ]],
+        "pageLength": 25
+    });
+
+    $('#tblLibroVarios').on('click', '.eliminar', function(e){
+        Swal.fire({
+            title: "¿Estás seguro en eliminar el asiento?",
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('elimina-asiento', {
+                    id: $(this).data('id')
+                }, function(data){
+                    //console.log(data)
+                    $('#msj').html(data);
+                });
+            }
+        });        
+    });
+
    
 });
 
@@ -406,8 +496,9 @@ function dataTableReload(opt = 1){
         $table2.DataTable().ajax.reload();
     else if(opt == 3)
         $table3.DataTable().ajax.reload();
+    else if(opt == 4)
+        $table4.DataTable().ajax.reload();
 }
-
 
 
 $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {

@@ -1,7 +1,10 @@
 <?php
 $arr_meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
 
-$mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
+if( $mes == 0 )
+    $mes_anio = $anio;
+else
+    $mes_anio = $arr_meses[$mes - 1]. " - ".$anio;
 
 // Arrays para almacenar datos procesados y sumas
 $mov1_procesado = [];
@@ -140,6 +143,7 @@ sort($todos_los_codigos);
                         <th>CUENTA</th>
                         <th>DEBE</th>
                         <th>HABER</th>
+                        <th>SALDO</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,7 +151,13 @@ sort($todos_los_codigos);
                         <td align="center">101</td>
                         <td>Caja</td>
                         <td class='saldos'><?php echo number_format($sum_mov1, 2); ?></td>
-                        <td class='saldos'><?php echo number_format($sum_mov2, 2); ?></td>                        
+                        <td class='saldos'><?php echo number_format($sum_mov2, 2); ?></td>
+                        <td align="right">
+                            <?php
+                            $saldo = $sum_mov1 - $sum_mov2;
+                            echo "<b>".number_format($saldo, 2)."</b>";
+                            ?>
+                        </td>                      
                     </tr>
                     <?php
                     foreach ($todos_los_codigos as $cod) {
@@ -166,9 +176,11 @@ sort($todos_los_codigos);
                         }
                         echo "<td>" . htmlspecialchars($cuenta_nombre) . "</td>";
                         
+                        $saldito = 0;
                         // Columna de Importe Movimiento 2
                         if (isset($mov2_por_cod[$cod])) {
                             echo "<td align='right'>" . htmlspecialchars(number_format($mov2_por_cod[$cod]['importe'], 2)) . "</td>";
+                            $saldito += $mov2_por_cod[$cod]['importe'];
                         } else {
                             echo "<td></td>";
                         }
@@ -176,9 +188,13 @@ sort($todos_los_codigos);
                         // Columna de Importe Movimiento 1
                         if (isset($mov1_procesado[$cod])) {
                             echo "<td align='right'>" . htmlspecialchars(number_format($mov1_procesado[$cod]['importe'], 2)) . "</td>";
+                            $saldito -= $mov1_procesado[$cod]['importe'];
                         } else {
                             echo "<td></td>";
                         }
+
+
+                        echo "<td align='right'>".number_format($saldito, 2)."</td>";
 
                         echo "</tr>";
                     }

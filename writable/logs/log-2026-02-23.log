@@ -1,0 +1,225 @@
+DEBUG - 2026-02-23 16:58:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:03:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:03:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:03:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:04:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:04:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:04:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 17:04:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-23 18:06:02 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'iglesiabd', 3306, '', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(52): CodeIgniter\Database\BaseConnection->query('select re.idreg...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(59): App\Models\RegistroModel->obtenerRegistro('')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->formularioLibroCaja()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\iglesia\app\Models\RegistroModel.php(52): CodeIgniter\Database\BaseConnection->query('select re.idreg...', Array)
+#3 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(59): App\Models\RegistroModel->obtenerRegistro('')
+#4 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->formularioLibroCaja()
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2026-02-23 18:06:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+[Method: POST, Route: formularioLCaja]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Models\RegistroModel.php(52): CodeIgniter\Database\BaseConnection->query('select re.idregistro,re.re_fecha,re.re_importe,re.re_desc,re.us_creador,re.idcuenta,re.idresponsable_caja,re.idiglesia,re.idcompra,
+            re.re_mov,CASE WHEN re.re_mov = 1 THEN \'Ingreso\' ELSE \'Egreso\' END AS tipo_mov,us.us_nombre,ig.ig_iglesia,ig.ig_direccion,ig.ig_pastor,
+            cu.cu_dh,cu.cu_codigo,cu.cu_cuenta,cu.cu_observacion,
+            rc.re_nombres,ca.ca_caja
+            from registro re
+            inner join usuario us on re.us_creador=us.idusuario
+            inner join iglesia ig on re.idiglesia=ig.idiglesia
+            inner join cuenta cu on re.idcuenta=cu.idcuenta
+            inner join responsable_caja rc on re.idresponsable_caja=rc.idresponsable_caja
+            inner join caja ca on rc.idcaja=ca.idcaja 
+            where re.idregistro = ?', [...])
+ 3 APPPATH\Controllers\Registro.php(59): App\Models\RegistroModel->obtenerRegistro('')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->formularioLibroCaja()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-23 18:06:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-23 18:06:09 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'iglesiabd', 3306, '', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->index()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#3 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#4 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->index()
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2026-02-23 18:06:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+[Method: GET, Route: registros]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
+            FROM responsable_caja rc 
+            inner join caja ca on rc.idcaja=ca.idcaja
+            WHERE rc.idiglesia = ?', [...])
+ 3 APPPATH\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-23 18:06:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-23 18:06:24 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'iglesiabd', 3306, '', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->index()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#3 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#4 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->index()
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2026-02-23 18:06:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+[Method: GET, Route: registros]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
+            FROM responsable_caja rc 
+            inner join caja ca on rc.idcaja=ca.idcaja
+            WHERE rc.idiglesia = ?', [...])
+ 3 APPPATH\Controllers\Registro.php(35): App\Models\CajaModel->listarResponsablesDeCaja('1')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-23 18:06:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-23 18:06:41 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'iglesiabd', 3306, '', 0)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#4 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(264): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->reportesRegistros()
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#7 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\xampp\htdocs\iglesia\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\iglesia\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\iglesia\app\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idres...', Array)
+#3 C:\xampp\htdocs\iglesia\app\Controllers\Registro.php(264): App\Models\CajaModel->listarResponsablesDeCaja('1')
+#4 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(933): App\Controllers\Registro->reportesRegistros()
+#5 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+#6 C:\xampp\htdocs\iglesia\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\iglesia\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\iglesia\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\iglesia\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 {main}
+CRITICAL - 2026-02-23 18:06:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+[Method: GET, Route: reportes-registros]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Models\CajaModel.php(65): CodeIgniter\Database\BaseConnection->query('select rc.idresponsable_caja,rc.re_nombres,rc.idiglesia,rc.idcaja,ca.ca_caja
+            FROM responsable_caja rc 
+            inner join caja ca on rc.idcaja=ca.idcaja
+            WHERE rc.idiglesia = ?', [...])
+ 3 APPPATH\Controllers\Registro.php(264): App\Models\CajaModel->listarResponsablesDeCaja('1')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Registro->reportesRegistros()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Registro))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-23 18:06:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:06:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:07:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:07:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:24:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:24:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:24:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:24:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:33:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:33:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:40:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:40:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:42:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 18:42:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 19:11:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 19:11:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 19:20:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-23 19:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
