@@ -291,7 +291,7 @@ class RegistroModel extends Model{
         }
 
         $params = [$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes,
-                $idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes];
+                $idiglesia,$anio,$mes,$idiglesia,$anio,$mes,$idiglesia,$anio,$mes, $idiglesia,$anio,$mes];
 
         $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,sum(re.re_importe) importe
             from registro re 
@@ -331,6 +331,26 @@ class RegistroModel extends Model{
             inner join cuenta cu on co.cuentabase=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) in ? and co.co_type = 2 
             GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION
+            SELECT 
+                CASE WHEN ad.monto_debe > 0 THEN 2 ELSE 1 END AS mov,
+                ad.idcuenta idcu,
+                cu.cu_codigo cod,
+                cu.cu_cuenta cuen,
+                CASE 
+                    WHEN ad.monto_debe > 0 THEN SUM(ad.monto_debe) 
+                    ELSE SUM(ad.monto_haber) 
+                END AS importe
+            FROM asiento_detalle ad 
+            INNER JOIN asiento a ON ad.idasiento = a.idasiento
+            INNER JOIN cuenta cu ON ad.idcuenta = cu.idcuenta
+            where a.idiglesia = ? and year(a.as_fecha) = ? and month(a.as_fecha) in ?
+            GROUP BY 
+                CASE WHEN ad.monto_debe > 0 THEN 2 ELSE 1 END,
+                ad.idcuenta,
+                cu.cu_codigo,
+                cu.cu_cuenta
 
             order by mov,cod;";
         $st = $this->db->query($query,  $params);
@@ -383,7 +403,8 @@ class RegistroModel extends Model{
                 TipoRegistro DESC, -- Asegura que el 'TOTAL' aparezca antes que el 'DETALLE'
                 fecha;"; */
 
-        $params = [$idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta];
+        $params = [$idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta, $idiglesia, $anio, $mes, $codcuenta,
+        $idiglesia, $anio, $mes, $codcuenta];
 
         $query = "select re.re_mov mov,re.idcuenta idcu,cu.cu_codigo cod,cu.cu_cuenta cuen,re.re_importe importe,re.re_desc glosa,re.re_fecha fecha,ca.ca_caja caja,NULL factura,
             NULL tipo
@@ -407,6 +428,28 @@ class RegistroModel extends Model{
             inner join cuenta cu on co.cuentabase=cu.idcuenta
             where co.idiglesia = ? and year(co.co_fecha) = ? and month(co.co_fecha) = ? and cu.cu_codigo=? 
             GROUP by co.cuentabase, cu.cu_codigo, cu.cu_cuenta
+
+            UNION
+            SELECT 
+                CASE WHEN ad.monto_debe > 0 THEN 2 ELSE 1 END AS mov,
+                ad.idcuenta idcu,
+                cu.cu_codigo cod,
+                cu.cu_cuenta cuen,                
+                CASE 
+                    WHEN ad.monto_debe > 0 THEN (ad.monto_debe) 
+                    ELSE (ad.monto_haber) 
+                END AS importe,
+                a.as_desc glosa, a.as_fecha fecha, NULL caja, a.as_nrodoc factura, NULL tipo
+            FROM asiento_detalle ad 
+            INNER JOIN asiento a ON ad.idasiento = a.idasiento
+            INNER JOIN cuenta cu ON ad.idcuenta = cu.idcuenta
+            where a.idiglesia = ? and year(a.as_fecha) = ? and month(a.as_fecha) = ? and cu.cu_codigo=?
+            GROUP BY 
+                CASE WHEN ad.monto_debe > 0 THEN 2 ELSE 1 END,
+                ad.idcuenta,
+                cu.cu_codigo,
+                cu.cu_cuenta
+
             order by mov,cod,fecha";
         
         $st = $this->db->query($query,  $params);

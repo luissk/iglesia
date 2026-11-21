@@ -167,6 +167,38 @@ if( isset($asiento_bd) && $asiento_bd ){
     </div>
 </div>
 
+
+<div class="modal fade" id="modalFacturas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalFacturasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h1 class="modal-title fs-5" id="tituloModalFact">Facturas por pagar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body table-responsive" style="font-size: 14px;">
+                    <table id="tblFacturas" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Total (S/.)</th>
+                                <th>Comprobante</th>
+                                <th>Doc</th>                                        
+                                <th>Razon/Nombre</th>
+                                <th>Glosa</th>
+                                <th>Opción</th>
+                            </tr>
+                        </thead>
+                        <tbody>                                
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <?php echo $this->endSection();?>
 
 <?php echo $this->section('scripts');?>
@@ -305,7 +337,7 @@ $(function(){
         const $btnEliminar = $('<button type="button">❌</button>').addClass('btn btn-danger btn-sm').attr('title', 'Eliminar línea');
 
         const $nuevaFila = $(`<tr data-linea-id="${contadorLinea}"></tr>`)
-            .append($('<td></td>').append($selectClonado))
+            .append($('<td class="d-flex"></td>').append($selectClonado))
             .append($('<td></td>').append($inputDebe))
             .append($('<td></td>').append($inputHaber))
             .append($('<td></td>').append($btnEliminar));
@@ -347,7 +379,7 @@ $(function(){
 
         // 5. Armamos la fila completa (TR)
         const $nuevaFila = $(`<tr data-linea-id="${contadorLinea}"></tr>`)
-            .append($('<td></td>').append($selectClonado))
+            .append($('<td class="d-flex"></td>').append($selectClonado))
             .append($('<td></td>').append($inputDebe))
             .append($('<td></td>').append($inputHaber))
             .append($('<td></td>').append($btnEliminar));
@@ -426,7 +458,117 @@ $(function(){
         $(this).closest('tr').remove(); 
         calcularYValidarTotales(); 
     });
+
+
+    //LOGICA PAGAR FACTURAS
+    var $dtFacturas_x_pagar,
+        $dtLineaId, //la linea actual del asiento
+        $dtTipo = 1; //El tipo facturas 1
+    // Delegación de eventos en #cuerpo-lineas
+    $cuerpoLineas.on('change', 'select', function() {
+        const $select = $(this);
+        const $fila = $select.closest('tr');
+        const cuentaId = $select.val();
+        const lineaId = $fila.data('linea-id');
+
+        // 1. Recalcular y validar totales (tu lógica actual)
+        calcularYValidarTotales();
+
+        // 2. Acciones independientes según la cuenta seleccionada
+        if (cuentaId === '4') {
+            const $inputIdCompra = $('<input>').attr({
+                'type': 'hidden',
+                'name': `lineas[${lineaId}][compra_id]`,
+                'value': ''
+            });
+            $select
+                .after('<button type="button" class="btn btn-sm btn-info btnFact" data-linea='+lineaId+'><i class="fa-solid fa-magnifying-glass"></i></button>')
+                .after($inputIdCompra)
+        //} else if (cuentaId === '35') {
+            //console.log('cuenta ID', cuentaId, lineaId);
+        }else{
+            $select.next().remove();
+        }
+    });
     
+    $cuerpoLineas.on('click', '.btnFact', function() {
+        let lineaId = $(this).data('linea')
+        //console.log(lineaId);
+        $("#modalFacturas").modal('show');
+        $dtLineaId = lineaId;
+        $dtFacturas_x_pagar.DataTable().ajax.reload();
+    });
+
+    $dtFacturas_x_pagar = $('#tblFacturas').dataTable({
+        "ajax":{
+            "url": 'lista-lcompra-dt',
+            "dataSrc":"",
+            "type": "POST",
+            "data": function (d) {
+                d.tipo = $dtTipo;
+                d.status =  0;
+                return d;
+            },
+            "complete": function(xhr, responseText){
+                /* console.log(xhr);
+                console.log(xhr.responseText); //*** responseJSON: Array[0] */
+            }
+        },
+        "columns":[
+            {"data": "co_fecha"},
+            {"data": "co_total"},
+            {"data": "co_factura"},
+            {"data": "pr_ruc"},
+            {"data": "pr_razon"},
+            {"data": "co_glosa"},
+            {"data": "idcompra",
+                "mRender": function (data, type, row) {
+                    //console.log(row);
+                    return `
+                    <a title='seleccionar' style='font-size:16px' class='link-danger ms-1 seleccionar' role='button' data-id=${data} data-linea=${$dtLineaId}>
+                        <i class="fa-solid fa-square-check"></i>
+                    </a>`;
+                }
+            }
+        ],
+        "aaSorting": [[ 0, "desc" ]],
+        "pageLength": 25
+    });
+
+    
+    $('#tblFacturas').on('click', '.seleccionar', function(e){
+        let id = $(this).data('id'),
+            lineaId = $(this).data('linea'),
+            fecha = $(this).parent().parent().children()[0].innerText,
+            total = $(this).parent().parent().children()[1].innerText,
+            factura = $(this).parent().parent().children()[2].innerText,
+            ruc = $(this).parent().parent().children()[3].innerText,
+            razon = $(this).parent().parent().children()[4].innerText;
+
+        let existeIdCompraEnAsiento = false;
+        $('input[name^="lineas["][name$="][compra_id]"]').each(function(i, el){
+            //console.log(i, el)
+            if( el.value == id ){
+                existeIdCompraEnAsiento = true;
+            }
+        });
+        if( existeIdCompraEnAsiento ){
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: 'Ya seleccionaste anteriormente esta factura, selecciona otra',
+                confirmButtonText: 'Entendido'
+            });
+            return;
+        }
+
+        //console.log(id, fecha, total, factura, ruc, razon);
+        $('input[name="lineas['+lineaId+'][compra_id]"]').val(id);
+        $('input[name="lineas['+lineaId+'][debe]"]').val(total);
+
+        $("#modalFacturas").modal('hide');
+    });
+
 
 });
 
