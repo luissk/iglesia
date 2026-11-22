@@ -321,7 +321,7 @@ $(function(){
                     <a title='eliminar' class='link-danger ms-1 eliminar' role='button' data-id=${data} data-type=1>
                         <i class='fa fa-trash-alt'></i>
                     </a> &nbsp;
-                    <a title='ver' class='link-primary ver ${oculto}' role='button' data-id="${data}" onclick="alert('PAGADO EL: ${row.re_fecha}')">
+                    <a title='ver' class='link-primary ver ${oculto}' role='button' data-id="${data}" onclick="alert('${row.fechapagado}')">
                         <i class='fa fa-search'></i>
                     </a>`;
                 }

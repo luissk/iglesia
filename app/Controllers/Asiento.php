@@ -62,9 +62,10 @@ class Asiento extends BaseController
             if( !session('idusuario') ) exit();
             if( session('idtipo_usuario') != 1 && session('idtipo_usuario') != 2 && session('idtipo_usuario') != 3 ) exit();
 
-           /*  echo "<pre>";
+            /* echo "<pre>";
             print_r($_POST);
-            echo "</pre>"; */
+            echo "</pre>";
+            exit(); */
             // Obtener el array de líneas de asiento
             // CodeIgniter maneja automáticamente la estructura del array [lineas][ID][campo]
             $lineas_asiento = $this->request->getPost('lineas');
@@ -102,9 +103,16 @@ class Asiento extends BaseController
             foreach ($lineas_asiento as $key => $linea) {
                 
                 // 2.1 Limpieza de datos
-                $cuenta_id = filter_var($linea['cuenta_id'] ?? null, FILTER_SANITIZE_NUMBER_INT);
-                $debe = filter_var($linea['debe'] ?? 0, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-                $haber = filter_var($linea['haber'] ?? 0, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $cuenta_id = filter_var($linea['cuenta_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+                $compra_id = filter_var($linea['compra_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+                $debe      = filter_var($linea['debe'] ?? 0, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $haber     = filter_var($linea['haber'] ?? 0, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
+                $texto_raw = trim((string) ($linea['texto'] ?? ''));
+                $texto     = $texto_raw !== '' ? $texto_raw : null;
+
+                // Si no vino compra_id, vino vacío, en 0 o no es un entero válido, queda en null
+                $compra_id = $compra_id ?: null;
                 
                 // 2.2 Ignorar líneas completamente vacías (ya filtrado por JS, pero por seguridad)
                 if (empty($cuenta_id) && $debe == 0 && $haber == 0) {
@@ -132,8 +140,15 @@ class Asiento extends BaseController
                     'cuenta_id' => (int)$cuenta_id,
                     'debe'      => (float)$debe,
                     'haber'     => (float)$haber,
+                    'compra_id' => $compra_id, // int (> 0) o null
+                    'texto'     => $texto
                 ];
             }
+
+           /*  echo "<pre>";
+            print_r($asiento_listo_para_db);
+            echo "</pre>";
+            exit(); */
 
             // --- 3. VALIDACIÓN DE PARTIDA DOBLE FINAL ---
             // Si no hay movimientos, no hay nada que enviar
@@ -160,6 +175,10 @@ class Asiento extends BaseController
                 // 1. Modificar encabezado del asiento...
                 $this->modeloAsiento->modificarAsiento($fecha,$desc,$documento,$total_debe,$total_haber,$idasiento);
                 //eliminar detalle asiento
+                //antes de eliminar el detalle del asiento verificar si tiene compras pagadas, si es asi primero cambiarles el estado
+                foreach( $this->modeloAsiento->listarAsientoDetalle($idasiento) as $as ){
+                    if( $as['idcompra'] > 0 ) $this->modeloRegistro->cambiarEstadoCompra($as['idcompra'], 0);
+                }
                 $this->modeloAsiento->eliminarDetalleAsiento($idasiento);
 
                 $id_insertado = $idasiento;
@@ -171,7 +190,10 @@ class Asiento extends BaseController
             
             // 2. Recorrer $asiento_listo_para_db e insertar detalles...
             foreach( $asiento_listo_para_db as $as ){
-                $this->modeloAsiento->insertarDetalleAsiento($id_insertado, $as['cuenta_id'], $as['debe'], $as['haber']);
+                //Si viene un id de compra, cambiarle el estado a pagado
+                if( $as['compra_id'] > 0 ) $this->modeloRegistro->cambiarEstadoCompra($as['compra_id'], 1);
+                //insertar detalle del asiento
+                $this->modeloAsiento->insertarDetalleAsiento($id_insertado, $as['cuenta_id'], $as['debe'], $as['haber'], $as['compra_id'], $as['texto']);
             }
             
             if ($db->transComplete() === FALSE) {
@@ -216,6 +238,11 @@ class Asiento extends BaseController
 
             $idasiento = $this->request->getVar('id');
             if( $asiento = $this->modeloAsiento->obtenerAsiento($idasiento,session('idiglesia')) ){
+                //antes de eliminar el detalle del asiento verificar si tiene compras pagadas, si es asi primero cambiarles el estado
+                foreach( $this->modeloAsiento->listarAsientoDetalle($idasiento) as $as ){
+                    if( $as['idcompra'] > 0 ) $this->modeloRegistro->cambiarEstadoCompra($as['idcompra'], 0);
+                }
+                
                 if( $this->modeloAsiento->eliminarAsiento($idasiento) ){
                     echo '<script>
                         Swal.fire({

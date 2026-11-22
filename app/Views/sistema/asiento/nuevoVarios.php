@@ -50,12 +50,12 @@ if( isset($asiento_bd) && $asiento_bd ){
                 <div class="row">                    
                     <div class="col-sm-3">
                         <label for="fecha" class="form-label fw-semibold">Ingrese una fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?=$fecha_bd?>">
+                        <input type="date" class="form-control form-control-sm" id="fecha" name="fecha" value="<?=$fecha_bd?>">
                         <div id="msj-fecha" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-2">
                         <label for="documento" class="form-label fw-semibold">Nro Documento</label>
-                        <input type="text" class="form-control" id="documento" name="documento" value="<?=$nrodoc_bd?>" placeholder="F-1-120" maxlength="13">
+                        <input type="text" class="form-control form-control-sm" id="documento" name="documento" value="<?=$nrodoc_bd?>" placeholder="F-1-120" maxlength="13">
                         <div id="msj-documento" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-12">
@@ -63,7 +63,7 @@ if( isset($asiento_bd) && $asiento_bd ){
                     </div>
                     <div class="col-sm-6">
                         <label for="desc" class="form-label fw-semibold">Glosa / Descripción</label>
-                        <input type="text" class="form-control" id="desc" name="desc" value="<?=$desc_bd?>" placeholder="" maxlength="100" autocomplete="off">
+                        <input type="text" class="form-control form-control-sm" id="desc" name="desc" value="<?=$desc_bd?>" placeholder="" maxlength="100" autocomplete="off">
                         <div id="msj-desc" class="form-text text-danger"></div>
                     </div>
                     <div class="col-sm-3 d-flex align-items-end pb-2">
@@ -71,7 +71,7 @@ if( isset($asiento_bd) && $asiento_bd ){
                     </div>                    
                 </div>                
 
-                <div class="row mt-4">
+                <div class="row mt-4 table-responsive">
                     <div class="col-sm-12">
                         <h4 class="mb-3 text-center border-bottom border-3 border-warning">Detalle del Asiento</h4>
                     </div>
@@ -82,6 +82,7 @@ if( isset($asiento_bd) && $asiento_bd ){
                                 <th class="cuenta-col">Cuenta Contable</th>
                                 <th class="monto-col text-end">Debe</th>
                                 <th class="monto-col text-end">Haber</th>
+                                <th class="texto-col text-start" style="width: 23%;">Texto</th>
                                 <th style="width: 5%;"></th>
                             </tr>
                         </thead>
@@ -92,6 +93,7 @@ if( isset($asiento_bd) && $asiento_bd ){
                                 <th>Total</th>
                                 <th id="total-debe" class="text-end">0.00</th>
                                 <th id="total-haber" class="text-end">0.00</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -334,12 +336,24 @@ $(function(){
                 'name': `lineas[${contadorLinea}][haber]`, 'data-rol': 'haber'
             }).addClass('form-control form-control-sm text-end');
 
+        const $inputTexto= $('<input>').attr({
+                'type': 'text', 'placeholder': '...', 'maxlength': '250',
+                'name': `lineas[${contadorLinea}][texto]`, 'data-rol': 'texto'
+            }).addClass('form-control form-control-sm text-start');
+        
+        const $inputCompraHidden= $('<input>').attr({
+                'type': 'hidden',
+                'name': `lineas[${contadorLinea}][compra_id]`, 'data-rol': 'idcompra'
+            });
+
         const $btnEliminar = $('<button type="button">❌</button>').addClass('btn btn-danger btn-sm').attr('title', 'Eliminar línea');
 
         const $nuevaFila = $(`<tr data-linea-id="${contadorLinea}"></tr>`)
             .append($('<td class="d-flex"></td>').append($selectClonado))
+            .append($inputCompraHidden)
             .append($('<td></td>').append($inputDebe))
             .append($('<td></td>').append($inputHaber))
+            .append($('<td></td>').append($inputTexto))
             .append($('<td></td>').append($btnEliminar));
 
         $cuerpoLineas.append($nuevaFila);
@@ -347,7 +361,7 @@ $(function(){
     }
 
     // --- Función para Agregar Línea con Datos Precargados (CUANDO ES EDITAR) ---
-    function agregarLineaConDatos(idcuenta, debe, haber) {
+    function agregarLineaConDatos(idcuenta, debe, haber, texto, idcompra) {
         contadorLinea++;
         
         // 1. Clonamos la plantilla del select de cuentas
@@ -373,6 +387,18 @@ $(function(){
                 'name': `lineas[${contadorLinea}][haber]`, 'data-rol': 'haber',
                 'value': valorHaber // Inyectamos el valor
             }).addClass('form-control form-control-sm text-end');
+        
+        const $inputTexto= $('<input>').attr({
+                'type': 'text', 'placeholder': '...', 'maxlength': '250',
+                'name': `lineas[${contadorLinea}][texto]`, 'data-rol': 'texto',
+                'value': texto
+            }).addClass('form-control form-control-sm text-start');
+
+        const $inputCompraHidden= $('<input>').attr({
+                'type': 'hidden',
+                'name': `lineas[${contadorLinea}][compra_id]`, 'data-rol': 'idcompra',
+                'value': idcompra
+            });
 
         // 4. Botón eliminar fila
         const $btnEliminar = $('<button type="button">❌</button>').addClass('btn btn-danger btn-sm').attr('title', 'Eliminar línea');
@@ -380,8 +406,10 @@ $(function(){
         // 5. Armamos la fila completa (TR)
         const $nuevaFila = $(`<tr data-linea-id="${contadorLinea}"></tr>`)
             .append($('<td class="d-flex"></td>').append($selectClonado))
+            .append($inputCompraHidden)
             .append($('<td></td>').append($inputDebe))
             .append($('<td></td>').append($inputHaber))
+            .append($('<td></td>').append($inputTexto))
             .append($('<td></td>').append($btnEliminar));
 
         // 6. La metemos al cuerpo de la tabla
@@ -436,7 +464,7 @@ $(function(){
         // Recorremos el array que mostrabas en tu print_r
         $.each(detalleBaseDatos, function(index, deta) {
             // Ejecutamos una función que cree la línea y cargue sus datos correspondientes
-            agregarLineaConDatos(deta.idcuenta, deta.monto_debe, deta.monto_haber);
+            agregarLineaConDatos(deta.idcuenta, deta.monto_debe, deta.monto_haber, deta.texto, deta.idcompra);
         });
     } else {
         // Si es un asiento nuevo, colocamos una sola línea vacía por defecto
@@ -476,14 +504,14 @@ $(function(){
 
         // 2. Acciones independientes según la cuenta seleccionada
         if (cuentaId === '4') {
-            const $inputIdCompra = $('<input>').attr({
+            /* const $inputIdCompra = $('<input>').attr({
                 'type': 'hidden',
                 'name': `lineas[${lineaId}][compra_id]`,
                 'value': ''
-            });
+            }); */
             $select
-                .after('<button type="button" class="btn btn-sm btn-info btnFact" data-linea='+lineaId+'><i class="fa-solid fa-magnifying-glass"></i></button>')
-                .after($inputIdCompra)
+                .after('<button type="button" class="btn btn-sm btn-info btnFact" data-linea='+lineaId+'><i class="fa-solid fa-magnifying-glass"></i></button>');
+                //.after($inputIdCompra)
         //} else if (cuentaId === '35') {
             //console.log('cuenta ID', cuentaId, lineaId);
         }else{
@@ -565,6 +593,8 @@ $(function(){
         //console.log(id, fecha, total, factura, ruc, razon);
         $('input[name="lineas['+lineaId+'][compra_id]"]').val(id);
         $('input[name="lineas['+lineaId+'][debe]"]').val(total);
+        $('input[name="lineas['+lineaId+'][texto]"]').val(`FACTURA ${factura}, ${ruc}`);
+        calcularYValidarTotales();
 
         $("#modalFacturas").modal('hide');
     });

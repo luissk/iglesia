@@ -21,10 +21,10 @@ class AsientoModel extends Model{
         return $st;
     }
 
-    public function insertarDetalleAsiento($idasiento, $idcuenta, $debe, $haber){
-        $query = "insert into asiento_detalle(idasiento,idcuenta,monto_debe,monto_haber) values(?,?,?,?)";
+    public function insertarDetalleAsiento($idasiento, $idcuenta, $debe, $haber, $idcompra, $texto){
+        $query = "insert into asiento_detalle(idasiento,idcuenta,monto_debe,monto_haber,idcompra,texto) values(?,?,?,?,?,?)";
 
-        $st = $this->db->query($query, [$idasiento, $idcuenta, $debe, $haber]);
+        $st = $this->db->query($query, [$idasiento, $idcuenta, $debe, $haber, $idcompra, $texto]);
 
         return $st;
     }

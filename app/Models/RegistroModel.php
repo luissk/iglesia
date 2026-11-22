@@ -211,12 +211,15 @@ class RegistroModel extends Model{
             pr.pr_ruc,pr.pr_razon,
             ig.ig_iglesia,
             us.us_nombre,
-            re.idregistro,re.re_fecha,re.re_desc
+            re.idregistro,re.re_fecha,re.re_desc,
+            COALESCE(concat('Pagado el: ', COALESCE(concat(re.re_fecha,', por caja'), concat(asi.as_fecha, ' por asiento')), '')) as fechapagado
             from compra co
             inner join proveedor pr on co.idproveedor=pr.idproveedor
             inner join iglesia ig on co.idiglesia=ig.idiglesia
             inner join usuario us on co.us_creador=us.idusuario 
             left join registro re on co.idcompra=re.idcompra
+            left JOIN asiento_detalle ad on co.idcompra=ad.idcompra
+            left join asiento asi on ad.idasiento=asi.idasiento 
             where co.idiglesia = ? and co.co_type = ? $where";
         $st = $this->db->query($query, $params);
 
@@ -439,16 +442,12 @@ class RegistroModel extends Model{
                     WHEN ad.monto_debe > 0 THEN (ad.monto_debe) 
                     ELSE (ad.monto_haber) 
                 END AS importe,
-                a.as_desc glosa, a.as_fecha fecha, NULL caja, a.as_nrodoc factura, NULL tipo
+                concat(ad.texto,'; \"',a.as_desc, '\"') glosa, a.as_fecha fecha, 'Asiento' caja, a.as_nrodoc factura, NULL tipo
             FROM asiento_detalle ad 
             INNER JOIN asiento a ON ad.idasiento = a.idasiento
             INNER JOIN cuenta cu ON ad.idcuenta = cu.idcuenta
             where a.idiglesia = ? and year(a.as_fecha) = ? and month(a.as_fecha) = ? and cu.cu_codigo=?
-            GROUP BY 
-                CASE WHEN ad.monto_debe > 0 THEN 2 ELSE 1 END,
-                ad.idcuenta,
-                cu.cu_codigo,
-                cu.cu_cuenta
+            
 
             order by mov,cod,fecha";
         

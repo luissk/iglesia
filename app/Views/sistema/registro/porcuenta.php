@@ -12,7 +12,7 @@ if( $movimientos ){
             <th>CUENTA</th>
             <th>IMPORTE</th>
             <th>GLOSA</th>
-            <th>FECHA</th>
+            <th style="width: 100px">FECHA</th>
             <th>CAJA</th>
             <th>COMPROB.</th>
         </tr>
